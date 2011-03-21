@@ -1,0 +1,15 @@
+<h1><%= @discipline.title %></h1>
+
+<% @discipline.themes.each do |t| %>
+  <%= t.title %>,
+  <%= link_to 'Показать', discipline_theme_url(@discipline,t)%>
+  <% if logged_in? && current_user.is_admin? %>
+     <%= link_to 'Удалить',discipline_theme_url(@discipline,t),:confirm =>'Вы уверены', :method=>:delete  %><br/>
+  <%end%>
+
+<%end%>
+<%  if logged_in? && current_user.is_admin? %>
+  <%= link_to 'Новая тема',new_discipline_theme_url(@discipline) %>
+<% end %>
+
+     <%= link_to 'Назад', disciplines_path %>

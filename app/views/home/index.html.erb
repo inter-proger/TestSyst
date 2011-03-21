@@ -1,0 +1,37 @@
+<h1>Тестирующая система MEGA v 1.0</h1><br/>
+<p>Find me in app/views/home/index.html.erb</p>
+<div style="margin: 0 auto; width: 700px; background-color: mediumaquamarine; color: blueviolet; border: 3px; border-style: dotted; padding: 10px; text-align: center;">
+<% if logged_in? %>
+	Добро пожаловать, <%= current_user.login %>.
+	<% if current_user.is_admin? %>
+        <sup>(admin)</sup>
+	<% end %>
+        <br/><%= link_to 'Выйти',:logout %><br/>
+        <%= link_to "Предметы", disciplines_path %>
+      
+     
+
+<% else %>
+	<h1>Вход</h1>
+
+        <%= form_tag session_path do -%>
+        <p><%= label_tag 'login' %><br />
+        <%= text_field_tag 'login', @login %></p>
+
+        <p><%= label_tag 'password' %><br/>
+        <%= password_field_tag 'password', nil %></p>
+        
+
+<!-- Uncomment this if you want this functionality
+<p><%= label_tag 'remember_me', 'Запомнить меня' %>
+<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+-->
+
+        <p><%= submit_tag 'Войти' %></p>
+        <p><%= link_to 'Зарегистрироваться', :signup %></p>
+	<% end %>
+<% end%>
+        
+
+<br/>
+</div>
