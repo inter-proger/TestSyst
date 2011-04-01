@@ -1,3 +1,4 @@
+# coding: utf-8
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
       self.current_user = @user # !! now logged in
       redirect_back_or_default('/', :notice => "Спасибо за регистрацию! ")
     else
-      flash.now[:error]  = "Невозможно создать аккаунт. Попробуйте позднее."
+      flash.now[:error]  = "Ошибка при регистрации."
       render :action => 'new'
     end
   end

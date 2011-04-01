@@ -1,4 +1,6 @@
+# coding: utf-8
 # This controller handles the login/logout function of the site.  
+
 class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
@@ -18,7 +20,7 @@ class SessionsController < ApplicationController
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
-      redirect_back_or_default('/', :notice => "Регистрация успешна")
+      redirect_back_or_default('/', :notice => "Вы успешно вошли.")
     else
       note_failed_signin
       @login       = params[:login]
@@ -29,13 +31,13 @@ class SessionsController < ApplicationController
 
   def destroy
     logout_killing_session!
-    redirect_back_or_default('/', :notice => "Вы вошли.")
+    redirect_back_or_default('/', :notice => "Вы вышли.")
   end
 
 protected
   # Track failed login attempts
   def note_failed_signin
-    flash.now[:error] = "Невозможно войти как '#{params[:login]}'"
-    logger.warn "Ошибка входа '#{params[:login]}' от #{request.remote_ip} в #{Time.now.utc}"
+    flash.now[:error] = "Ошибка входа для '#{params[:login]}'"
+    logger.warn "Ошибка входа под именем '#{params[:login]}' от #{request.remote_ip} в #{Time.now.utc}"
   end
 end

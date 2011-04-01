@@ -32,3 +32,14 @@ tr
 
 }
 
+.vis{
+    display: block;
+}
+
+.hid{
+    display: none;
+}
+
+.pref{
+    white-space: pre;
+}

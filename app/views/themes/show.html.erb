@@ -1,4 +1,5 @@
 <h1><%= @theme.title %></h1>
+<%= link_to 'Создать вопрос', new_discipline_theme_question_path(@discipline,@theme) %>
 
 <%= link_to 'Назад', discipline_path(@discipline) %>
 

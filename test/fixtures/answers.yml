@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  right: 1
   content: MyText
-  answcount: 1
-  qtype: 
-  theme: 
+  question: 
+  col: 1
 
 two:
+  right: 1
   content: MyText
-  answcount: 1
-  qtype: 
-  theme: 
+  question: 
+  col: 1

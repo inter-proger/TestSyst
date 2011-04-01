@@ -1,0 +1,31 @@
+<head>
+  <%= javascript_include_tag "answ_form" %>
+</head>
+<body>
+<h1>Questions#show</h1>
+<p>Find me in app/views/questions/show.html.erb</p>
+
+<%= @quest.content %>
+<div class="pref">
+Вариант ответа                     Правильность
+</div>
+<% form_tag do %>
+<div id="ans1" class="vis">
+  <%= text_field_tag "content[1]",nil,:size=>"20"  %>
+  <%= check_box_tag "right[1]" %>
+</div>
+
+<% 2.upto(10) do |i| %>
+  <div id="ans<%=i%> "class="hid">
+    <%= text_field_tag "content["+i.to_s+"]",nil,:size=>"20"  %>
+    <%= check_box_tag "right["+i.to_s+"]" %>
+  </div>
+<%end%>
+
+  <%= submit_tag "Подтвердить"  %>
+
+<%end%>
+
+<button onClick="add_ans();">Добавить вариант ответа</button>
+
+</body>

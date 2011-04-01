@@ -1,3 +1,4 @@
+# coding: utf-8
 class ThemesController < ApplicationController
   
   before_filter :find_disc

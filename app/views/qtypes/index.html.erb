@@ -1,0 +1,23 @@
+<h1>Listing qtypes</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @qtypes.each do |qtype| %>
+  <tr>
+    <td><%= qtype.title %></td>
+    <td><%= link_to 'Show', qtype %></td>
+    <td><%= link_to 'Edit', edit_qtype_path(qtype) %></td>
+    <td><%= link_to 'Destroy', qtype, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Qtype', new_qtype_path %>
