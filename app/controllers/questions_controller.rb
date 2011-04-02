@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    @pict=Picture.new
     @quest=@theme.questions.build
     respond_to do |format|
         format.html # new.html.erb
@@ -17,6 +18,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @pict=Picture.new
     respond_to do |format|
       format.html # show
       format.xml  { render :xml => @quest }
@@ -37,6 +39,7 @@ class QuestionsController < ApplicationController
 
   def destroy
   end
+
 
 private
 

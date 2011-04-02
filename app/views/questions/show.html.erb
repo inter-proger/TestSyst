@@ -28,4 +28,19 @@
 
 <button onClick="add_ans();">Добавить вариант ответа</button>
 
+<br/>
+<br/>
+<br/>
+<%if @quest.pictures.any?%>
+  <%@p=@quest.pictures[0]%>
+  <%= image_tag(@p.pict_url) %>
+<%end%>
+<br/>
+<% form_for([@discipline,@theme,@quest,@pict],:html => {:multipart => true}) do |f| %>
+  <%= f.file_field :pict %>
+  <%= f.hidden_field :pict_cache %>
+  <%= f.submit 'Загрузить' %>
+<%  end %>
+
+
 </body>
