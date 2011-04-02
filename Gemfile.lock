@@ -30,6 +30,8 @@ GEM
     activesupport (3.0.4)
     arel (2.0.8)
     builder (2.1.2)
+    carrierwave (0.5.3)
+      activesupport (~> 3.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     i18n (0.5.0)
@@ -74,6 +76,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  carrierwave
   jquery-rails
   mysql2
   rails (= 3.0.4)

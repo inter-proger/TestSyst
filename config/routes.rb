@@ -1,4 +1,8 @@
 A3::Application.routes.draw do
+  get "pictures/create"
+
+  get "pictures/destroy"
+
   resources :qtypes
 
   get "questions/index"
@@ -30,7 +34,7 @@ A3::Application.routes.draw do
   get "question_types/destroy"
 
 
-  resources :question_types
+
 
   get "test/new"
 
@@ -57,16 +61,24 @@ A3::Application.routes.draw do
   get "disciplines/destroy"
 
   get "home/index"
+  get "sessions/new"
+  get "sessions/destroy"
+  get "sessions/show"
+  get "users/new"
+  get "users/create"
 
   resources :users
 
-  
+  resources :sessions
+  resources :question_types
 
   resources :themes, :only =>[:new, :create, :show, :destroy]
 
   resources :disciplines, :only => [:index, :new, :create, :destroy, :show] do
     resources :themes, :only =>[:new, :create, :show, :destroy] do
-      resources :questions
+      resources :questions do
+        resources :pictures
+      end
     end
   end
 

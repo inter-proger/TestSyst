@@ -6,6 +6,8 @@ gem 'rails', '3.0.4'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem "jquery-rails"
 gem 'mysql2'
+gem 'carrierwave'
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
