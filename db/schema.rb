@@ -10,18 +10,58 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110318092305) do
+ActiveRecord::Schema.define(:version => 20110331081427) do
 
-# Could not dump table "disciplines" because of following ArgumentError
-#   invalid date
+  create_table "answers", :force => true do |t|
+    t.integer  "right"
+    t.text     "content"
+    t.integer  "question_id"
+    t.integer  "col"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
-# Could not dump table "question_types" because of following ArgumentError
-#   invalid date
+  create_table "disciplines", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
-# Could not dump table "themes" because of following ArgumentError
-#   invalid date
+  create_table "qtypes", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
-# Could not dump table "users" because of following ArgumentError
-#   invalid date
+  create_table "questions", :force => true do |t|
+    t.text     "content"
+    t.integer  "answcount"
+    t.integer  "qtype_id"
+    t.integer  "theme_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "themes", :force => true do |t|
+    t.string   "title"
+    t.integer  "discipline_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "login",                     :limit => 40
+    t.string   "name",                      :limit => 100, :default => ""
+    t.string   "email",                     :limit => 100
+    t.string   "crypted_password",          :limit => 40
+    t.string   "salt",                      :limit => 40
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "remember_token",            :limit => 40
+    t.datetime "remember_token_expires_at"
+    t.string   "roles",                                    :default => "--- []"
+  end
+
+  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
 end

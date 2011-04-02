@@ -1,4 +1,35 @@
 A3::Application.routes.draw do
+  resources :qtypes
+
+  get "questions/index"
+
+  get "questions/new"
+
+  get "questions/show"
+
+  get "questions/edit"
+
+  get "questions/update"
+
+  get "questions/create"
+
+  get "questions/destroy"
+
+  get "question_types/index"
+
+  get "question_types/new"
+
+  get "question_types/show"
+
+  get "question_types/edit"
+
+  get "question_types/update"
+
+  get "question_types/create"
+
+  get "question_types/destroy"
+
+
   resources :question_types
 
   get "test/new"
@@ -29,10 +60,14 @@ A3::Application.routes.draw do
 
   resources :users
 
-  resource :session, :only => [:new, :create, :destroy]
+  
+
+  resources :themes, :only =>[:new, :create, :show, :destroy]
 
   resources :disciplines, :only => [:index, :new, :create, :destroy, :show] do
-    resources :themes, :only =>[:new, :create, :show, :destroy]
+    resources :themes, :only =>[:new, :create, :show, :destroy] do
+      resources :questions
+    end
   end
 
   match 'signup' => 'users#new', :as => :signup
