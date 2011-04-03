@@ -2,7 +2,7 @@
 class QuestionsController < ApplicationController
   before_filter :find_disc
   before_filter :find_theme
-  before_filter :find_quest,:only=>[:show,:destroy]
+  before_filter :find_quest,:only=>[:show,:destroy,:answsadd]
 
   def index
 
@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController
 
   def show
     @pict=Picture.new
+    @answs_count=@quest.answers.count
     respond_to do |format|
       format.html # show
       format.xml  { render :xml => @quest }
@@ -40,6 +41,25 @@ class QuestionsController < ApplicationController
   def destroy
   end
 
+  def answsadd
+    @quest.answers.clear
+    
+    1.upto(10) do |i|
+      if params[:content][i.to_s]==""
+        break
+      end
+      @answ=@quest.answers.build
+      @answ.content=params[:content][i.to_s]
+      if params[:right]==i.to_s
+        @answ.right=1
+      else
+        @answ.right=0
+      end
+      @answ.save
+    end
+    @answs_count=@quest.answers.count
+    redirect_to discipline_theme_question_path(@discipline,@theme,@quest)
+  end
 
 private
 

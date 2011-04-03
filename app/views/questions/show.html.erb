@@ -9,16 +9,32 @@
 <div class="pref">
 Вариант ответа                     Правильность
 </div>
-<% form_tag do %>
-<div id="ans1" class="vis">
-  <%= text_field_tag "content[1]",nil,:size=>"20"  %>
-  <%= check_box_tag "right[1]" %>
-</div>
+<% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
+  <% if @answs_count == 0 %>
+  <div id="ans1" class="vis">
+    <%= text_field_tag "content[1]",nil,:size=>"20"  %>
+    <%= radio_button_tag  "right","1",true%>
+  </div>
+  <% else %>
+  <div id="ans1" class="vis">
+    <% @fl=@quest.answers[0].right==1 %>
+    <%= text_field_tag "content[1]",@quest.answers[0].content,:size=>"20"  %>
+    <%= radio_button_tag  "right","1",@fl%>
+  </div>
+  <% end %>
 
-<% 2.upto(10) do |i| %>
+<% 2.upto(@answs_count) do |i| %>
+  <div id="ans<%=i%> "class="vis">
+    <% @fl=@quest.answers[i-1].right==1 %>
+    <%= text_field_tag "content["+i.to_s+"]",@quest.answers[i-1].content,:size=>"20"  %>
+    <%= radio_button_tag "right",i.to_s,@fl %>
+  </div>
+<%end%>
+
+<% (@answs_count+1).upto(10) do |i| %>
   <div id="ans<%=i%> "class="hid">
     <%= text_field_tag "content["+i.to_s+"]",nil,:size=>"20"  %>
-    <%= check_box_tag "right["+i.to_s+"]" %>
+    <%= radio_button_tag "right",i.to_s,nil %>
   </div>
 <%end%>
 
