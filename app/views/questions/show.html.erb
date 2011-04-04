@@ -6,45 +6,156 @@
 <p>Find me in app/views/questions/show.html.erb</p>
 
 <%= @quest.content %>
-<div class="pref">
-Вариант ответа                     Правильность
-</div>
-<% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
-  <% if @answs_count == 0 %>
-  <div id="ans1" class="vis">
-    <%= text_field_tag "content[1]",nil,:size=>"20"  %>
-    <%= radio_button_tag  "right","1",true%>
+<% if @qtid==6 %>
+  <div class="pref">
+  Вариант ответа                     Правильность
   </div>
-  <% else %>
-  <div id="ans1" class="vis">
-    <% @fl=@quest.answers[0].right==1 %>
-    <%= text_field_tag "content[1]",@quest.answers[0].content,:size=>"20"  %>
-    <%= radio_button_tag  "right","1",@fl%>
-  </div>
+  <% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
+    <% if @answs_count == 0 %>
+    <div id="ans1" class="vis">
+      <%= text_field_tag "content[1]",nil,:size=>"20"  %>
+      <%= radio_button_tag  "right","1",true%>
+    </div>
+      <% @answs_count=@answs_count+1 %>
+    <% else %>
+    <div id="ans1" class="vis">
+      <% @fl=@quest.answers[0].right==1 %>
+      <%= text_field_tag "content[1]",@quest.answers[0].content,:size=>"20"  %>
+      <%= radio_button_tag  "right","1",@fl%>
+    </div>
+    <% end %>
+
+  <% 2.upto(@answs_count) do |i| %>
+    <div id="ans<%=i%> "class="vis">
+      <% @fl=@quest.answers[i-1].right==1 %>
+      <%= text_field_tag "content["+i.to_s+"]",@quest.answers[i-1].content,:size=>"20"  %>
+      <%= radio_button_tag "right",i.to_s,@fl %>
+    </div>
+  <%end%>
+
+  <% (@answs_count+1).upto(10) do |i| %>
+    <div id="ans<%=i%> "class="hid">
+      <%= text_field_tag "content["+i.to_s+"]",nil,:size=>"20"  %>
+      <%= radio_button_tag "right",i.to_s,nil %>
+    </div>
+  <%end%>
+
+    <%= submit_tag "Подтвердить"  %>
+  
   <% end %>
 
-<% 2.upto(@answs_count) do |i| %>
-  <div id="ans<%=i%> "class="vis">
-    <% @fl=@quest.answers[i-1].right==1 %>
-    <%= text_field_tag "content["+i.to_s+"]",@quest.answers[i-1].content,:size=>"20"  %>
-    <%= radio_button_tag "right",i.to_s,@fl %>
+<%end%>
+
+<% if @qtid==7 %>
+  <div class="pref">
+  Вариант ответа                     Правильность
   </div>
+  <% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
+    <% if @answs_count == 0 %>
+    <div id="ans1" class="vis">
+      <%= text_field_tag "content[1]",nil,:size=>"20"  %>
+      <%= check_box_tag "right[1]","1" %>
+    </div>
+        <% @answs_count=@answs_count+1 %>
+    <% else %>
+    <div id="ans1" class="vis">
+      <% @fl=@quest.answers[0].right==1 %>
+      <%= text_field_tag "content[1]",@quest.answers[0].content,:size=>"20"  %>
+      <%=check_box_tag  "right[1]","1",@fl%>
+    </div>
+    <% end %>
+
+  <% 2.upto(@answs_count) do |i| %>
+    <div id="ans<%=i%> "class="vis">
+      <% @fl=@quest.answers[i-1].right==1 %>
+      <%= text_field_tag "content["+i.to_s+"]",@quest.answers[i-1].content,:size=>"20"  %>
+      <%= check_box_tag "right["+i.to_s+"]","1",@fl %>
+    </div>
+  <%end%>
+
+  <% (@answs_count+1).upto(10) do |i| %>
+    <div id="ans<%=i%> "class="hid">
+      <%= text_field_tag "content["+i.to_s+"]",nil,:size=>"20"  %>
+      <%= check_box_tag "right["+i.to_s+"]","1" %>
+    </div>
+  <%end%>
+
+    <%= submit_tag "Подтвердить"  %>
+  <%end%>
+
 <%end%>
 
-<% (@answs_count+1).upto(10) do |i| %>
-  <div id="ans<%=i%> "class="hid">
-    <%= text_field_tag "content["+i.to_s+"]",nil,:size=>"20"  %>
-    <%= radio_button_tag "right",i.to_s,nil %>
+<% if @qtid==8 || @qtid==10 %>
+  <% if @qtid==8 %>
+    <div class="pref">
+    Возможный вариант ответа
+    </div>
+  <%else%>
+    <div class="pref">
+    Правильный порядок вариантов ответа
+    </div>
+  <%end%>
+  <% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
+    <% if @answs_count == 0 %>
+    <div id="ans1" class="vis">
+      <%= text_field_tag "content[1]",nil,:size=>"20"  %>
+    </div>
+        <% @answs_count=@answs_count+1 %>
+    <% else %>
+    <div id="ans1" class="vis">
+      <% @fl=@quest.answers[0].right==1 %>
+      <%= text_field_tag "content[1]",@quest.answers[0].content,:size=>"20"  %>
+    </div>
+    <% end %>
+
+  <% 2.upto(@answs_count) do |i| %>
+    <div id="ans<%=i%> "class="vis">
+      <% @fl=@quest.answers[i-1].right==1 %>
+      <%= text_field_tag "content["+i.to_s+"]",@quest.answers[i-1].content,:size=>"20"  %>
+    </div>
+  <%end%>
+
+  <% (@answs_count+1).upto(10) do |i| %>
+    <div id="ans<%=i%> "class="hid">
+      <%= text_field_tag "content["+i.to_s+"]",nil,:size=>"20"  %>
+    </div>
+  <%end%>
+
+    <%= submit_tag "Подтвердить"  %>
+  <%end%>
+
+<%end%>
+
+<% if @qtid==9 %>
+  <div class="pref">
+  Вариант ответа                     Правильность
   </div>
+  <% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
+
+    <div id="ans1" class="vis">
+      <%= text_field_tag "content1[1]",@arr1[0],:size=>"20"  %>
+      <%= text_field_tag "content2[1]",@arr2[0],:size=>"20"  %>
+    </div>
+
+
+  <% 2.upto(10) do |i| %>
+    <%if @arr1[i-1]==nil && @arr2[i-1]==nil;@cl="hid"; else;@cl="vis";end %>
+    <div id="ans<%=i%> "class="<%=@cl%>">
+      <%= text_field_tag "content1["+i.to_s+"]",@arr1[i-1],:size=>"20"  %>
+      <%= text_field_tag "content2["+i.to_s+"]",@arr2[i-1],:size=>"20"  %>
+    </div>
+  <%end%>
+
+
+
+    <%= submit_tag "Подтвердить"  %>
+  <%end%>
+
 <%end%>
 
-  <%= submit_tag "Подтвердить"  %>
-
-<%end%>
-
-<button onClick="add_ans();">Добавить вариант ответа</button>
 
 <br/>
+<button onClick="add_ans();">Добавить вариант ответа</button>
 <br/>
 <br/>
 <%if @quest.pictures.any?%>
