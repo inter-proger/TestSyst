@@ -4,3 +4,4 @@ log/*.log
 tmp/
 config/*.yml
 nbproject/*
+public/pictures/*
