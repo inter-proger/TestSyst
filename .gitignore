@@ -5,3 +5,6 @@ tmp/
 config/*.yml
 nbproject/*
 public/pictures/*
+nbproject/private/rake-d.txt
+nbproject/project.xml
+
