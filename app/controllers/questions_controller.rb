@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   before_filter :find_quest,:only=>[:show,:destroy,:answsadd]
 
   def index
-
+    redirect_to discipline_theme_path(@discipline,@theme)
   end
 
   def new
@@ -113,7 +113,7 @@ class QuestionsController < ApplicationController
           @answ.save
         end
       end if @qtid==9
-    redirect_to discipline_theme_question_path(@discipline,@theme,@quest)
+    redirect_to discipline_theme_question_path(@discipline,@theme,@quest),:notice=>"Варианты ответов добавлены."
   end
 
 private
