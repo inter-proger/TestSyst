@@ -1,11 +1,24 @@
 <h1><%= @theme.title %></h1>
+Themes#show
+</br>
+Find me at themes/show.html.erb
 <% @qtypes=Qtype.all %>
 <% @c=6 %>
+<table>
 <% @theme.questions.each do |t| %>
-  
+  <tr>
+    <td>
   <%= link_to t.content, discipline_theme_question_path(@discipline,@theme,t)%>
-  <%=  @qtypes[t.qtype_id-@c].title %><br/>
+      </td>
+      <td>
+  <%=  @qtypes[t.qtype_id-@c].title %>
+      </td>
+      <td>
+        <%= link_to 'Удалить',discipline_theme_question_url(@discipline,@theme,t),:confirm =>'Вы уверены', :method=>:delete  %>
+      </td>
+  </tr>
 <% end %>
+  </table>
 
 <%= link_to 'Создать вопрос', new_discipline_theme_question_path(@discipline,@theme) %>
 

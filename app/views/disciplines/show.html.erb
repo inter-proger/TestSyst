@@ -1,15 +1,26 @@
 <p id="notice"><%= notice %></p>
-
+Find me in /disciplines/show.html.erb
 <h1><%= @discipline.title %></h1>
 
+<table>
 <% @discipline.themes.each do |t| %>
-  <%= t.title %>,
+  <tr>
+    <td>
+  <%= t.title %></td>
+    <td>
   <%= link_to 'Показать', discipline_theme_url(@discipline,t)%>
+      </td>
+
   <% if logged_in? && current_user.is_admin? %>
+      <td>
      <%= link_to 'Удалить',discipline_theme_url(@discipline,t),:confirm =>'Вы уверены', :method=>:delete  %><br/>
+     </td>
+
   <%end%>
+     </tr>
 
 <%end%>
+     </table>
 <%  if logged_in? && current_user.is_admin? %>
   <%= link_to 'Новая тема',new_discipline_theme_url(@discipline) %>
 <% end %>
