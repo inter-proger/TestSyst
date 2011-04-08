@@ -1,9 +1,13 @@
 A3::Application.routes.draw do
+  resources :tconfigurations
+
+
   get "pictures/create"
 
   get "pictures/destroy"
 
   resources :qtypes
+  
 
   get "questions/index"
 

@@ -40,11 +40,13 @@ td
     background-color: blanchedalmond;
     color: black;
 }
+
 tr
 {
     width: 90%;
 
 }
+
 
 .vis{
     display: block;
