@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110402103649) do
+ActiveRecord::Schema.define(:version => 20110408151238) do
 
   create_table "answers", :force => true do |t|
     t.integer  "right"
@@ -45,6 +45,38 @@ ActiveRecord::Schema.define(:version => 20110402103649) do
     t.integer  "answcount"
     t.integer  "qtype_id"
     t.integer  "theme_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tconfigurations", :force => true do |t|
+    t.string   "Name"
+    t.integer  "confType"
+    t.integer  "qT1Count"
+    t.integer  "qT2Count"
+    t.integer  "qT3Count"
+    t.integer  "qT4Count"
+    t.integer  "qT5Count"
+    t.integer  "degree3"
+    t.integer  "degree4"
+    t.integer  "degree5"
+    t.time     "TestTime"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "test_configs", :force => true do |t|
+    t.string   "Name"
+    t.datetime "TestTime"
+    t.integer  "confType"
+    t.integer  "qType1Count"
+    t.integer  "qType2Count"
+    t.integer  "qType3Count"
+    t.integer  "qType4Count"
+    t.integer  "qType5Count"
+    t.integer  "degree3"
+    t.integer  "degree4"
+    t.integer  "degree5"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

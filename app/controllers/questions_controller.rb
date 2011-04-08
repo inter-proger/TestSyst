@@ -53,6 +53,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    @quest.destroy
+    redirect_to discipline_theme_path(@discipline,@theme)
   end
 
   def answsadd

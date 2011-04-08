@@ -1,0 +1,62 @@
+<%= form_for(@tconfiguration) do |f| %>
+  <% if @tconfiguration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tconfiguration.errors.count, "error") %> prohibited this tconfiguration from being saved:</h2>
+
+      <ul>
+      <% @tconfiguration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label 'Имя' %><br />
+    <%= f.text_field :Name %>
+  </div>
+  <div class="field">
+    <%= f.label 'Тип конфигурации' %><br />
+    <%= f.text_field :confType %>
+  </div>
+  <div class="field">
+    <%= f.label 'Количество вопросов 1' %><br />
+    <%= f.text_field :qT1Count %>
+  </div>
+  <div class="field">
+    <%= f.label 'Количество вопросов 2' %><br />
+    <%= f.text_field :qT2Count %>
+  </div>
+  <div class="field">
+    <%= f.label 'Количество вопросов 3' %><br />
+    <%= f.text_field :qT3Count %>
+  </div>
+  <div class="field">
+    <%= f.label 'Количество вопросов 4' %><br />
+    <%= f.text_field :qT4Count %>
+  </div>
+  <div class="field">
+    <%= f.label 'Количество вопросов 5' %><br />
+    <%= f.text_field :qT5Count %>
+  </div>
+  <div class="field">
+    <%= f.label '% на 3' %><br />
+    <%= f.text_field :degree3 %>
+  </div>
+  <div class="field">
+    <%= f.label '% на 4' %><br />
+    <%= f.text_field :degree4 %>
+  </div>
+  <div class="field">
+    <%= f.label '% на 5' %><br />
+    <%= f.text_field :degree5 %>
+  </div>
+  <div class="field">
+    <%= f.label 'Время на тест' %><br />
+    <%= f.time_select :TestTime, :value=>'00:00' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

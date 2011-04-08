@@ -1,0 +1,43 @@
+<h1>Конфигурации тестов</h1>
+
+<table>
+  <tr>
+    <th>Имя</th>
+    <th>Тип конфигурации</th>
+    <th>Количество вопросов 1</th>
+    <th>Количество вопросов 2</th>
+    <th>Количество вопросов 3</th>
+    <th>Количество вопросов 4</th>
+    <th>Количество вопросов 5</th>
+    <th>Оценка 3 (%)</th>
+    <th>Оценка 4 (%)</th>
+    <th>Оценка 5 (%)</th>
+    <th>Время тестирования</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tconfigurations.each do |tconfiguration| %>
+  <tr>
+    <td><%= tconfiguration.Name %></td>
+    <td><%= tconfiguration.confType %></td>
+    <td><%= tconfiguration.qT1Count %></td>
+    <td><%= tconfiguration.qT2Count %></td>
+    <td><%= tconfiguration.qT3Count %></td>
+    <td><%= tconfiguration.qT4Count %></td>
+    <td><%= tconfiguration.qT5Count %></td>
+    <td><%= tconfiguration.degree3 %></td>
+    <td><%= tconfiguration.degree4 %></td>
+    <td><%= tconfiguration.degree5 %></td>
+    <td><%= tconfiguration.TestTime %></td>
+    <td><%= link_to 'Show', tconfiguration %></td>
+    <td><%= link_to 'Edit', edit_tconfiguration_path(tconfiguration) %></td>
+    <td><%= link_to 'Destroy', tconfiguration, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tconfiguration', new_tconfiguration_path %>
