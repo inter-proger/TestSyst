@@ -18,26 +18,28 @@
   </div>
   <div class="field">
     <%= f.label 'Тип конфигурации' %><br />
-    <%= f.text_field :confType %>
+    <%= f.collection_select(:configuration_type_id,ConfigurationType.all,:id,:Name) %>&nbsp;
+    <%= link_to 'Создать',new_configuration_type_path %>
+  
   </div>
   <div class="field">
-    <%= f.label 'Количество вопросов 1' %><br />
+    <%= f.label 'Количество закрытых вопросов' %><br />
     <%= f.text_field :qT1Count %>
   </div>
   <div class="field">
-    <%= f.label 'Количество вопросов 2' %><br />
+    <%= f.label 'Количество открытых вопросов' %><br />
     <%= f.text_field :qT2Count %>
   </div>
   <div class="field">
-    <%= f.label 'Количество вопросов 3' %><br />
+    <%= f.label 'Количество вопросов на соотвествие' %><br />
     <%= f.text_field :qT3Count %>
   </div>
   <div class="field">
-    <%= f.label 'Количество вопросов 4' %><br />
+    <%= f.label 'Количество вопросов на упорядочивание' %><br />
     <%= f.text_field :qT4Count %>
   </div>
   <div class="field">
-    <%= f.label 'Количество вопросов 5' %><br />
+    <%= f.label 'Количество вопросов с множественным выбором' %><br />
     <%= f.text_field :qT5Count %>
   </div>
   <div class="field">
@@ -58,6 +60,6 @@
     <%= f.time_select "TestTime", :include_seconds => true,:default=>DateTime.parse("00:30:00"), :minute_step => 5  %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Создать"%>
   </div>
 <% end %>

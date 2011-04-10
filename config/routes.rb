@@ -1,4 +1,6 @@
 A3::Application.routes.draw do
+  resources :configuration_types
+
   resources :tconfigurations
 
 
