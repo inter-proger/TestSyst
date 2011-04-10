@@ -54,7 +54,8 @@
   </div>
   <div class="field">
     <%= f.label 'Время на тест' %><br />
-    <%= f.time_select :TestTime, :value=>'00:00' %>
+  
+    <%= f.time_select "TestTime", :include_seconds => true,:default=>DateTime.parse("00:30:00"), :minute_step => 5  %>
   </div>
   <div class="actions">
     <%= f.submit %>
