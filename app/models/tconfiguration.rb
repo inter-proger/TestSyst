@@ -6,4 +6,5 @@ class Tconfiguration < ActiveRecord::Base
   validates_numericality_of :degree4, :only_integer => true, :greater_than => :degree3, :message =>'Значение не может быть меньше чем оценка за 3'
   validates_numericality_of :degree5, :only_integer => true, :greater_than => :degree4
   belongs_to :configutaion_type
+  has_many :testsessions
 end
