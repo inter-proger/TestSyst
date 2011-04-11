@@ -1,4 +1,5 @@
 A3::Application.routes.draw do
+  resources :testsessions
   get "testsessions/new"
 
   get "testsessions/index"
