@@ -10,13 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110408151238) do
+ActiveRecord::Schema.define(:version => 20110410113433) do
 
   create_table "answers", :force => true do |t|
     t.integer  "right"
     t.text     "content"
     t.integer  "question_id"
     t.integer  "col"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "configuration_types", :force => true do |t|
+    t.string   "Name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,7 +57,6 @@ ActiveRecord::Schema.define(:version => 20110408151238) do
 
   create_table "tconfigurations", :force => true do |t|
     t.string   "Name"
-    t.integer  "confType"
     t.integer  "qT1Count"
     t.integer  "qT2Count"
     t.integer  "qT3Count"
@@ -61,6 +66,31 @@ ActiveRecord::Schema.define(:version => 20110408151238) do
     t.integer  "degree4"
     t.integer  "degree5"
     t.time     "TestTime"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "configuration_type_id"
+  end
+
+
+  create_table "test_configs", :force => true do |t|
+    t.string   "Name"
+    t.datetime "TestTime"
+    t.integer  "confType"
+    t.integer  "qType1Count"
+    t.integer  "qType2Count"
+    t.integer  "qType3Count"
+    t.integer  "qType4Count"
+    t.integer  "qType5Count"
+    t.integer  "degree3"
+    t.integer  "degree4"
+    t.integer  "degree5"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "testsessions", :force => true do |t|
+    t.integer  "users_id"
+    t.integer  "tconfiguration_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

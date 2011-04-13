@@ -21,7 +21,7 @@
 <% @tconfigurations.each do |tconfiguration| %>
   <tr>
     <td><%= tconfiguration.Name %></td>
-    <td><%= tconfiguration.confType %></td>
+    <td><%= tconfiguration.configutaion_type.configuration_type.Name %></td>
     <td><%= tconfiguration.qT1Count %></td>
     <td><%= tconfiguration.qT2Count %></td>
     <td><%= tconfiguration.qT3Count %></td>
@@ -30,7 +30,7 @@
     <td><%= tconfiguration.degree3 %></td>
     <td><%= tconfiguration.degree4 %></td>
     <td><%= tconfiguration.degree5 %></td>
-    <td><%= tconfiguration.TestTime %></td>
+    <td><%= tconfiguration.TestTime.strftime('%H:%M:%S')  %></td>
     <td><%= link_to 'Show', tconfiguration %></td>
     <td><%= link_to 'Edit', edit_tconfiguration_path(tconfiguration) %></td>
     <td><%= link_to 'Destroy', tconfiguration, :confirm => 'Are you sure?', :method => :delete %></td>
