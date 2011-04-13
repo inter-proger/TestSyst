@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110410113433) do
+ActiveRecord::Schema.define(:version => 20110410102119) do
 
   create_table "answers", :force => true do |t|
     t.integer  "right"
@@ -83,13 +83,6 @@ ActiveRecord::Schema.define(:version => 20110410113433) do
     t.integer  "degree3"
     t.integer  "degree4"
     t.integer  "degree5"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "testsessions", :force => true do |t|
-    t.integer  "users_id"
-    t.integer  "tconfiguration_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
