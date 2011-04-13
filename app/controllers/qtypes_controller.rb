@@ -1,5 +1,6 @@
 # coding: utf-8
 class QtypesController < ApplicationController
+   before_filter :login_required
   # GET /qtypes
   # GET /qtypes.xml
   def index

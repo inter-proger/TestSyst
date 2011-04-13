@@ -16,34 +16,55 @@ root {
 }
 body
 {
-    background-image: url("/images/bg.jpg");
+    background-image: url("/images/bg.png");
 }
 .body
 {
-    padding: 20px;
-    margin: 15px auto;
+    
+    padding: 40px;
+    margin: 50px auto;
     max-width: 1000px;
     min-width: 500px;
-    background-color: #c0c0c0;
-    
-
+    background-color: #9090ff;
+    -border-radius: 20px;
+    -moz-border-radius:20px;
+    position: relative;
+  
+}
+.base
+{
+    margin: 0 auto;
+    width: 700px;
+    background-color: #d9d9d9;
+    color: blueviolet;
+    border: 3px;
+    border-style: dotted;
+    padding: 10px;
+    text-align: center;
 }
 table
 {
     border: 1px;
-    border-color: grey;
+    border-color: blue;
     border-style: dotted;
+    margin: 0px;
+    padding: 0px;
 }
 td
 {
     padding: 5px;
-    background-color: blanchedalmond;
+    background-color: #79fc61;
     color: black;
+    margin: 1px;
+    padding: 0px;    
 }
 
 tr
 {
+   
     width: 90%;
+    margin: 1px;
+    padding: 0px;
 
 }
 
@@ -58,4 +79,33 @@ tr
 
 .pref{
     white-space: pre;
+}
+
+.del
+{
+    border: 0px;
+    width: 16px;
+    
+}
+
+.menu
+{
+    text-align: right;
+    color: green;
+    display: block;
+    min-height:  60px;
+   
+}
+.menu ul li
+{
+    display: inline-block;
+    vertical-align:  middle;
+}
+.menu a:link
+{
+    color: green;
+}
+.menu a:visited
+{
+    color: greenyellow;
 }

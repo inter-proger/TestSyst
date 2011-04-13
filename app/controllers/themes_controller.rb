@@ -1,6 +1,6 @@
 # coding: utf-8
 class ThemesController < ApplicationController
-  
+  before_filter :login_required
   before_filter :find_disc
   before_filter :find_theme,:only=>[:show,:destroy]
   

@@ -1,4 +1,5 @@
 class ConfigurationTypesController < ApplicationController
+   before_filter :login_required
   # GET /configuration_types
   # GET /configuration_types.xml
   def index

@@ -1,3 +1,11 @@
+<%= content_for :menu  do%>
+<ul>
+      <li><%=link_to 'Главная',:root%></li>
+      <li>|&nbsp;Вторая</li>
+      <li>|&nbsp;Третья</li>
+     <li><%= render :partial =>"users/user_bar" %></li>
+    </ul>
+<% end %>
 <h1>Listing qtypes</h1>
 
 <table>
@@ -13,7 +21,7 @@
     <td><%= qtype.title %></td>
     <td><%= link_to 'Show', qtype %></td>
     <td><%= link_to 'Edit', edit_qtype_path(qtype) %></td>
-    <td><%= link_to 'Destroy', qtype, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag('del.png',:class=>'del'), qtype, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

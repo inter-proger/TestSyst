@@ -1,3 +1,11 @@
+<%= content_for :menu  do%>
+<ul>
+      <li><%=link_to 'Главная',:root%></li>
+      <li>|&nbsp;Вторая</li>
+      <li>|&nbsp;Третья</li>
+      <li><%= render :partial =>"users/user_bar" %></li>
+    </ul>
+<% end %>
 <h1>Disciplines#index</h1>
 <p>Find me in app/views/disciplines/index.html.erb</p>
 <p id="notice"><%= notice %></p>
@@ -10,7 +18,7 @@
   <%= link_to 'Показать', disc %></td>
   <%  if logged_in? && current_user.is_admin? %>
     <td>
-<%= link_to 'Удалить',disc,:confirm =>'Вы уверены', :method=>:delete  %></td>
+<%= link_to image_tag('del.png',:class=>'del'),disc,:confirm =>'Вы уверены', :method=>:delete  %></td>
 </tr>
   <% end %>
 <%end%>

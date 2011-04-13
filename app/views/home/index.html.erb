@@ -1,6 +1,15 @@
+<%= content_for :menu  do%>
+<ul>
+      <li><%=link_to 'Главная',:root%></li>
+      <li>|&nbsp;Вторая</li>
+      <li>|&nbsp;Третья</li>
+      <li><%= render :partial =>"users/user_bar" %></li>
+    </ul>
+<% end %>
+
 <h1>Тестирующая система MEGA v 0.1.0</h1><br/>
 <p>Find me in app/views/home/index.html.erb</p>
-<div style="margin: 0 auto; width: 700px; background-color: mediumaquamarine; color: blueviolet; border: 3px; border-style: dotted; padding: 10px; text-align: center;">
+<div class="base">
 <% if logged_in? %>
 	Добро пожаловать, <%= current_user.login %>.
 	<% if current_user.is_admin? %>

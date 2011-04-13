@@ -1,4 +1,6 @@
 class TconfigurationsController < ApplicationController
+   before_filter :login_required
+  before_filter :admin_required, :only=>[:new,:create,:destroy]
   # GET /tconfigurations
   # GET /tconfigurations.xml
   def index
