@@ -1,3 +1,11 @@
+<%= content_for :menu  do%>
+<ul>
+      <li><%=link_to 'Главная',:root%></li>
+      <li>|&nbsp;Вторая</li>
+      <li>|&nbsp;Третья</li>
+      <li><%= render :partial =>"users/user_bar" %></li>
+    </ul>
+<% end %>
 <h1><%= @theme.title %></h1>
 Themes#show
 </br>
@@ -14,7 +22,7 @@ Find me at themes/show.html.erb
   <%=  @qtypes[t.qtype_id-@c].title %>
       </td>
       <td>
-        <%= link_to 'Удалить',discipline_theme_question_url(@discipline,@theme,t),:confirm =>'Вы уверены', :method=>:delete  %>
+        <%= link_to image_tag('del.png',:class=>'del'),discipline_theme_question_url(@discipline,@theme,t),:confirm =>'Вы уверены', :method=>:delete  %>
       </td>
   </tr>
 <% end %>

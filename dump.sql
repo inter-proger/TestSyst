@@ -31,7 +31,7 @@ CREATE TABLE `answers` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,8 +40,34 @@ CREATE TABLE `answers` (
 
 LOCK TABLES `answers` WRITE;
 /*!40000 ALTER TABLE `answers` DISABLE KEYS */;
-INSERT INTO `answers` VALUES (1,0,'1738',NULL,NULL,'2011-04-03 16:53:59','2011-04-03 16:53:59'),(2,0,'1738',NULL,NULL,'2011-04-03 16:57:09','2011-04-03 16:57:09'),(3,1,'1756',NULL,NULL,'2011-04-03 16:57:09','2011-04-03 16:57:09'),(4,0,'1738',NULL,NULL,'2011-04-03 16:57:53','2011-04-03 16:57:53'),(5,1,'1756',NULL,NULL,'2011-04-03 16:57:53','2011-04-03 16:57:53'),(26,0,'1999',11,NULL,'2011-04-04 07:05:39','2011-04-04 07:05:39'),(27,0,'1985',11,NULL,'2011-04-04 07:05:39','2011-04-04 07:05:39'),(28,0,'1986',11,NULL,'2011-04-04 07:05:39','2011-04-04 07:05:39'),(29,1,'1875',11,NULL,'2011-04-04 07:05:39','2011-04-04 07:05:39'),(38,0,'1986',12,NULL,'2011-04-04 12:56:33','2011-04-04 12:56:33'),(39,1,'1985',12,NULL,'2011-04-04 12:56:33','2011-04-04 12:56:33'),(40,0,'ццц',12,NULL,'2011-04-04 12:56:33','2011-04-04 12:56:33'),(41,1,'бас-гитара',13,NULL,'2011-04-04 13:18:36','2011-04-04 13:18:36'),(42,0,'балалайка',13,NULL,'2011-04-04 13:18:36','2011-04-04 13:18:36'),(43,0,'скрипка',13,NULL,'2011-04-04 13:18:36','2011-04-04 13:18:36'),(44,1,'барабан',13,NULL,'2011-04-04 13:18:37','2011-04-04 13:18:37'),(60,1,'Кино',16,1,'2011-04-04 15:44:41','2011-04-04 15:44:41'),(61,1,'Звезда по имени Солнце',16,2,'2011-04-04 15:44:42','2011-04-04 15:44:42'),(62,2,'Каста',16,1,'2011-04-04 15:44:42','2011-04-04 15:44:42'),(63,2,'Ревность',16,2,'2011-04-04 15:44:42','2011-04-04 15:44:42'),(64,3,'Алла Пугачева',16,1,'2011-04-04 15:44:42','2011-04-04 15:44:42'),(65,3,'Арлекино',16,2,'2011-04-04 15:44:42','2011-04-04 15:44:42'),(66,4,'Зайка моя',16,2,'2011-04-04 15:44:42','2011-04-04 15:44:42'),(71,1,'Бетховен',14,NULL,'2011-04-06 06:14:52','2011-04-06 06:14:52'),(72,1,'Людвиг Бетховен',14,NULL,'2011-04-06 06:14:52','2011-04-06 06:14:52'),(73,1,'HHH',14,NULL,'2011-04-06 06:14:53','2011-04-06 06:14:53');
+INSERT INTO `answers` VALUES (1,1,'Да ',12,NULL,'2011-04-08 04:20:25','2011-04-08 04:20:25'),(2,1,'Нет',12,NULL,'2011-04-08 04:20:25','2011-04-08 04:20:25'),(3,1,'Не знаю',12,NULL,'2011-04-08 04:20:25','2011-04-08 04:20:25'),(4,1,'Не знаю',13,NULL,'2011-04-08 04:22:01','2011-04-08 04:22:01'),(5,1,'1800',14,NULL,'2011-04-08 05:10:31','2011-04-08 05:10:31'),(6,2,'1890',14,NULL,'2011-04-08 05:10:31','2011-04-08 05:10:31'),(7,3,'1900',14,NULL,'2011-04-08 05:10:31','2011-04-08 05:10:31'),(8,4,'1980',14,NULL,'2011-04-08 05:10:31','2011-04-08 05:10:31'),(9,5,'2000',14,NULL,'2011-04-08 05:10:31','2011-04-08 05:10:31'),(10,1,'Один',15,1,'2011-04-08 05:11:31','2011-04-08 05:11:31'),(11,1,'Один',15,2,'2011-04-08 05:11:31','2011-04-08 05:11:31'),(12,2,'Два',15,1,'2011-04-08 05:11:31','2011-04-08 05:11:31'),(13,2,'Два',15,2,'2011-04-08 05:11:32','2011-04-08 05:11:32'),(14,3,'Три',15,1,'2011-04-08 05:11:32','2011-04-08 05:11:32'),(15,3,'Три',15,2,'2011-04-08 05:11:32','2011-04-08 05:11:32'),(16,1,'Мур!',16,NULL,'2011-04-08 05:12:09','2011-04-08 05:12:09'),(17,0,'Гав',16,NULL,'2011-04-08 05:12:10','2011-04-08 05:12:10'),(18,0,'Му',16,NULL,'2011-04-08 05:12:10','2011-04-08 05:12:10'),(19,0,'Кря',16,NULL,'2011-04-08 05:12:10','2011-04-08 05:12:10'),(33,1,'олол',17,NULL,'2011-04-08 08:02:03','2011-04-08 08:02:03'),(34,1,'ыфжвлоа',17,NULL,'2011-04-08 08:02:03','2011-04-08 08:02:03'),(35,1,'ждылвоаж',17,NULL,'2011-04-08 08:02:03','2011-04-08 08:02:03'),(36,1,'Да!',18,NULL,'2011-04-13 07:02:47','2011-04-13 07:02:47');
 /*!40000 ALTER TABLE `answers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `configuration_types`
+--
+
+DROP TABLE IF EXISTS `configuration_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `configuration_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `configuration_types`
+--
+
+LOCK TABLES `configuration_types` WRITE;
+/*!40000 ALTER TABLE `configuration_types` DISABLE KEYS */;
+INSERT INTO `configuration_types` VALUES (1,'Тест по системе зачет/не зачет','2011-04-10 11:12:09','2011-04-10 11:12:09'),(2,'Тест на оценку','2011-04-10 11:12:26','2011-04-10 11:12:26'),(3,'Профилирующий тест','2011-04-10 11:12:38','2011-04-10 11:12:38');
+/*!40000 ALTER TABLE `configuration_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -57,7 +83,7 @@ CREATE TABLE `disciplines` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +92,7 @@ CREATE TABLE `disciplines` (
 
 LOCK TABLES `disciplines` WRITE;
 /*!40000 ALTER TABLE `disciplines` DISABLE KEYS */;
-INSERT INTO `disciplines` VALUES (1,'Пение','2011-03-21 16:22:34','2011-03-21 16:22:34');
+INSERT INTO `disciplines` VALUES (1,'Пение','2011-03-21 16:22:34','2011-03-21 16:22:34'),(2,'Лепение','2011-04-08 04:21:18','2011-04-08 04:21:18');
 /*!40000 ALTER TABLE `disciplines` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +110,7 @@ CREATE TABLE `pictures` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +119,7 @@ CREATE TABLE `pictures` (
 
 LOCK TABLES `pictures` WRITE;
 /*!40000 ALTER TABLE `pictures` DISABLE KEYS */;
-INSERT INTO `pictures` VALUES (7,'weemee_37025b121c6babbf5c96d7eafae8c079_for_inter-proger.jpg',11,'2011-04-02 11:49:44','2011-04-02 11:49:44'),(8,'weemee_37025b121c6babbf5c96d7eafae8c079_for_inter-proger.jpg',12,'2011-04-04 12:58:53','2011-04-04 12:58:53'),(9,NULL,14,'2011-04-06 06:15:47','2011-04-06 06:15:47'),(12,'weemee_37025b121c6babbf5c96d7eafae8c079_for_inter-proger.jpg',15,'2011-04-06 06:17:16','2011-04-06 06:17:16');
+INSERT INTO `pictures` VALUES (7,'weemee_37025b121c6babbf5c96d7eafae8c079_for_inter-proger.jpg',11,'2011-04-02 11:49:44','2011-04-02 11:49:44'),(8,NULL,16,'2011-04-08 07:38:33','2011-04-08 07:38:33');
 /*!40000 ALTER TABLE `pictures` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +165,7 @@ CREATE TABLE `questions` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +174,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,'В каком году родился Моцарт?',5,1,1,'2011-03-31 13:12:51','2011-03-31 13:12:51'),(2,'В каком году родился Моцарт?',5,1,1,'2011-03-31 13:18:07','2011-03-31 13:18:07'),(3,'В каком году родился Моцарт?',5,1,1,'2011-03-31 13:21:52','2011-03-31 13:21:52'),(4,'В каком году родился Моцарт?www',5,1,1,'2011-03-31 13:35:21','2011-03-31 13:35:21'),(5,'В каком году родился Моцарт?www',5,1,1,'2011-03-31 13:36:14','2011-03-31 13:36:14'),(6,'В каком году родился Моцарт?www',5,1,1,'2011-03-31 13:37:16','2011-03-31 13:37:16'),(7,'В каком году родился Моцарт?www',5,1,1,'2011-03-31 13:37:24','2011-03-31 13:37:24'),(8,'В каком году родился Моцарт?www',5,1,1,'2011-03-31 13:38:49','2011-03-31 13:38:49'),(9,'В каком году родился Моцарт?www',5,1,1,'2011-03-31 13:38:56','2011-03-31 13:38:56'),(10,'В каком году родился Моцарт?www',5,1,1,'2011-03-31 13:40:34','2011-03-31 13:40:34'),(11,'В каком году родился Моцарт?www',5,1,1,'2011-03-31 13:41:41','2011-03-31 13:41:41'),(12,'В каком году родился пагонини ',2,6,1,'2011-04-04 12:54:39','2011-04-04 12:54:39'),(13,'Какие из перечисленных инструментов используются в Black Metal?',3,7,1,'2011-04-04 13:00:57','2011-04-04 13:00:57'),(14,'Автор лунной сонаты?',3,8,1,'2011-04-04 13:21:00','2011-04-04 13:21:00'),(15,'Соотнесите группы и композиции',2,6,1,'2011-04-04 15:31:08','2011-04-04 15:31:08'),(16,'Соотнесите группы и композиции',2,9,1,'2011-04-04 15:32:14','2011-04-04 15:32:14');
+INSERT INTO `questions` VALUES (11,'В каком году родился Моцарт?www',5,1,1,'2011-03-31 13:41:41','2011-03-31 13:41:41'),(12,'как дальше жить?',1,8,1,'2011-04-08 04:20:14','2011-04-08 04:20:14'),(13,'Что такое лепение?',1,8,2,'2011-04-08 04:21:46','2011-04-08 04:21:46'),(14,'В каком году основали Москву?',1,10,1,'2011-04-08 05:10:01','2011-04-08 05:10:01'),(15,'Привет мир!',1,9,1,'2011-04-08 05:11:02','2011-04-08 05:11:02'),(16,'мур?',1,7,1,'2011-04-08 05:11:48','2011-04-08 05:11:48'),(17,'что?',1,8,1,'2011-04-08 08:01:12','2011-04-08 08:01:12'),(18,'Базу в базу!',1,6,1,'2011-04-13 07:02:36','2011-04-13 07:02:36');
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,8 +197,80 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20110227184656'),('20110228171033'),('20110302104604'),('20110321133105'),('20110321160153'),('20110331081427'),('20110402103649');
+INSERT INTO `schema_migrations` VALUES ('20110227184656'),('20110228171033'),('20110302104604'),('20110321133105'),('20110321160153'),('20110331081427'),('20110402103649'),('20110408131805'),('20110408151238'),('20110410101259'),('20110410102119');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tconfigurations`
+--
+
+DROP TABLE IF EXISTS `tconfigurations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tconfigurations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `qT1Count` int(11) DEFAULT NULL,
+  `qT2Count` int(11) DEFAULT NULL,
+  `qT3Count` int(11) DEFAULT NULL,
+  `qT4Count` int(11) DEFAULT NULL,
+  `qT5Count` int(11) DEFAULT NULL,
+  `degree3` int(11) DEFAULT NULL,
+  `degree4` int(11) DEFAULT NULL,
+  `degree5` int(11) DEFAULT NULL,
+  `TestTime` time DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `configuration_type_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tconfigurations`
+--
+
+LOCK TABLES `tconfigurations` WRITE;
+/*!40000 ALTER TABLE `tconfigurations` DISABLE KEYS */;
+INSERT INTO `tconfigurations` VALUES (1,'Имя',1,1,1,1,1,1,2,5,'00:30:00','2011-04-13 07:04:32','2011-04-13 07:12:26',1);
+/*!40000 ALTER TABLE `tconfigurations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test_configs`
+--
+
+DROP TABLE IF EXISTS `test_configs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `test_configs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TestTime` datetime DEFAULT NULL,
+  `confType` int(11) DEFAULT NULL,
+  `qType1Count` int(11) DEFAULT NULL,
+  `qType2Count` int(11) DEFAULT NULL,
+  `qType3Count` int(11) DEFAULT NULL,
+  `qType4Count` int(11) DEFAULT NULL,
+  `qType5Count` int(11) DEFAULT NULL,
+  `degree3` int(11) DEFAULT NULL,
+  `degree4` int(11) DEFAULT NULL,
+  `degree5` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_configs`
+--
+
+LOCK TABLES `test_configs` WRITE;
+/*!40000 ALTER TABLE `test_configs` DISABLE KEYS */;
+INSERT INTO `test_configs` VALUES (1,'Test','0000-00-00 00:00:00',1,1,1,1,1,1,1,1,1,'0000-00-00 00:00:00',NULL);
+/*!40000 ALTER TABLE `test_configs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -189,7 +287,7 @@ CREATE TABLE `themes` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +296,7 @@ CREATE TABLE `themes` (
 
 LOCK TABLES `themes` WRITE;
 /*!40000 ALTER TABLE `themes` DISABLE KEYS */;
-INSERT INTO `themes` VALUES (1,'Моцарт',1,'2011-03-21 16:22:44','2011-03-21 16:22:44');
+INSERT INTO `themes` VALUES (1,'Моцарт',1,'2011-03-21 16:22:44','2011-03-21 16:22:44'),(2,'Про лепение',2,'2011-04-08 04:21:33','2011-04-08 04:21:33');
 /*!40000 ALTER TABLE `themes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +321,7 @@ CREATE TABLE `users` (
   `roles` varchar(255) COLLATE utf8_unicode_ci DEFAULT '--- []',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +330,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'inter','','o@ru','4a61878f022fd9edff36f5436fa40ce8373bb8ac','3b9a0cccdd8b5b4a7c844ab35a560ca5219375fa','2011-03-21 16:22:20','2011-03-21 16:22:20',NULL,NULL,'--- \n- admin\n'),(2,'qqqqq','','o@ru','6f6c8b1073f89fcd39e9ae59f481cdeee172f21f','5114467824e861b47d900aaceb025b20b38f36ab','2011-03-31 08:22:14','2011-03-31 08:22:14',NULL,NULL,'--- \n- admin\n');
+INSERT INTO `users` VALUES (1,'inter','','o@ru','4a61878f022fd9edff36f5436fa40ce8373bb8ac','3b9a0cccdd8b5b4a7c844ab35a560ca5219375fa','2011-03-21 16:22:20','2011-03-21 16:22:20',NULL,NULL,'--- \n- admin\n'),(2,'qqqqq','','o@ru','6f6c8b1073f89fcd39e9ae59f481cdeee172f21f','5114467824e861b47d900aaceb025b20b38f36ab','2011-03-31 08:22:14','2011-03-31 08:22:14',NULL,NULL,'--- \n- admin\n'),(3,'xamele0n','','o@ru','c3e3f3de1da2b3de2c1ec7517ccb142f4b8ce37a','a8f6d06d7e57c28c23e1d058085177c01ca767d1','2011-04-08 04:19:19','2011-04-08 04:19:19',NULL,NULL,'--- \n- admin\n');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -245,4 +343,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-04-06 13:18:48
+-- Dump completed on 2011-04-13 13:44:46

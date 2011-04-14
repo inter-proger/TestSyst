@@ -1,3 +1,11 @@
+<%= content_for :menu  do%>
+<ul>
+      <li><%=link_to 'Главная',:root%></li>
+      <li>|&nbsp;Вторая</li>
+      <li>|&nbsp;Третья</li>
+      <li><%= render :partial =>"users/user_bar" %></li>
+    </ul>
+<% end %>
 <h1>Listing configuration_types</h1>
 
 <table>
@@ -13,7 +21,7 @@
     <td><%= configuration_type.Name %></td>
     <td><%= link_to 'Show', configuration_type %></td>
     <td><%= link_to 'Edit', edit_configuration_type_path(configuration_type) %></td>
-    <td><%= link_to 'Destroy', configuration_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag('del.png',:class=>'del'), configuration_type, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

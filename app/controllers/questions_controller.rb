@@ -1,5 +1,6 @@
 # coding: utf-8
 class QuestionsController < ApplicationController
+   before_filter :login_required
   before_filter :find_disc
   before_filter :find_theme
   before_filter :find_quest,:only=>[:show,:destroy,:answsadd]

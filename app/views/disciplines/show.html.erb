@@ -1,3 +1,11 @@
+<%= content_for :menu  do%>
+<ul>
+      <li><%=link_to 'Главная',:root%></li>
+      <li>|&nbsp;Вторая</li>
+      <li>|&nbsp;Третья</li>
+      <li><%= render :partial =>"users/user_bar" %></li>
+    </ul>
+<% end %>
 <p id="notice"><%= notice %></p>
 Find me in /disciplines/show.html.erb
 <h1><%= @discipline.title %></h1>
@@ -13,7 +21,7 @@ Find me in /disciplines/show.html.erb
 
   <% if logged_in? && current_user.is_admin? %>
       <td>
-     <%= link_to 'Удалить',discipline_theme_url(@discipline,t),:confirm =>'Вы уверены', :method=>:delete  %><br/>
+     <%= link_to image_tag('del.png',:class=>'del'),discipline_theme_url(@discipline,t),:confirm =>'Вы уверены', :method=>:delete  %><br/>
      </td>
 
   <%end%>
