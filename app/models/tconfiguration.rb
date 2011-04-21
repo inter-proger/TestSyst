@@ -1,3 +1,4 @@
+#coding: utf-8
 class Tconfiguration < ActiveRecord::Base
   validates_presence_of :Name,:qT1Count,:qT2Count,:qT3Count,:qT4Count, :qT5Count,:degree3,:degree4,:degree5
   validates_uniqueness_of :Name, :message =>'Конфигурация с таким именем уже существует'

@@ -44,27 +44,36 @@ body
 }
 table
 {
-    border: 1px;
+    border: 0px;
     border-color: blue;
     border-style: dotted;
     margin: 0px;
     padding: 0px;
 }
+th
+{
+    background-color: orange;
+    margin: 0;
+    padding: 2px;
+}
 td
 {
+    border-collapse: separate;
     padding: 5px;
-    background-color: #79fc61;
+    background-color: white;
+    border-left: 1px solid #efefef;
     color: black;
-    margin: 1px;
-    padding: 0px;    
+    margin: 0;
+    border-bottom: 2px solid #ccc;
 }
 
 tr
 {
    
     width: 90%;
-    margin: 1px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+    
 
 }
 
@@ -95,6 +104,12 @@ tr
     display: block;
     min-height:  60px;
    
+}
+
+.menu div {
+
+display:inline;
+
 }
 .menu ul li
 {
