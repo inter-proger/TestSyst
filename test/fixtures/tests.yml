@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  testsession: 
+  question: 
+  useransw: MyString
+  answorder: MyString
+  ok: 1
+
+two:
+  testsession: 
+  question: 
+  useransw: MyString
+  answorder: MyString
+  ok: 1

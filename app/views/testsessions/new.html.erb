@@ -1,0 +1,9 @@
+<h1>Testsessions#new</h1>
+<p>Find me in app/views/testsessions/new.html.erb</p>
+
+<% form_for(@ts) do |f| %>
+  <%= f.collection_select(:tconfiguration_id,Tconfiguration.all,:id,:Name) %>
+  <%= f.submit "Начать тестирование" %>
+<% end %>
+
+<% form %>
