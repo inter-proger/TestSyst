@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 #coding: utf-8
-=======
-# coding: utf-8
->>>>>>> e473287afcfe9ad87bf60fbc680a82723e526013
+
 class TconfigurationsController < ApplicationController
    before_filter :login_required
   before_filter :admin_required, :only=>[:new,:create,:destroy]
