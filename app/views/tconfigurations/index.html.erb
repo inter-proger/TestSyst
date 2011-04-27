@@ -1,3 +1,12 @@
+<%= content_for :head do %>
+  
+<style>  
+	a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
+	
+</style>
+<%end%>
+
+
 <%= content_for :menu  do%>
 <ul>
       <li><%=link_to 'Главная',:root%></li>
@@ -22,13 +31,13 @@
     <th>Оценка 5 (%)</th>
     <th>Время тестирования</th>
     <th></th>
-    <th></th>
-    <th></th>
+  
   </tr>
 
 <% @tconfigurations.each do |tconfiguration| %>
-  <tr>
-    <td><%= tconfiguration.Name %></td>
+
+  <tr >
+    <td  id="<%=tconfiguration.id%>" onmouseover="setcolor('Red','<%=tconfiguration.id%>')"><%= tconfiguration.Name %></td>
     <td><%= tconfiguration.configuration_type.Name %></td>
     <td><%= tconfiguration.qT1Count %></td>
     <td><%= tconfiguration.qT2Count %></td>
@@ -39,13 +48,14 @@
     <td><%= tconfiguration.degree4 %></td>
     <td><%= tconfiguration.degree5 %></td>
     <td><%= tconfiguration.TestTime.strftime('%H:%M:%S')  %></td>
-    <td><%= link_to 'Show', tconfiguration %></td>
-    <td><%= link_to 'Edit', edit_tconfiguration_path(tconfiguration) %></td>
-    <td><%= link_to image_tag('del.png',:class=>'del'), tconfiguration, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td width="95px"><%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}), tconfiguration,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+   <%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}), edit_tconfiguration_path(tconfiguration),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
+    <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}), tconfiguration, :confirm => 'Are you sure?', :method => :delete, :class=>"ui-state-default ui-corner-all",:title=>"Удалить"%></td>
   </tr>
 <% end %>
 </table>
 
+
 <br />
 
-<%= link_to 'New Tconfiguration', new_tconfiguration_path %>
+<%= link_to 'New Tconfiguration', new_tconfiguration_path,:class=>"actionbutton" %>

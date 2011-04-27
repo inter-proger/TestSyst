@@ -15,9 +15,9 @@
 	<% if current_user.is_admin? %>
         <sup>(admin)</sup>
 	<% end %>
-        <br/><%= link_to 'Выйти',:logout %><br/>
-        <%= link_to "Предметы", disciplines_path %>&nbsp
-        <%= link_to 'Конфигурации тестов',tconfigurations_path %>
+        <br/><%= link_to 'Выйти',:logout,:class=>"actionbutton" %><br/>
+        <%= link_to "Предметы", disciplines_path ,:class=>"actionbutton"%>&nbsp
+        <%= link_to 'Конфигурации тестов',tconfigurations_path,:class=>"actionbutton" %>
       
      
 
@@ -38,7 +38,7 @@
 -->
 
         <p><%= submit_tag 'Войти' %></p>
-        <p><%= link_to 'Зарегистрироваться', :signup %></p>
+        <p><%= link_to 'Зарегистрироваться', :signup,:class=>"actionbutton" %></p>
 	<% end %>
 <% end%>
         

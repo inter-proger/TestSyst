@@ -1,3 +1,10 @@
+<%= content_for :head do %>
+
+<style>
+	a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
+
+</style>
+<%end%>
 <%= content_for :menu  do%>
 <ul>
       <li><%=link_to 'Главная',:root%></li>
@@ -15,16 +22,16 @@
     <td>
   <%= disc.title  %></td>
     <td>
-  <%= link_to 'Показать', disc %></td>
+  <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}), disc,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %></td>
   <%  if logged_in? && current_user.is_admin? %>
     <td>
-<%= link_to image_tag('del.png',:class=>'del'),disc,:confirm =>'Вы уверены', :method=>:delete  %></td>
+<%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),disc,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %></td>
 </tr>
   <% end %>
 <%end%>
 </table>
 
 <%  if logged_in? && current_user.is_admin? %>
-  <%= link_to 'Новая дисциплина', :controller=>:disciplines, :action=>:new %>
+  <%= link_to 'Новая дисциплина', :controller=>:disciplines, :action=>:new ,:class=>"actionbutton"%>
 <% end %>
-<br/><%=link_to 'Назад', :root%>
+<br/><%=link_to 'Назад', :root,:class=>"actionbutton"%>

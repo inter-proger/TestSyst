@@ -19,13 +19,13 @@
 <% @configuration_types.each do |configuration_type| %>
   <tr>
     <td><%= configuration_type.Name %></td>
-    <td><%= link_to 'Show', configuration_type %></td>
-    <td><%= link_to 'Edit', edit_configuration_type_path(configuration_type) %></td>
-    <td><%= link_to image_tag('del.png',:class=>'del'), configuration_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}), configuration_type,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %></td>
+    <td><%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}), edit_configuration_type_path(configuration_type),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать"  %></td>
+    <td><%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}), configuration_type, :confirm => 'Are you sure?', :method => :delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"%></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Configuration type', new_configuration_type_path %>
+<%= link_to 'New Configuration type', new_configuration_type_path,:class=>"actionbutton" %>
