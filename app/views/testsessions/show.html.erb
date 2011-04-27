@@ -1,0 +1,70 @@
+<h1>Testsessions#show</h1>
+<p>Find me in app/views/testsessions/show.html.erb</p>
+
+
+<%unless @end%>
+  <div>
+  <%= @question.content %>
+  </div>
+  <div>
+  <%if @question.pictures.any?%>
+    <%@pic=@question.pictures[0]%>
+    <%= image_tag(@pic.pict_url) %>
+  <%end%>
+  </div>
+  <%=  form_tag({:controller=>:testsessions,:action=>:check, :num=>(@num+1).to_s, :id=>@ts.id},:method=>:post) do%>
+  <% if  @question.qtype_id == 6 %>
+    <% 0.upto(@a_count-1) do |i| %>
+      <%= radio_button_tag :answ,i.to_s,i==@ua.to_i %>
+      <%= @answers[@answorder[i]].content %><br/>
+    <% end %>
+  <%end%>
+
+  <% if  @question.qtype_id == 7 %>
+    <% 0.upto(@a_count-1) do |i| %>
+      <%= check_box_tag "answ[#{i}]","1",@ua[i] %>
+      <%= @answers[@answorder[i]].content %><br/>
+    <% end %>
+  <%end%>
+
+  <% if  @question.qtype_id == 8 %>
+    Ваш ответ:<br/>
+    <%= text_field_tag :answ,@ua %><br/>
+  <%end%>
+
+  <% if @question.qtype_id == 9 %>
+    <div id="answcolumn1">
+      <% 0.upto(@a1_count-1) do |i| %>
+        <%= (i+1).to_s %>.
+        <%= @answers[@answorder1[i]].content %><br/>
+      <% end %>
+    </div>
+    <div id="answcolumn2">
+     <% 0.upto(@a2_count-1) do |i| %>
+        <%= text_field_tag "answ[#{i}]",@ua[i] %>.
+        <%= @answers[@answorder2[i]].content %><br/>
+      <% end %>
+    </div>
+
+  <% end  %>
+
+
+  <% if  @question.qtype_id == 10 %>
+    <% 0.upto(@a_count-1) do |i| %>
+      <%= text_field_tag "answ[#{i}]",@ua[i] %>
+      <%= @answers[@answorder[i]].content%><br/>
+    <% end %>
+  <%end%>
+
+
+  <%= submit_tag "Подтвердить" %>
+  <%end%>
+<% else %>
+      <div>
+        Вы можете вернуться к предыдущим впоросам или завершить тестирование.
+      </div>
+  <%= form_tag({ :controller => :testsessions, :action => :complete, :id=>@ts.id.to_s }, :method=>:post) do %>
+      <%= submit_tag "Завершить" %>
+  <% end %>
+
+<%end%>

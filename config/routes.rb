@@ -1,4 +1,12 @@
 A3::Application.routes.draw do
+  get "testsessions/new"
+
+  get "testsessions/create"
+
+  get "testsessions/show"
+
+  get "testsessions/destroy"
+
   resources :testsessions
   resources :configuration_types
 

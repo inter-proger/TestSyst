@@ -10,13 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110410102119) do
+ActiveRecord::Schema.define(:version => 20110426150947) do
 
   create_table "answers", :force => true do |t|
     t.integer  "right"
     t.text     "content"
     t.integer  "question_id"
     t.integer  "col"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "configthemerelations", :force => true do |t|
+    t.integer  "tconfiguration_id"
+    t.integer  "theme_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,6 +92,24 @@ ActiveRecord::Schema.define(:version => 20110410102119) do
     t.integer  "degree5"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tests", :force => true do |t|
+    t.integer  "testsession_id"
+    t.integer  "question_id"
+    t.string   "useransw"
+    t.string   "answorder"
+    t.integer  "ok"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "testsessions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "tconfiguration_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "completed"
   end
 
   create_table "themes", :force => true do |t|

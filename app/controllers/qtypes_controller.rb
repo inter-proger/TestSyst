@@ -76,7 +76,6 @@ class QtypesController < ApplicationController
   def destroy
     @qtype = Qtype.find(params[:id])
     @qtype.destroy
-
     respond_to do |format|
       format.html { redirect_to(qtypes_url) }
       format.xml  { head :ok }
