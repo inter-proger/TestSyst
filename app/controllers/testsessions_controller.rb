@@ -50,8 +50,10 @@ class TestsessionsController < ApplicationController
 
   def show
     @num=params[:num].to_i-1
+
     @ts=current_user.testsessions.find(params[:id])
     @count=@ts.tests.count
+    @has_answer=@ts.tests.map{|i| i.useransw.length>0 }.unshift(false)
     @end=false
     if @num>=@count
       @end=true
@@ -86,8 +88,17 @@ class TestsessionsController < ApplicationController
         aa.each_index{|index| @ua[index]=aa[index]}
         @ua.default=nil
       end
+      
+      
     end
-
+    t=Time.now
+     @dt=t-@ts.created_at
+     @tt=@ts.tconfiguration.TestTime-Time.utc(2000,1,1,0,0,0)
+    @dt=@tt-@dt
+    @dt=@dt.to_i
+    @hour=@dt/3600
+    @min=@dt%3600/60
+    @sec=@dt%60
   end
 
   def destroy

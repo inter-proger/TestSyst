@@ -1,6 +1,51 @@
+<% content_for :head do %>
+<script type="text/javascript">
+  $(function() {
+
+  var hour=<%=@hour.to_s%>;
+  var min=<%=@min.to_s%>;
+  var sec=<%=@sec.to_s%>;
+  var timeflag=true;
+  setInterval(function(){
+    if(timeflag){
+    $("#timer").empty();
+    sec-=1;
+    if(sec==-1){
+      min-=1;
+      sec=59;
+      if(min==-1){
+        min=59;
+        hour-=1;
+      }
+      if(hour==0&&min==0&&sec==0){
+        timeflag=false;
+      }
+    }
+    var s="";
+     if(hour<10){
+       s=s+"0";
+     }
+     s=s+hour+":";
+     if(min<10){
+       s=s+"0";
+     }
+     s=s+min+":";
+     if(sec<10){
+       s=s+"0";
+     }
+     s=s+sec;
+    $("#timer").append(s);
+  }
+  },1000);
+});
+
+</script>
+<%end%>
+
 <h1>Testsessions#show</h1>
 <p>Find me in app/views/testsessions/show.html.erb</p>
-
+<div id="timer">
+</div>
 
 <%unless @end%>
   <div>
@@ -68,3 +113,16 @@
   <% end %>
 
 <%end%>
+<br/>
+Список вопросов:<br/>
+<div class="answlist">
+<%1.upto(@count) do |i|%>
+  <%= link_to((i).to_s,{ :controller => :testsessions, :action => :show, :id=>@ts.id.to_s, :num=>(i).to_s }) %>
+  <%if @has_answer[i] %>
+    +
+  <%else%>
+    -
+  <%end%>
+<%end%>
+
+</div>

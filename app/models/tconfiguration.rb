@@ -14,5 +14,6 @@ class Tconfiguration < ActiveRecord::Base
   belongs_to :configuration_type
   has_many :configthemerelations,:dependent => :destroy
   has_many :themes,:through=>:configthemerelations
+  has_many :testsessions
 
 end
