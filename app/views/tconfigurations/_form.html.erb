@@ -25,7 +25,7 @@
   <div class="field">
     <%= f.label 'Тип конфигурации' %><br />
     <%= f.collection_select(:configuration_type_id,ConfigurationType.all,:id,:Name) %>&nbsp;
-    <%= link_to 'Создать',new_configuration_type_path %>
+    <%= link_to 'Создать',new_configuration_type_path,:class=>'actionbutton' %>
   
   </div>
   <div class="field">

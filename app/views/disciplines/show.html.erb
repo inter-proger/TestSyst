@@ -1,3 +1,10 @@
+<%= content_for :head do %>
+
+<style>
+	a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
+
+</style>
+<%end%>
 <%= content_for :menu  do%>
 <ul>
       <li><%=link_to 'Главная',:root%></li>
@@ -10,27 +17,33 @@
 Find me in /disciplines/show.html.erb
 <h1><%= @discipline.title %></h1>
 
-<table>
+<table cellspacing="0" cellpadding="0">
+   <tr>
+    <th>Имя</th>
+    <th></th>
+  
+  </tr>
 <% @discipline.themes.each do |t| %>
   <tr>
     <td>
   <%= t.title %></td>
-    <td>
-  <%= link_to 'Показать', discipline_theme_url(@discipline,t)%>
-      </td>
+    <td> 
+       <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),discipline_theme_url(@discipline,t),:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+    
 
   <% if logged_in? && current_user.is_admin? %>
-      <td>
-     <%= link_to image_tag('del.png',:class=>'del'),discipline_theme_url(@discipline,t),:confirm =>'Вы уверены', :method=>:delete  %><br/>
-     </td>
+   
+     <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),discipline_theme_url(@discipline,t),:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
+   
 
   <%end%>
+        </td>
      </tr>
 
 <%end%>
      </table>
 <%  if logged_in? && current_user.is_admin? %>
-  <%= link_to 'Новая тема',new_discipline_theme_url(@discipline) %>
+  <%= link_to 'Новая тема',new_discipline_theme_url(@discipline),:class=>'actionbutton' %>
 <% end %>
 
-     <%= link_to 'Назад', disciplines_path %>
+     <%= link_to 'Назад', disciplines_path ,:class=>'actionbutton'%>

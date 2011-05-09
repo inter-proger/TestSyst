@@ -251,7 +251,7 @@
 Список вопросов:<br/>
 <div class="answlist">
 <%1.upto(@count) do |i|%>
-  <%= link_to((i).to_s,{ :controller => :testsessions, :action => :show, :id=>@ts.id.to_s, :num=>(i).to_s }) %>
+  <%= link_to((i).to_s,{ :controller => :testsessions, :action => :show, :id=>@ts.id.to_s, :num=>(i).to_s }),:class=>'actionbutton' %>
   <%if @has_answer[i] %>
     +
   <%else%>

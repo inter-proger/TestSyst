@@ -11,9 +11,14 @@
 <%= @questions.length %>
 
 <br/>
+<div id='accordion'>
 <% 0.upto(@tests.length-1) do |i| %>
+  <div><h3><a href="#">
   <%= (i+1).to_s %>.
 
-<%= @questions[i].content %><br/>
-  <%= @rights[i]  %><br/>
+  <%= @questions[i].content %></a></h3>
+    <div>
+  <%= @rights[i]  %></div>
+  </div>
 <% end %>
+</div>

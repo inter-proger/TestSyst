@@ -11,11 +11,15 @@
   <script language="javascript" type="text/javascript">
     $(function(){
       $("a.actionbutton").button();
-      $('#dialog_link, ul#icons li, a').hover(
+      $('a.actionbutton, td a').hover(
 					function() { $(this).addClass('ui-state-hover'); },
 					function() { $(this).removeClass('ui-state-hover'); });
 
-    });
+
+   $("#accordion").accordion({ header: "h3" });
+  });
+   
+
   </script>
   <style>
     a span.ui-icon {float: left; margin: 0 4px;}

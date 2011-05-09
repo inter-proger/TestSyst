@@ -1,3 +1,12 @@
+<%= content_for :head do %>
+
+<style>
+	a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
+        
+
+</style>
+<%end%>
+
 <%= content_for :menu  do%>
 <ul>
       <li><%=link_to 'Главная',:root%></li>
@@ -7,28 +16,38 @@
     </ul>
 <% end %>
 <h1><%= @theme.title %></h1>
+
 Themes#show
 <br/>
 Find me at themes/show.html.erb
 <% @qtypes=Qtype.all %>
 <% @c=6 %>
-<table>
+<table cellspacing="0" cellpadding="0" >
+   <tr>
+    <th>Вопрос</th>
+    <th>Тип</th>
+    <th></th>
+   
+  </tr>
 <% @theme.questions.each do |t| %>
   <tr>
     <td>
-  <%= link_to t.content, discipline_theme_question_path(@discipline,@theme,t)%>
+  <%=t.content%>
       </td>
       <td>
   <%=  @qtypes[t.qtype_id-@c].title %>
       </td>
       <td>
-        <%= link_to image_tag('del.png',:class=>'del'),discipline_theme_question_url(@discipline,@theme,t),:confirm =>'Вы уверены', :method=>:delete  %>
+          <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),discipline_theme_question_path(@discipline,@theme,t),:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+     
+
+         <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),discipline_theme_question_url(@discipline,@theme,t),:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
       </td>
   </tr>
 <% end %>
   </table>
 
-<%= link_to 'Создать вопрос', new_discipline_theme_question_path(@discipline,@theme) %>
+<%= link_to 'Создать вопрос', new_discipline_theme_question_path(@discipline,@theme),:class=>'actionbutton' %>
 
-<%= link_to 'Назад', discipline_path(@discipline) %>
+<%= link_to 'Назад', discipline_path(@discipline),:class=>'actionbutton' %>
 
