@@ -1,0 +1,112 @@
+<% @i=1 %>
+<%@reports.each do |t|%>
+<div class="ui-widget ui-corner-all ui-state-active">
+  <div class="ui-widget-header ui-corner-all">
+  <%= @i.to_s+". " %>
+  <% @i+=1 %>
+  <%= t.question %>
+  </div>
+  <div class="ui-widget-content ui-corner-all">
+  <%case t.type %>
+    <%when 6%>
+      <% t.answorder.each do |a| %>
+        <% @class="ui-widget-content ui-corner-all" %>
+        <%  if a==t.answorder[t.useransw] %>
+          <% @class="ui-state-error ui-corner-all" %>
+        <%end%>
+        <% if t.rightansw==a %>
+          <%  if a==t.answorder[t.useransw] %>
+             <% @class="ui-state-highlight ui-corner-all" %>
+          <%else%>
+             <% @class="ui-state-error ui-corner-all" %>
+          <%  end %>
+        <%end%>
+        <div class="<%= @class %>">
+          <%= t.answers[a].content %>
+        </div>
+      <% end %>
+    <%when 7%>
+      <% t.answorder.each_index do |i| %>
+        <% @class="ui-widget-content ui-corner-all" %>
+        <%  if t.useransw.include?(i.to_s) %>
+           <% @class="ui-state-error ui-corner-all" %>
+        <%end%>
+        <% if t.rightansw.include?(t.answorder[i]) %>
+          <%  if t.useransw.include?(i.to_s) %>
+             <% @class="ui-state-highlight ui-corner-all" %>
+          <%else%>
+             <% @class="ui-state-error ui-corner-all" %>
+          <%  end %>
+        <%end%>
+        <div class="<%= @class %>">
+          <%= t.answers[t.answorder[i]].content %>
+        </div>
+      <% end %>
+     <%when 8%>
+        <% if t.right=="+" %>
+          <% @class="ui-state-highlight ui-corner-all" %>
+        <% else %>
+          <% @class="ui-state-error ui-corner-all" %>
+        <% end %>
+        <div class="<%= @class %>">
+          <%= t.useransw %>
+        </div>
+        <div>
+           <div class="ui-widget-header ui-corner-all">
+            Возможные варианты ответа:
+           </div>
+           <% t.answers.each do |k,v| %>
+            <div class="ui-widget-content ui-corner-all">
+              <%= v.content %>
+            </div>
+           <% end %>
+        </div>
+     <%when 9%>
+      <div style="display: inline-block;width: 49%;vertical-align: top;">
+      <% t.useransw.each do |pp| %>
+      <%if pp.right%>
+        <% @class="ui-state-highlight ui-corner-all" %>
+      <%else%>
+        <% @class="ui-state-error ui-corner-all" %>
+      <%end%>
+      <div class="<%=@class%>">
+        <%= pp.a1 %><br/>
+        <%= pp.a2 %><br/>
+      </div>
+      <% end %>
+      </div>
+      <div style="display: inline-block;width: 49%;">
+      <% t.rightansw.each do |pp| %>
+      <div class="ui-widget-content ui-corner-all">
+        <%= pp.a1 %><br/>
+        <%= pp.a2 %><br/>
+      </div>
+      <% end %>
+      </div>
+    <%when 10%>
+      <div style="display: inline-block;width: 49%;vertical-align: top;">
+      <% t.useransw.each_index do |i| %>
+        <%if t.useransw[i].content==t.rightansw[i].content%>
+          <% @class="ui-state-highlight ui-corner-all" %>
+        <%else%>
+          <% @class="ui-state-error ui-corner-all" %>
+        <%end%>
+        <div class="<%=@class%>">
+          <%= t.useransw[i].content %>
+        </div>
+      <% end %>
+      </div>
+      <div style="display: inline-block;width: 49%;">
+      <% t.rightansw.each do |pp| %>
+      <div class="ui-widget-content ui-corner-all">
+        <%= pp.content %>
+      </div>
+      <% end %>
+      </div>
+
+
+  <%end%>
+  </div>
+</div>
+<br/>
+<% end %>

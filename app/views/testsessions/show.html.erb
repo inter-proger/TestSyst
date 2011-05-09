@@ -1,26 +1,19 @@
 <% content_for :head do %>
 <script type="text/javascript">
+  var currDrag;
   $(function() {
-
   var hour=<%=@hour.to_s%>;
   var min=<%=@min.to_s%>;
   var sec=<%=@sec.to_s%>;
   var timeflag=true;
-  setInterval(function(){
-    if(timeflag){
-    $("#timer").empty();
-    sec-=1;
-    if(sec==-1){
-      min-=1;
-      sec=59;
-      if(min==-1){
-        min=59;
-        hour-=1;
-      }
-      if(hour==0&&min==0&&sec==0){
+
+  function TimerOutput(){
+    if((hour<0) || (hour==0&&min==0&&sec==0)){
         timeflag=false;
+        hour=0;
+        min=0;
+        sec=0;
       }
-    }
     var s="";
      if(hour<10){
        s=s+"0";
@@ -35,11 +28,109 @@
      }
      s=s+sec;
     $("#timer").append(s);
+  };
+
+  function TimerStep(){
+    if(timeflag){
+    $("#timer").empty();
+    sec-=1;
+    if(sec==-1){
+      min-=1;
+      sec=59;
+      if(min==-1){
+        min=59;
+        hour-=1;
+      }
+
+    }
+    TimerOutput();
   }
+  else{
+     window.location="/testsessions/complete/<%= @ts.id.to_s %>?mesage='Вермя вышло.'";
+    }
+  }
+  TimerOutput();
+  TimerStep();
+  setInterval(function(){
+    TimerStep();
   },1000);
+  <%if !@end&&@question.qtype_id == 10%>
+      $( "#sortable" ).sortable({
+              stop: function(event, ui) { var result = $('#sortable').sortable('toArray');
+                      var s="",i=0;
+                      var inputs=$('[type=hidden].vals');
+                      for(i=0;i<7;i++)
+                        inputs[i].value=result[i];
+                      }
+
+      });
+      $( "#sortable" ).sortable("option","placeholder","ui-state-highlight");
+      $( "#sortable" ).disableSelection();
+  <%end%>
+  <%if !@end&&@question.qtype_id == 9%>
+    $( ".drs" ).draggable();
+		$( ".drop" ).droppable({
+			drop: function( event, ui ) {
+				var sel='[type=hidden].vals';
+				if($(this).children().length<2){
+				$( this )
+					.addClass( "ui-state-highlight" );
+					var dr=ui.draggable;
+					dr.click(function(){
+						$( this ).draggable("enable");
+						$( this ).parent().removeClass("ui-state-highlight");
+						$( this ).appendTo($('#drags'));
+						$(sel)[parseInt(this.id)].value="";
+						return true;
+					});
+					dr.draggable("disable");
+					dr.removeClass("ui-state-disabled");
+					dr.css("left","0");
+					dr.css("top","0");
+					dr.appendTo($( this ));
+					var ind=parseInt(dr[0].id);
+					var val=this.id.substr(1);
+					$(sel)[ind].value=val;
+					}
+					else{
+					var del=$( this ).find("div.drs");
+					var dr=ui.draggable;
+					var val=this.id.substr(1);
+					var ind=parseInt(del[0].id);
+					$(sel)[ind].value="";
+					ind=parseInt(dr[0].id);
+					$(sel)[ind].value=val;
+					del.click(function(){});
+					del.appendTo($('#drags'));
+					del.draggable("enable");
+					dr.click(function(){
+						$( this ).draggable("enable");
+						$( this ).parent().removeClass("ui-state-highlight");
+						$( this ).appendTo($('#drags'));
+						$( this ).click(function(){});
+						$(sel)[parseInt(this.id)].value="";
+						return true;
+					});
+					dr.draggable("disable");
+					dr.removeClass("ui-state-disabled");
+					dr.css("left","0");
+					dr.css("top","0");
+					dr.appendTo($( this ));
+					}
+				}
+		});
+  <%end%>
 });
 
 </script>
+<style>
+	#sortable { list-style-type: none; margin: 0; padding: 0; }
+	#sortable li { margin: 0 2px 2px 2px; padding: 2px; font-size: 16; height: 1.2em; }
+        .drs { width: 442px; height: 18px; padding: 2px;  margin: 3px 3px 3px 0; }
+	#drags {width: 450px; display: inline-block; vertical-align: top;}
+	#drops{display: inline-block; vertical-align: top;}
+	.drop { width: 450px; height: 50px; padding: 2px;  margin: 1px; }
+</style>
 <%end%>
 
 <h1>Testsessions#show</h1>
@@ -54,9 +145,9 @@
   <div>
   <%if @question.pictures.any?%>
     <%@pic=@question.pictures[0]%>
-    <% if @pic.pict_url %>
-    <%= image_tag(@pic.pict_url) %>
-    <%end%>
+    <%  if @pic.pict_url %>
+      <%= image_tag(@pic.pict_url) %>
+    <% end %>
   <%end%>
   </div>
   <%=  form_tag({:controller=>:testsessions,:action=>:check, :num=>(@num+1).to_s, :id=>@ts.id},:method=>:post) do%>
@@ -80,27 +171,68 @@
   <%end%>
 
   <% if @question.qtype_id == 9 %>
-    <div id="answcolumn1">
+    <% 0.upto(@a2_count-1) do |i| %>
+      <%= hidden_field_tag "answ[#{i}]","",:class=>"vals" %>
+    <%  end %>
+    <div id="drops">
       <% 0.upto(@a1_count-1) do |i| %>
-        <%= (i+1).to_s %>.
-        <%= @answers[@answorder1[i]].content %><br/>
+            <div id="<%= 'd'+(i+1).to_s %>" class="ui-widget-header drop" >
+            <div class="title"><%= @answers[@answorder1[i]].content %></div>
+
+            </div>
       <% end %>
     </div>
-    <div id="answcolumn2">
-     <% 0.upto(@a2_count-1) do |i| %>
-        <%= text_field_tag "answ[#{i}]",@ua[i] %>.
-        <%= @answers[@answorder2[i]].content %><br/>
+
+    <div id="drags">
+
+    <% 0.upto(@a2_count-1) do |i| %>
+      <div id="<%=i.to_s%>" class="ui-widget-content drs">
+            <%= @answers[@answorder2[i]].content %>
+      </div>
+      <%  if @ua[i].to_i!=0 %>
+      <script type="text/javascript">
+        currDrag=$("#<%=i.to_s%>");
+        $("#d<%=@ua[i]%>").append(currDrag);
+        $("#d<%=@ua[i]%>").addClass( "ui-state-highlight" );
+        currDrag.click(function(){
+                $( this ).draggable("enable");
+                $( this ).parent().removeClass("ui-state-highlight");
+                $( this ).appendTo($('#drags'));
+                $("[type=hidden].vals")[parseInt(this.id)].value="";
+                return true;
+        });
+        currDrag.draggable("disable");
+        currDrag.removeClass("ui-state-disabled");
+        currDrag.css("left","0");
+        currDrag.css("top","0");
+        var ind=parseInt(currDrag[0].id);
+        var val=$("#d<%=@ua[i]%>")[0].id.substr(1);
+        $("[type=hidden].vals")[ind].value=val;
+      </script>
       <% end %>
+
+    <% end %>
+
     </div>
 
   <% end  %>
 
 
   <% if  @question.qtype_id == 10 %>
+    <% @ff=@ua[0] %>
     <% 0.upto(@a_count-1) do |i| %>
-      <%= text_field_tag "answ[#{i}]",@ua[i] %>
-      <%= @answers[@answorder[i]].content%><br/>
+      <% @ua[i]=(i+1).to_s unless @ua[i]%>
+      <%= hidden_field_tag "answ[#{i}]",@ua[i],:class=>"vals" %>
     <% end %>
+    <ul id="sortable">
+      <% 0.upto(@a_count-1) do |i| %>
+        <%unless(@ff)%>
+          <li id="<%= (i+1).to_s %>" class="ui-state-default"><%= @answers[@answorder[i]].content %></li>
+        <%else%>
+          <li id="<%= @ua[i]%>" class="ui-state-default"><%= @answers[@answorder[@ua[i].to_i-1]].content %></li>
+        <%end%>
+      <% end %>
+    </ul>
   <%end%>
 
 

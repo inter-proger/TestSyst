@@ -15,9 +15,10 @@
 	<% if current_user.is_admin? %>
         <sup>(admin)</sup>
 	<% end %>
-        <br/><%= link_to 'Выйти',:logout,:class=>"actionbutton" %><br/>
-        <%= link_to "Предметы", disciplines_path ,:class=>"actionbutton"%>&nbsp
-        <%= link_to 'Конфигурации тестов',tconfigurations_path,:class=>"actionbutton" %>
+        <br/><%= link_to 'Выйти',:logout %><br/>
+        <%= link_to "Предметы", disciplines_path %>&nbsp
+        <%= link_to 'Конфигурации тестов',tconfigurations_path %>
+        <%= link_to 'Перейти к тестированию',:controller=>:testsessions,:action=>:new %>
       
      
 
