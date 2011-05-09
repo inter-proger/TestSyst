@@ -45,7 +45,7 @@ class TestsessionsController < ApplicationController
       @test.ok=0
       @test.save
     end
-    redirect_to testsession_path(@ts),:num=>"1"
+    redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1"
   end
 
   def show
@@ -130,7 +130,8 @@ class TestsessionsController < ApplicationController
       case qt
         when 6
           f=false unless useransw && @answers[@answorder[useransw.to_i]].right==1
-          ua=useransw
+          ua=""
+          ua=useransw unless useransw
         when 7
           useransw=Hash.new unless useransw
           useransw=useransw.select{|key,value| value=="1"}
@@ -147,10 +148,10 @@ class TestsessionsController < ApplicationController
           f=ra.value?(useransw.mb_chars.downcase.to_s)
           ua=useransw
         when 9
-          useransw.each { |key,value| f&&=@answers[@answorder2[key.to_i]].right==value.to_i }
+          useransw.each { |key,value| f&&=((value.to_i==0)&&(@answers[@answorder2[key.to_i]].right==0))||((value.to_i!=0)&&@answers[@answorder2[key.to_i]].right==@answers[@answorder1[value.to_i-1]].right)}
           ua=useransw.values.join('|%')
         when 10
-          0.upto(@a_count-1) {|i| f&&= useransw[i.to_s].to_i==@answers[@answorder[i]].right}
+          0.upto(@a_count-1) {|i| f&&= useransw[(@answers[@answorder[i]].right-1).to_s].to_i==i+1}
           ua=useransw.values.join('|%')
       end
       if f
@@ -164,7 +165,19 @@ class TestsessionsController < ApplicationController
   end
 
   def complete
-
+    @ts=current_user.testsessions.find(params[:id])
+    @ts.update_attribute("completed",1)
+    @tests=@ts.tests
+    qs=@ts.questions
+    @ra_count=0
+    @tests.each{|t| @ra_count+=t.ok}
+    @percent=@ra_count.to_f/@tests.length.to_f*100.0
+    @questions=Array.new
+    @tests.each{|t| @questions.push(qs.detect{|q| q.id==t.question_id})}
+    #@tests.each{|t| @questions.push(Question.find(t.question_id))}
+    @rights=Array.new(@tests.length){|u| '-'}
+    @tests.each_index{|i| @rights[i] = '+' if @tests[i].ok==1}
+    
   end
 
 end

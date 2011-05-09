@@ -5,3 +5,15 @@
 
 Тест завершен<br/>
 Здесь будет отчет о тесте.
+
+
+<%= @percent.to_i.to_s %>
+<%= @questions.length %>
+
+<br/>
+<% 0.upto(@tests.length-1) do |i| %>
+  <%= (i+1).to_s %>.
+
+<%= @questions[i].content %><br/>
+  <%= @rights[i]  %><br/>
+<% end %>
