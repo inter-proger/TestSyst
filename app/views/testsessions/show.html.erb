@@ -54,7 +54,9 @@
   <div>
   <%if @question.pictures.any?%>
     <%@pic=@question.pictures[0]%>
+    <% if @pic.pict_url %>
     <%= image_tag(@pic.pict_url) %>
+    <%end%>
   <%end%>
   </div>
   <%=  form_tag({:controller=>:testsessions,:action=>:check, :num=>(@num+1).to_s, :id=>@ts.id},:method=>:post) do%>
