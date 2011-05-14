@@ -17,18 +17,58 @@ root {
 body
 {
     background-image: url("/images/bg.png");
+ 
+}
+#page
+{
+    margin: 0px auto;
+    max-width: 1200px;
+    min-width: 800px;
+    
+    
+}
+#left-pad
+{
+    
+    background-image: url("/images/back.png");
+    background-repeat: repeat-y;
+    background-color: transparent;
+    padding: 0px 0px 0px 80px;
+    
+   
+}
+#top-pads
+{
+    padding-left: 80px;
+}
+#top-pads a
+{
+    font-family: 'Courier New', 'Arial';
+    font-variant: small-caps;
+    font-size: 9pt;
+    color: blue;
+}
+#top-pads a:hover
+{
+    background-color: yellowgreen;
+}
+#top-pads td
+{
+    border: 0px;
+    text-align: center;
+    background-color: transparent;
+    background-image: url('/images/tab.png');
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 25px;
+    
 }
 .body
 {
     
-    padding: 40px;
-    margin: 50px auto;
-    max-width: 1200px;
-    min-width: 500px;
-    background-color: #9090ff;
-    -border-radius: 20px;
-    -moz-border-radius:20px;
-    position: relative;
+    padding: 40px 40px 60px 40px;
+    background-color: #ede7e3;
+    
   
 }
 .base
@@ -37,10 +77,9 @@ body
     width: 700px;
     background-color: #d9d9d9;
     color: blueviolet;
-    border: 3px;
-    border-style: dotted;
     padding: 10px;
     text-align: center;
+    -moz-border-radius:20px;
 }
 table
 {

@@ -11,7 +11,7 @@
   <script language="javascript" type="text/javascript">
     $(function(){
       $("a.actionbutton").button();
-      $('a.actionbutton, td a').hover(
+      $('a.actionbutton, .body td a').hover(
 					function() { $(this).addClass('ui-state-hover'); },
 					function() { $(this).removeClass('ui-state-hover'); });
 
@@ -29,13 +29,31 @@
 
   <div class="menu">
     <%= yield :menu  %>
+<ul>
+      <li><%=link_to 'Главная',:root%></li>
+     
+      <li>|<%= render :partial =>"users/user_bar" %></li>
+</ul>
+
+  
     
   </div>
-   
-  
-  <div class="body">
-<%= yield %>
-    </div>
+
+   <div id="page">
+ 
+
+      <table id="top-pads" cellspacing="0" cellpadding="0">
+        <tr>
+          <%=  yield :tabs%>
+        </tr>
+      </table>
+ <div id ="left-pad">
+
+    <div class="body">
+    <%= yield %>
+    </div></div>
+
+  </div>
 
 </body>
 </html>
