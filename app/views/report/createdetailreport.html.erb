@@ -1,11 +1,30 @@
+<%=content_for :head do%>
+ <script language="javascript" type="text/javascript">
+    $(function(){
+
+   $("#accordion").accordion({ header: "h3" });
+  });
+
+
+  </script>
+
+<%end%>
 <% @i=1 %>
+<div id="accordion">
 <%@reports.each do |t|%>
-<div class="ui-widget ui-corner-all ui-state-active">
+  <div class="ui-widget ui-corner-all ui-state-active"><h3>
+
+    <% if t.right=='+' %>
   <div class="ui-widget-header ui-corner-all">
+    <% else %>
+     <div class="ui-widget-header ui-corner-all ui-state-error">
+    <%end %>
+
+
   <%= @i.to_s+". " %>
   <% @i+=1 %>
   <%= t.question %>
-  </div>
+  </div></h3>
   <div class="ui-widget-content ui-corner-all">
   <%case t.type %>
     <%when 6%>
@@ -108,5 +127,7 @@
   <%end%>
   </div>
 </div>
+
 <br/>
 <% end %>
+</div>

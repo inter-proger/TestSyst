@@ -11,14 +11,19 @@
 <%= @questions.length %>
 
 <br/>
-<div id='accordion'>
+
 <% 0.upto(@tests.length-1) do |i| %>
-  <div><h3><a href="#">
+  <div>
+    
+     <% if @rights[i]=='+' %>
+  <div class="ui-widget-header ui-corner-all">
+    <% else %>
+     <div class="ui-widget-header ui-corner-all ui-state-error">
+    <%end %>
+        
   <%= (i+1).to_s %>.
 
-  <%= @questions[i].content %></a></h3>
-    <div>
-  <%= @rights[i]  %></div>
+  <%= @questions[i].content %></div>
+ 
   </div>
 <% end %>
-</div>
