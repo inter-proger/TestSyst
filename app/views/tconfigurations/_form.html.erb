@@ -18,8 +18,10 @@
   </div>
 
   <div class="field">
-    <%= label_tag "Темы для теста (для выбора нескольких тем нажмите и удерживайте Ctrl)"%><br/>
-    <%= select_tag("themes[]", options_for_select(@themes),:multiple=>"true",:size=>"8")  %>
+    <%= f.label "Темы для теста (для выбора нескольких тем нажмите и удерживайте Ctrl)"%><br/>
+    <%  if @themes %>
+    <%= select_tag("themes[]", options_for_select(@themes,),:multiple=>"true",:size=>"8")  %>
+    <%end%>
   </div>
 
   <div class="field">

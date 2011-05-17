@@ -37,32 +37,7 @@ body
     
    
 }
-#top-pads
-{
-    padding-left: 80px;
-}
-#top-pads a
-{
-    font-family: 'Courier New', 'Arial';
-    font-variant: small-caps;
-    font-size: 9pt;
-    color: blue;
-}
-#top-pads a:hover
-{
-    background-color: yellowgreen;
-}
-#top-pads td
-{
-    border: 0px;
-    text-align: center;
-    background-color: transparent;
-    background-image: url('/images/tab.png');
-    background-repeat: no-repeat;
-    width: 120px;
-    height: 25px;
-    
-}
+
 .body
 {
     
@@ -162,4 +137,8 @@ display:inline;
 .menu a:visited
 {
     color: greenyellow;
+}
+.wraper
+{
+    clear: both;
 }

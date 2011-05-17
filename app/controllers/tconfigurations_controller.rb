@@ -40,6 +40,10 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations/1/edit
   def edit
     @tconfiguration = Tconfiguration.find(params[:id])
+    @themes= Theme.all.map{|th| [th.title, th.id]}
+
+
+    
   end
 
   # POST /tconfigurations
@@ -83,7 +87,7 @@ class TconfigurationsController < ApplicationController
   def update
 
     @tconfiguration = Tconfiguration.find(params[:id])
-
+     @themes= Theme.all.map{|th| [th.title, th.id]}
     respond_to do |format|
       if @tconfiguration.update_attributes(params[:tconfiguration])
         format.html { redirect_to(@tconfiguration, :notice => 'Tconfiguration was successfully updated.') }

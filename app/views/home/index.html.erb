@@ -1,9 +1,9 @@
 
 
 <%= content_for :tabs do %>
-<td> <%= link_to "Предметы", disciplines_path %></td>
-<td> <%= link_to 'Конфигурации',tconfigurations_path %></td>
-<td> <%= link_to 'Тестирование',{:controller=>:testsessions,:action=>:new} %></td>
+<li><%= link_to "Предметы", disciplines_path %></li>
+<li><%= link_to 'Конфигурации',tconfigurations_path %></li>
+<li><%= link_to 'Тестирование',{:controller=>:testsessions,:action=>:new} %></li>
 <%  end %>
 
 <h1>Тестирующая система MEGA v 0.1.5</h1><br/>

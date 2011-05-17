@@ -10,7 +10,7 @@
   <%= yield :head %>
   <script language="javascript" type="text/javascript">
     $(function(){
-      $("a.actionbutton").button();
+      $("a.actionbutton,  input:submit, input:reset, button").button();
       $('a.actionbutton, .body td a').hover(
 					function() { $(this).addClass('ui-state-hover'); },
 					function() { $(this).removeClass('ui-state-hover'); });
@@ -42,11 +42,12 @@
    <div id="page">
  
 
-      <table id="top-pads" cellspacing="0" cellpadding="0">
-        <tr>
+      <div id="top-pads">
+        <ul>
           <%=  yield :tabs%>
-        </tr>
-      </table>
+        </ul>
+        <div class="wraper"></div>
+      </div>
  <div id ="left-pad">
 
     <div class="body">
