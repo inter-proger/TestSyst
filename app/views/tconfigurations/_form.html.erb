@@ -1,3 +1,51 @@
+<%= content_for :head do %>
+<script language="javascript" type="text/javascript">
+    $(function(){
+     $('.slider').slider({
+                          value:0
+                         
+                        });
+     $('#sl3').bind('slide',function(event,ui)
+                      {                     
+                       $('#tconfiguration_degree3').val(ui.value);
+                       
+                        var v=$('#sl4').slider('value');
+                          $('#sl4').slider('option','min',ui.value);
+                        if (v < ui.value)
+                         $('#sl4').slider('value',ui.value);
+
+                      
+                      });
+
+
+      $('#sl4').bind('slide',function(event,ui)
+                      {
+                         $('#tconfiguration_degree4').val(ui.value);
+                            var v=$('#sl5').slider('value');
+                         $('#sl5').slider('option','min',ui.value);
+                            if (v < ui.value)
+                         $('#sl5').slider('value',ui.value);
+                      });
+
+      $('#sl5').bind('slide',function(event,ui)
+                      {
+                        $('#tconfiguration_degree5').val(ui.value);
+                      });
+        $('#sl3').bind('slidechange',function(event,ui)
+                      {
+                       $('#tconfiguration_degree3').val(ui.value);
+                      });
+          $('#sl4').bind('slidechange',function(event,ui)
+                      {
+                       $('#tconfiguration_degree4').val(ui.value);
+                      });
+           $('#sl5').bind('slidechange',function(event,ui)
+                      {
+                       $('#tconfiguration_degree5').val(ui.value);
+                      });
+    });
+</script>
+<%end%>
 <%= form_for(@tconfiguration) do |f| %>
   <% if @tconfiguration.errors.any? %>
     <div id="error_explanation">
@@ -19,9 +67,10 @@
 
   <div class="field">
     <%= f.label "Темы для теста (для выбора нескольких тем нажмите и удерживайте Ctrl)"%><br/>
-    <%  if @themes %>
-    <%= select_tag("themes[]", options_for_select(@themes,),:multiple=>"true",:size=>"8")  %>
+    <%if @themes%>
+    <%= select_tag("themes[]", options_for_select(@themes,@arr),:multiple=>"true",:size=>"8")  %>
     <%end%>
+    
   </div>
 
   <div class="field">
@@ -53,14 +102,18 @@
   <div class="field">
     <%= f.label '% на 3' %><br />
     <%= f.text_field :degree3 %>
+    <div class="slider" id="sl3"></div>
+
   </div>
   <div class="field">
     <%= f.label '% на 4' %><br />
     <%= f.text_field :degree4 %>
+     <div class="slider" id="sl4"></div>
   </div>
   <div class="field">
     <%= f.label '% на 5' %><br />
     <%= f.text_field :degree5 %>
+     <div class="slider" id="sl5"></div>
   </div>
   <div class="field">
     <%= f.label 'Время на тест' %><br />
@@ -68,6 +121,6 @@
     <%= f.time_select "TestTime", :include_seconds => true,:default=>DateTime.parse("00:30:00"), :minute_step => 5  %>
   </div>
   <div class="actions">
-    <%= f.submit "Создать"%>
+    <%= f.submit "Сохранить"%>
   </div>
 <% end %>

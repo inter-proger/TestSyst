@@ -16,7 +16,7 @@ root {
 }
 body
 {
-    background-image: url("/images/bg.png");
+    background-image: url("/images/desk.jpg");
  
 }
 #page
@@ -24,6 +24,7 @@ body
     margin: 0px auto;
     max-width: 1200px;
     min-width: 800px;
+    
     
     
 }
@@ -43,6 +44,7 @@ body
     
     padding: 40px 40px 60px 40px;
     background-color: #ede7e3;
+    min-height: 400px;
     
   
 }
@@ -54,7 +56,9 @@ body
     color: blueviolet;
     padding: 10px;
     text-align: center;
-    -moz-border-radius:20px;
+   -moz-border-radius: 20px;
+    -webkit-border-radius:20px;
+    border-radius:20px;
 }
 table
 {
@@ -114,9 +118,9 @@ tr
 .menu
 {
     text-align: right;
-    color: green;
+    color: blueviolet;
     display: block;
-    min-height:  60px;
+    min-height:  60px; 
    
 }
 
@@ -124,19 +128,32 @@ tr
 
 display:inline;
 
+
+}
+.menu ul
+{
+    float: right;
+    background-color: #d9d9d9;
+    border: 2px solid black;
+    padding: 5px;
+     -moz-border-radius: 8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
 }
 .menu ul li
 {
     display: inline-block;
     vertical-align:  middle;
+   
 }
 .menu a:link
 {
-    color: green;
+    color: cornflowerblue;
+    
 }
 .menu a:visited
 {
-    color: greenyellow;
+    color: #9475f2;
 }
 .wraper
 {
