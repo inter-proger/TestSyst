@@ -22,11 +22,14 @@
     <td>
   <%= disc.title  %></td>
     <td>
+       <% if logged_in?%>
+      <%= link_to tag("span",{:class=>"ui-icon ui-icon-play"}),new_testsession_url,:class=>"ui-state-default ui-corner-all",:title=>"Начать тестирование" %>
+ <%  if  current_user.is_admin? %>
   <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}), disc,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
-  <%  if logged_in? && current_user.is_admin? %>
+ 
     
 <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),disc,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
-
+<%end%>
   <% end %>
 </td></tr>
 <%end%>

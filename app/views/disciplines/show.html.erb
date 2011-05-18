@@ -20,15 +20,16 @@ Find me in /disciplines/show.html.erb
   <tr>
     <td>
   <%= t.title %></td>
-    <td> 
-       <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),discipline_theme_url(@discipline,t),:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
-    
+    <td>
+   <% if logged_in?%>
+      <%= link_to tag("span",{:class=>"ui-icon ui-icon-play"}),new_testsession_url,:class=>"ui-state-default ui-corner-all",:title=>"Начать тестирование" %>
 
-  <% if logged_in? && current_user.is_admin? %>
+  <% if  current_user.is_admin? %>
+      <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),discipline_theme_url(@discipline,t),:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
    
      <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),discipline_theme_url(@discipline,t),:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
    
-
+     <%end%>
   <%end%>
         </td>
      </tr>
