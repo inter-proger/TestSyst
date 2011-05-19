@@ -3,22 +3,60 @@
 <head>
   <title>A3</title>
   <%= stylesheet_link_tag :all %>
+  <link href="stylesheets/css/pepper-grinder/jquery-ui-1.8.11.custom.css" type="text/css" rel="stylesheet"/>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
   <link rel="stylesheet" type="text/css" href="/stylesheets/pepper-grinder/jquery-ui-1.8.11.custom.css"/>
   <%= yield :head %>
+  <script language="javascript" type="text/javascript">
+    $(function(){
+      $("a.actionbutton,  input:submit, input:reset, button").button();
+      $('a.actionbutton, .body td a').hover(
+					function() { $(this).addClass('ui-state-hover'); },
+					function() { $(this).removeClass('ui-state-hover'); });
+
+
+   $("#accordion").accordion({ header: "h3" });
+
+
+  });
+   
+
+  </script>
+  <style>
+    a span.ui-icon {float: left; margin: 0 4px;}
+    </style>
 </head>
 <body>
 
   <div class="menu">
     <%= yield :menu  %>
+<ul>
+      <li><%=link_to 'Главная',:root%></li>
+     
+      <li>|<%= render :partial =>"users/user_bar" %></li>
+</ul>
+
+  
     
   </div>
-   
-  
-  <div class="body">
-<%= yield %>
-    </div>
+
+   <div id="page">
+ 
+
+      <div id="top-pads">
+        <ul>
+          <%=  yield :tabs%>
+        </ul>
+        <div class="wraper"></div>
+      </div>
+ <div id ="left-pad">
+
+    <div class="body">
+    <%= yield %>
+    </div></div>
+
+  </div>
 
 </body>
 </html>

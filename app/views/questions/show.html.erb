@@ -160,9 +160,11 @@
 <button onClick="add_ans();">Добавить вариант ответа</button>
 <br/>
 <br/>
-<%if @quest.pictures.any?%>
+<%if @quest.pictures.any? %>
   <%@p=@quest.pictures[0]%>
-  <%= image_tag(@p.pict_url) %>
+  <%if @p.pict_url!=nil%>
+    <%= image_tag(@p.pict_url) %>
+  <%end%>
 <%end%>
 <br/>
 <% form_for([@discipline,@theme,@quest,@pict],:html => {:multipart => true}) do |f| %>
@@ -171,6 +173,6 @@
   <%= f.submit 'Загрузить' %>
 <%  end %>
 
-<%= link_to "К списку вопросов",discipline_theme_path(@discipline,@theme)%>
+<%= link_to "К списку вопросов",discipline_theme_path(@discipline,@theme),:class=>'actionbutton'%>
 
 </body>

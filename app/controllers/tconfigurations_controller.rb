@@ -1,4 +1,5 @@
-# coding: utf-8
+#coding: utf-8
+
 class TconfigurationsController < ApplicationController
    before_filter :login_required
   before_filter :admin_required, :only=>[:new,:create,:destroy]
@@ -39,6 +40,12 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations/1/edit
   def edit
     @tconfiguration = Tconfiguration.find(params[:id])
+    @themes= Theme.all.map{|th| [th.title, th.id]}
+    @the=@tconfiguration.themes.map { |e| e.id } 
+    @arr=Array.new
+    @themes.each_index { |i| @arr.push(i+1) if @the.include?(@themes[i][1])  }
+
+        
   end
 
   # POST /tconfigurations
@@ -68,7 +75,7 @@ class TconfigurationsController < ApplicationController
           params[:themes].each do |t|
             @rel=@tconfiguration.configthemerelations.create(:theme_id=>t)
           end
-          redirect_to(@tconfiguration, :notice => 'Tconfiguration was successfully created.') }
+          redirect_to(@tconfiguration, :notice => 'Конфигурация успешно создана') }
         format.xml  { render :xml => @tconfiguration, :status => :created, :location => @tconfiguration }
       else
         format.html { render :action => "new" }
@@ -82,10 +89,39 @@ class TconfigurationsController < ApplicationController
   def update
 
     @tconfiguration = Tconfiguration.find(params[:id])
-
+     @themes= Theme.all.map{|th| [th.title, th.id]}
+     #=========from create===========
+      unless params[:themes]
+      @tconfiguration.errors.add("Вопросов","не достаточно")
+      @themes=Theme.all.map{|t| [t.title,t.id]}
+      render :action => "edit" and return
+    end
+    st=" and (theme_id in ("+params[:themes].join(", ")+"))"
+    f1=Question.where("(qtype_id= 6)"+ st).count.to_s>=params[:tconfiguration][:qT1Count]
+    f2=Question.where("(qtype_id= 7)"+ st).count.to_s>=params[:tconfiguration][:qT2Count]
+    f3=Question.where("(qtype_id= 8)"+ st).count.to_s>=params[:tconfiguration][:qT3Count]
+    f4=Question.where("(qtype_id= 9)"+ st).count.to_s>=params[:tconfiguration][:qT4Count]
+    f5=Question.where("(qtype_id= 10)"+ st).count.to_s>=params[:tconfiguration][:qT5Count]
+    f=f1&&f2&&f3&&f4&&f5
+    if !f
+      @tconfiguration.errors.add("Вопросов","не достаточно")
+      @themes=Theme.all.map{|t| [t.title,t.id]}
+      render :action => "edit" and return
+    end
+     #====================
     respond_to do |format|
       if @tconfiguration.update_attributes(params[:tconfiguration])
-        format.html { redirect_to(@tconfiguration, :notice => 'Tconfiguration was successfully updated.') }
+        format.html {
+          
+          @tconfiguration.themes.delete(@tconfiguration.themes)
+
+
+            params[:themes].each do |t|
+            @rel=@tconfiguration.configthemerelations.create(:theme_id=>t)
+            end
+          redirect_to(@tconfiguration, :notice => 'Конфигурация успешно обновлена')
+
+          }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

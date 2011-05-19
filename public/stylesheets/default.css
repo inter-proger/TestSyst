@@ -16,19 +16,37 @@ root {
 }
 body
 {
-    background-image: url("/images/bg.png");
+    background-image: url("/images/desk.jpg");
+ 
 }
+#page
+{
+    margin: 0px auto;
+    max-width: 1200px;
+    min-width: 800px;
+    
+    
+    
+}
+#left-pad
+{
+    
+    background-image: url("/images/back.png");
+    background-repeat: repeat-y;
+    background-color: transparent;
+    padding: 0px 0px 0px 80px;
+    
+   
+}
+
 .body
 {
     
-    padding: 40px;
-    margin: 50px auto;
-    max-width: 1000px;
-    min-width: 500px;
-    background-color: #9090ff;
-    -border-radius: 20px;
-    -moz-border-radius:20px;
-    position: relative;
+    padding: 40px 40px 60px 40px;
+    background-color: #ede7e3;
+    min-height: 400px;
+   
+    
   
 }
 .base
@@ -37,34 +55,44 @@ body
     width: 700px;
     background-color: #d9d9d9;
     color: blueviolet;
-    border: 3px;
-    border-style: dotted;
     padding: 10px;
     text-align: center;
+   -moz-border-radius: 20px;
+    -webkit-border-radius:20px;
+    border-radius:20px;
 }
 table
 {
-    border: 1px;
+    border: 0px;
     border-color: blue;
     border-style: dotted;
     margin: 0px;
     padding: 0px;
 }
+th
+{
+    background-color: orange;
+    margin: 0;
+    padding: 2px;
+}
 td
 {
+    border-collapse: separate;
     padding: 5px;
-    background-color: #79fc61;
+    background-color: white;
+    border-left: 1px solid #efefef;
     color: black;
-    margin: 1px;
-    padding: 0px;    
+    margin: 0;
+    border-bottom: 2px solid #ccc;
 }
 
 tr
 {
    
     width: 90%;
-    margin: 1px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+    
 
 }
 
@@ -91,21 +119,60 @@ tr
 .menu
 {
     text-align: right;
-    color: green;
+    color: blueviolet;
     display: block;
-    min-height:  60px;
+    min-height:  60px; 
    
+}
+
+.menu div {
+
+display:inline;
+
+
+}
+.menu ul
+{
+    float: right;
+    background-color: #d9d9d9;
+    border: 2px solid black;
+    padding: 5px;
+     -moz-border-radius: 8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
 }
 .menu ul li
 {
     display: inline-block;
     vertical-align:  middle;
+   
 }
 .menu a:link
 {
-    color: green;
+    color: cornflowerblue;
+    
 }
 .menu a:visited
 {
-    color: greenyellow;
+    color: #9475f2;
+}
+.wraper
+{
+    clear: both;
+}
+
+#timer
+{
+    float: right;
+    padding: 60px 12px 12px 12px;
+    background-color: transparent;
+    background-image: url('/images/s.png');
+    background-repeat: no-repeat;
+    text-align: center;
+    color: #9475f2;
+    font-family: 'Courier New';
+    font-size: 14pt;
+    font-weight: bold;
+    width: 100px;
+    height: 90px;
 }

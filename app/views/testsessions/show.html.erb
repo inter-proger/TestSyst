@@ -133,10 +133,11 @@
 </style>
 <%end%>
 
-<h1>Testsessions#show</h1>
-<p>Find me in app/views/testsessions/show.html.erb</p>
 <div id="timer">
 </div>
+<h1>Testsessions#show</h1>
+<p>Find me in app/views/testsessions/show.html.erb</p>
+
 
 <%unless @end%>
   <div>
@@ -251,7 +252,7 @@
 Список вопросов:<br/>
 <div class="answlist">
 <%1.upto(@count) do |i|%>
-  <%= link_to((i).to_s,{ :controller => :testsessions, :action => :show, :id=>@ts.id.to_s, :num=>(i).to_s }) %>
+  <%= link_to (i).to_s,{ :controller => :testsessions, :action => :show, :id=>@ts.id.to_s, :num=>(i).to_s },:class=>'actionbutton' %>
   <%if @has_answer[i] %>
     +
   <%else%>
