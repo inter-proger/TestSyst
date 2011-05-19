@@ -1,3 +1,12 @@
+<% content_for :head do %>
+<style type="text/css">
+  .icons { padding: 4px 4px;  display: inline-block; width:5px;vertical-align: middle; margin: 2px;}
+  .icons span.ui-icon {}
+  .ua{display: inline-block; width:17px; height: 100%; vertical-align: middle;text-align: center; margin: 2px;}
+  .answ{display: inline-block;vertical-align: middle; height: 100%;text-indent: 1em;}
+</style>
+<% end %>
+
 <% @i=1 %>
 <%@reports.each do |t|%>
 <div class="ui-widget ui-corner-all ui-state-active">
@@ -6,57 +15,95 @@
   <% @i+=1 %>
   <%= t.question %>
   </div>
-  <div class="ui-widget-content ui-corner-all">
+  <div class="ui-widget-content ui-corner-all" >
   <%case t.type %>
     <%when 6%>
       <% t.answorder.each do |a| %>
-        <% @class="ui-widget-content ui-corner-all" %>
+        <% @class="ui-state-content ui-corner-all" %>
+        <% @iconclass="" %>
+        <% @ua=false %>
         <%  if a==t.answorder[t.useransw] %>
-          <% @class="ui-state-error ui-corner-all" %>
+          <% #@class="ui-state-error ui-corner-all"
+          %>
+         <% @ua=true %>
+          <% @iconclass="ui-icon ui-icon-circle-close" %>
         <%end%>
         <% if t.rightansw==a %>
           <%  if a==t.answorder[t.useransw] %>
              <% @class="ui-state-highlight ui-corner-all" %>
-          <%else%>
+             <% @iconclass="ui-icon ui-icon-check" %>
+          <%  else %>
              <% @class="ui-state-error ui-corner-all" %>
-          <%  end %>
+             <% @iconclass="ui-icon ui-icon-circle-close" %>
+          <% end %>
         <%end%>
-        <div class="<%= @class %>">
+        
+        <div class="<%= @class %>" style=" padding: 0px; display: block;width: 100%; vertical-align:top;">
+          <div class="icons">
+            <span class="<%=@iconclass %>"/>
+          </div>
+          <div class="ua">
+            <input type="radio" <%="checked" if @ua%>/>
+          </div>
+          <div class="answ">
           <%= t.answers[a].content %>
+          </div>
         </div>
       <% end %>
     <%when 7%>
       <% t.answorder.each_index do |i| %>
+        <% @ua=false %>
         <% @class="ui-widget-content ui-corner-all" %>
+        <% @iconclass="" %>
         <%  if t.useransw.include?(i.to_s) %>
-           <% @class="ui-state-error ui-corner-all" %>
+           <%  # @class="ui-state-error ui-corner-all" %>
+           <% @iconclass="ui-icon ui-icon-circle-close" %>
+           <% @ua=true %>
         <%end%>
         <% if t.rightansw.include?(t.answorder[i]) %>
           <%  if t.useransw.include?(i.to_s) %>
              <% @class="ui-state-highlight ui-corner-all" %>
+             <% @iconclass="ui-icon ui-icon-check" %>
           <%else%>
              <% @class="ui-state-error ui-corner-all" %>
+             <% @iconclass="ui-icon ui-icon-circle-close" %>
           <%  end %>
         <%end%>
-        <div class="<%= @class %>">
-          <%= t.answers[t.answorder[i]].content %>
+        <div class="<%= @class %>" style="display: inline-block;width: 100%;">
+          <div class="icons " style="">
+            <span class="<%=@iconclass %>"/>
+          </div>
+           <div class="ua">
+            <input type="checkbox" <%="checked" if @ua%>/>
+           </div>
+          <div class="answ">
+            <%= t.answers[t.answorder[i]].content %>
+          </div>
         </div>
       <% end %>
      <%when 8%>
+        <% @iconclass="" %>
         <% if t.right=="+" %>
           <% @class="ui-state-highlight ui-corner-all" %>
+          <% @iconclass="ui-icon ui-icon-check"%>
         <% else %>
           <% @class="ui-state-error ui-corner-all" %>
+          <% @iconclass="ui-icon ui-icon-circle-close" %>
         <% end %>
         <div class="<%= @class %>">
-          <%= t.useransw %>
+          <div class="icons " style="">
+            <span class="<%=@iconclass %>"/>
+          </div>
+          <div class="answ">
+            <%= t.useransw %>
+          </div>
         </div>
         <div>
            <div class="ui-widget-header ui-corner-all">
             Возможные варианты ответа:
            </div>
            <% t.answers.each do |k,v| %>
-            <div class="ui-widget-content ui-corner-all">
+          <div class="ui-widget-content ui-corner-all" style="text-indent: 1em;">
               <%= v.content %>
             </div>
            <% end %>
