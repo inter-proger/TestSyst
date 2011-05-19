@@ -94,4 +94,20 @@ class UsersController < ApplicationController
     end
   end
 
+    def listsessions
+      @us=User.find(params[:id])
+      ts=Testsession.all
+      @sessions=Array.new
+      ts.each do |t|
+        if t.user_id==@us.id
+          @sessions.push(t)
+        end
+      end
+
+       respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @us }
+    end
+    end
+
 end
