@@ -1,22 +1,27 @@
 <table cellpadding="0" cellspacing="0">
   <tr>
-  <th>Имя</th>
   <th>Логин</th>
-  <th>e-mail</th>
-  <th>Пароль</th>
+  <th>Имя</th>
+  <th>Фамилия</th>
+  <th>Отчество</th>
+   <th>Место работы</th>
+   <th>Должность</th>
    <th>Роли</th>
   </tr>
 
   <tr>
-    <td><%= @us.name%></td>
-    <td><%=@us.login %></td>
-    <td><%=@us.email %></td>
-    <td>Пароль</td>
-      <td><%=@us.roles %></td>
+      <td><%= @us.login%></td>
+    <td><%=@us.I %></td>
+    <td><%=@us.F %></td>
+    <td><%=@us.O %></td>
+    <td><%=@us.workplace %></td>
+    <td><%=@us.proff %></td>
+     <td><%=@us.roles %></td>
 
   </tr>
 
 
   </table>
-<%= link_to 'Отобразить сессии',{:controller=>:users,:action=>:listsessions,:id=>@us},:class=>'actionbutton' %>
+<br/>
+<%= link_to 'Отобразить сессии',{:controller=>:users,:action=>:listsessions,:id=>@us},:class=>'actionbutton' %>&nbsp;
 <%= link_to "Редактировать",edit_user_path(@us),:class=>'actionbutton' %>
