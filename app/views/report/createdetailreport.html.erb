@@ -18,12 +18,12 @@
 <% @i=1 %>
 <div id="accordion">
 <%@reports.each do |t|%>
-  <div class="ui-widget ui-corner-all ui-state-active"><h3>
+  <div class="ui-widget ui-corner-all ui-state-active"><h3 >
 
     <% if t.right=='+' %>
-  <div class="ui-widget-header ui-corner-all">
+      <div class="ui-widget-header ui-corner-all" style="padding: 8px 30px; ">
     <% else %>
-     <div class="ui-widget-header ui-corner-all ui-state-error">
+     <div class="ui-widget-header ui-corner-all ui-state-error" style="padding: 8px 30px;">
     <%end %>
 
 
@@ -39,8 +39,7 @@
         <% @iconclass="" %>
         <% @ua=false %>
         <%  if a==t.answorder[t.useransw] %>
-          <% #@class="ui-state-error ui-corner-all"
-          %>
+          <% @class="ui-state-error ui-corner-all"%>
          <% @ua=true %>
           <% @iconclass="ui-icon ui-icon-circle-close" %>
         <%end%>
@@ -49,12 +48,12 @@
              <% @class="ui-state-highlight ui-corner-all" %>
              <% @iconclass="ui-icon ui-icon-check" %>
           <%  else %>
-             <% @class="ui-state-error ui-corner-all" %>
+             <% #  @class="ui-state-error ui-corner-all" %>
              <% @iconclass="ui-icon ui-icon-circle-close" %>
           <% end %>
         <%end%>
         
-        <div class="<%= @class %>" style=" padding: 0px; display: block;width: 100%; vertical-align:top;">
+        <div class="<%= @class %>" style=" padding: 3px 0px; display: block;width: 100%; vertical-align:top;">
           <div class="icons">
             <span class="<%=@iconclass %>"/>
           </div>
@@ -72,7 +71,7 @@
         <% @class="ui-widget-content ui-corner-all" %>
         <% @iconclass="" %>
         <%  if t.useransw.include?(i.to_s) %>
-           <%  # @class="ui-state-error ui-corner-all" %>
+           <%  @class="ui-state-error ui-corner-all" %>
            <% @iconclass="ui-icon ui-icon-circle-close" %>
            <% @ua=true %>
         <%end%>
@@ -81,11 +80,11 @@
              <% @class="ui-state-highlight ui-corner-all" %>
              <% @iconclass="ui-icon ui-icon-check" %>
           <%else%>
-             <% @class="ui-state-error ui-corner-all" %>
-             <% @iconclass="ui-icon ui-icon-circle-close" %>
+             <% # @class="ui-state-error ui-corner-all" %>
+             <% @iconclass="ui-icon ui-icon-check" %>
           <%  end %>
         <%end%>
-        <div class="<%= @class %>" style="display: inline-block;width: 100%;">
+        <div class="<%= @class %>" style="display: inline-block;width: 100%;padding: 3px 0px;">
           <div class="icons " style="">
             <span class="<%=@iconclass %>"/>
           </div>
@@ -98,6 +97,9 @@
         </div>
       <% end %>
      <%when 8%>
+        <div class="ui-widget-header ui-corner-all" style="padding: 8px 5px;">
+          Ответ пользователя:
+        </div>
         <% @iconclass="" %>
         <% if t.right=="+" %>
           <% @class="ui-state-highlight ui-corner-all" %>
@@ -106,7 +108,7 @@
           <% @class="ui-state-error ui-corner-all" %>
           <% @iconclass="ui-icon ui-icon-circle-close" %>
         <% end %>
-        <div class="<%= @class %>">
+        <div class="<%= @class %>" style="padding: 3px 0px;">
           <div class="icons " style="">
             <span class="<%=@iconclass %>"/>
           </div>
@@ -115,32 +117,38 @@
           </div>
         </div>
         <div>
-           <div class="ui-widget-header ui-corner-all">
+           <div class="ui-widget-header ui-corner-all" style="padding: 8px 5px;">
             Возможные варианты ответа:
            </div>
            <% t.answers.each do |k,v| %>
-          <div class="ui-widget-content ui-corner-all" style="text-indent: 1em;">
+          <div class="ui-state-highlight ui-corner-all" style="text-indent: 1em; padding: 8px 5px;">
               <%= v.content %>
             </div>
            <% end %>
         </div>
      <%when 9%>
       <div style="display: inline-block;width: 49%;vertical-align: top;">
+      <div class="ui-widget-header ui-corner-all" style="padding: 8px 5px;">
+          Ответ пользователя:
+      </div>
       <% t.useransw.each do |pp| %>
       <%if pp.right%>
         <% @class="ui-state-highlight ui-corner-all" %>
       <%else%>
         <% @class="ui-state-error ui-corner-all" %>
       <%end%>
-      <div class="<%=@class%>">
+      <div class="<%=@class%>" style="padding: 0px 5px;">
         <%= pp.a1 %><br/>
         <%= pp.a2 %><br/>
       </div>
       <% end %>
       </div>
       <div style="display: inline-block;width: 49%;">
+        <div class="ui-widget-header ui-corner-all" style="padding: 8px 5px;">
+          Правильный ответ:
+        </div>
       <% t.rightansw.each do |pp| %>
-      <div class="ui-widget-content ui-corner-all">
+      <div class="ui-state-highlight ui-corner-all" style="padding: 0px 5px;">
         <%= pp.a1 %><br/>
         <%= pp.a2 %><br/>
       </div>
@@ -148,20 +156,26 @@
       </div>
     <%when 10%>
       <div style="display: inline-block;width: 49%;vertical-align: top;">
+      <div class="ui-widget-header ui-corner-all" style="padding: 8px 5px;">
+          Ответ пользователя:
+      </div>
       <% t.useransw.each_index do |i| %>
         <%if t.useransw[i].content==t.rightansw[i].content%>
           <% @class="ui-state-highlight ui-corner-all" %>
         <%else%>
           <% @class="ui-state-error ui-corner-all" %>
         <%end%>
-        <div class="<%=@class%>">
+        <div class="<%=@class%>" style="padding: 8px 5px;">
           <%= t.useransw[i].content %>
         </div>
       <% end %>
       </div>
       <div style="display: inline-block;width: 49%;">
+        <div class="ui-widget-header ui-corner-all" style="padding: 8px 5px;">
+          Правильный ответ:
+        </div>
       <% t.rightansw.each do |pp| %>
-      <div class="ui-widget-content ui-corner-all">
+      <div class="ui-state-highlight ui-corner-all" style="padding: 8px 5px;">
         <%= pp.content %>
       </div>
       <% end %>
