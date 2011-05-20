@@ -1,0 +1,22 @@
+<table cellpadding="0" cellspacing="0">
+  <tr>
+  <th>Имя</th>
+  <th>Логин</th>
+  <th>e-mail</th>
+  <th>Пароль</th>
+   <th>Роли</th>
+  </tr>
+
+  <tr>
+    <td><%= @us.name%></td>
+    <td><%=@us.login %></td>
+    <td><%=@us.email %></td>
+    <td>Пароль</td>
+      <td><%=@us.roles %></td>
+
+  </tr>
+
+
+  </table>
+<%= link_to 'Отобразить сессии',{:controller=>:users,:action=>:listsessions,:id=>@us},:class=>'actionbutton' %>
+<%= link_to "Редактировать",edit_user_path(@us),:class=>'actionbutton' %>

@@ -1,0 +1,10 @@
+<h1>Educations#new</h1>
+<p>Find me in app/views/educations/new.html.erb</p>
+
+<%= form_for (@edu) do |f| %>
+<p>
+  <%= f.label 'Имя' %><br/>
+  <%= f.text_field(:name) %>
+  <%= f.submit "Ok"%>
+</p>
+<%end%>

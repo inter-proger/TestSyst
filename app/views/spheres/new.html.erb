@@ -1,0 +1,9 @@
+<h1>Spheres#new</h1>
+<p>Find me in app/views/spheres/new.html.erb</p>
+<%= form_for (@st) do |f| %>
+<p>
+  <%= f.label 'Имя' %><br/>
+  <%= f.text_field(:name) %>
+  <%= f.submit "Ok"%>
+</p>
+<%end%>

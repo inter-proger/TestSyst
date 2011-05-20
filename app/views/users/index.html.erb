@@ -1,0 +1,55 @@
+<%= content_for :head do %>
+
+<style>
+	td a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
+
+</style>
+<%end%>
+
+<%= content_for :tabs do %>
+<li><%= link_to "Главная", root_url %></li>
+<li><%= link_to "Предметы", disciplines_path %></li>
+    <li><%= link_to 'Конфигурации',tconfigurations_path %></li>
+<li><%= link_to 'Тестирование',{:controller=>:testsessions,:action=>:new} %></li>
+<li><%= link_to 'Пользователи',users_url %></li>
+<%  end %>
+<h1>Список пользователей</h1>
+<p>
+  Консоль управления пользователями. Вы можете назначать/удалять администраторов ресурса, а так же удалять пользователей
+</p>
+
+<table cellpadding="0" cellspacing="0">
+  <tr>
+  <th>Логин</th>
+  <th>Имя</th>
+  <th>Фамилия</th>
+  <th>Отчество</th>
+   <th>Место работы</th>
+   <th>Должность</th>
+   <th>Роли</th>
+   
+   <th></th>
+  </tr>
+<% @us.each do |u| %>
+  <tr>
+    <td><%= u.login%></td>
+    <td><%=u.I %></td>
+    <td><%=u.F %></td>
+    <td><%=u.O %></td>
+    <td><%=u.workplace %></td>
+    <td><%=u.proff %></td>
+     <td><%=u.roles %></td>
+     <td>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-plusthick"}),{ :controller=>'Users',:action=>'newadmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Добавить роль" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-minusthick"}),{ :controller=>'Users',:action=>'deladmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Удалить роль" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}),edit_user_path(u),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:users,:action=>:listsessions,:id=>u},:class=>'ui-state-default ui-corner-all',:title=>'Отобразить сессии пользователя' %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),u,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
+
+     </td>
+
+  </tr>
+
+<%end%>
+  </table>
+

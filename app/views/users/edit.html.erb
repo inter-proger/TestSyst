@@ -1,0 +1,52 @@
+<h1>Редактирование пользователя</h1>
+<%= error_messages_for @us %>
+<%= form_for @us do |f| -%>
+<p><%= label_tag 'login' %><br/>
+<%= f.text_field :login %></p>
+
+<!--<p><%= label_tag 'e-mail' %><br/>
+<%= f.text_field :email %></p>*-->
+
+<p><%= label_tag 'Фамилия' %><br/>
+<%= f.text_field :F %></p>
+<p><%= label_tag 'Имя' %><br/>
+<%= f.text_field :I %></p>
+<p><%= label_tag 'Отчество' %><br/>
+<%= f.text_field :O %></p>
+<p><%= label_tag 'Пол' %><br/>
+  Муж. <%= f.radio_button :Sex,true %>&nbsp;
+    Жен.<%= f.radio_button :Sex,false %>
+</p>
+<p><%= label_tag 'Дата рождения' %><br/>
+<%= f.date_select :Birth,:order => [:day, :month, :year],:use_month_names=>['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октрябрь','Ноябрь','Декабрь'],:start_year=>1950 %></p>
+<p><%= label_tag 'Место работы' %><br/>
+<%= f.text_field :workplace %></p>
+<p><%= label_tag 'Должность' %><br/>
+<%= f.text_field :proff %></p>
+
+<table>
+  <tr>
+    <td><%= label_tag 'Вид службы' %></td><td>
+<%= f.collection_select(:sertype_id,Sertype.all,:id,:name) %>&nbsp;</td><td>
+    <%= link_to 'Создать',{:controller=>:sertypes,:action=>:new},:class=>'actionbutton' %></td></tr>
+<tr>
+
+<td><%= label_tag 'Сфера деятельности' %></td><td>
+<%= f.collection_select(:sphere_id, Sphere.all, :id, :name ) %>&nbsp;</td>
+<td>
+    <%= link_to 'Создать',{:controller=>:spheres,:action=>:new},:class=>'actionbutton' %></td></tr>
+<tr>
+<td><%= label_tag 'Образование' %></td><td>
+<%= f.collection_select(:education_id, Education.all,:id,:name ) %>&nbsp;</td>
+<td>
+    <%= link_to 'Создать',{:controller=>:educations,:action=>:new},:class=>'actionbutton' %></td></tr>
+<tr>
+<td><%= label_tag 'Уровень службы(?)' %></td><td>
+<%= f.collection_select(:serlevel_id, Serlevel.all,:id,:name ) %>&nbsp;</td>
+<td>
+    <%= link_to 'Создать',{:controller=>:serlevels,:action=>:new},:class=>'actionbutton' %></td></tr>
+</table>
+
+
+<p><%= submit_tag 'Сохранить' %></p>
+<% end %>
