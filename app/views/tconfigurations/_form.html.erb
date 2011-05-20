@@ -49,7 +49,8 @@
 <%= form_for(@tconfiguration) do |f| %>
   <% if @tconfiguration.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@tconfiguration.errors.count, "error") %> prohibited this tconfiguration from being saved:</h2>
+      <h2><%= pluralize(@tconfiguration.errors.count, "error") %>
+          prohibited this tconfiguration from being saved:</h2>
 
       <ul>
       <% @tconfiguration.errors.full_messages.each do |msg| %>

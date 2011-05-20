@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110426150947) do
+ActiveRecord::Schema.define(:version => 20110520040437) do
 
   create_table "answers", :force => true do |t|
     t.integer  "right"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(:version => 20110426150947) do
     t.datetime "updated_at"
   end
 
+  create_table "educations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pictures", :force => true do |t|
     t.string   "pict"
     t.integer  "question_id"
@@ -58,6 +64,24 @@ ActiveRecord::Schema.define(:version => 20110426150947) do
     t.integer  "answcount"
     t.integer  "qtype_id"
     t.integer  "theme_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "serlevels", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sertypes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spheres", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -130,6 +154,17 @@ ActiveRecord::Schema.define(:version => 20110426150947) do
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
     t.string   "roles",                                    :default => "--- []"
+    t.string   "F"
+    t.string   "I"
+    t.string   "O"
+    t.boolean  "Sex"
+    t.date     "Birth"
+    t.string   "workplace"
+    t.string   "proff"
+    t.integer  "sertype_id"
+    t.integer  "sphere_id"
+    t.integer  "education_id"
+    t.integer  "serlevel_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

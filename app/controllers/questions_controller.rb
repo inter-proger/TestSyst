@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   before_filter :find_disc
   before_filter :find_theme
   before_filter :find_quest,:only=>[:show,:destroy,:answsadd]
+  
 
   def index
     redirect_to discipline_theme_path(@discipline,@theme)

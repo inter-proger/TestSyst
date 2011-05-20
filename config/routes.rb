@@ -1,4 +1,18 @@
 A3::Application.routes.draw do
+  get "spheres/new"
+
+  get "spheres/create"
+
+  get "serlevels/new"
+
+  get "serlevels/create"
+
+  get "educations/new"
+
+  get "educations/create"
+
+  get "sertypes/new"
+
   get "testsessions/new"
 
   get "testsessions/create"
@@ -11,6 +25,10 @@ A3::Application.routes.draw do
   resources :configuration_types
 
   resources :tconfigurations
+  resources :serlevels
+  resources :sertypes
+  resources :spheres
+  resources :educations
 
 
   get "pictures/create"
