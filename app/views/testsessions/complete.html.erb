@@ -3,12 +3,21 @@
 # and open the template in the editor.
 %>
 
-Тест завершен<br/>
-Здесь будет отчет о тесте.
+<h2>Тест завершен</h2>
+<br/>
+<h4>Выполнено:&nbsp;
+<%= @percent.to_i.to_s %>&nbsp;%</h4>
 
-
-<%= @percent.to_i.to_s %>
-<%= @questions.length %>
+<h4>Оценка: &nbsp;
+<%= @rank %>
+</h4>
+<h4>Результат: &nbsp;
+  <% if @questions.length>2 %>
+  Зачтено
+  <%else%>
+    Не зачтено
+  <%end%>
+</h4>
 
 <br/>
 
@@ -25,5 +34,12 @@
 
   <%= @questions[i].content %></div>
  
+  
   </div>
 <% end %>
+    <% if current_user.is_admin?  %>
+    <p>
+ <%=  link_to 'Подробный отчет',{:controller=>:report,:action=>'createdetailreport',:userid=>current_user.id,:id=>@ts},:class=>'actionbutton' %>
+      </p>
+    <%end%>
+

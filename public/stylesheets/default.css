@@ -43,8 +43,8 @@ body
 {
     
     padding: 40px 40px 60px 40px;
-    background-color: #ede7e3;
-    min-height: 400px;
+    background-color: #fbf8f3;
+    min-height: 600px;
    
     
   
@@ -134,7 +134,7 @@ display:inline;
 .menu ul
 {
     float: right;
-    background-color: #d9d9d9;
+    background-color: #fbf8f3;
     border: 2px solid black;
     padding: 5px;
      -moz-border-radius: 8px;

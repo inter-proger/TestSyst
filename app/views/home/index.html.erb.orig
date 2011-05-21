@@ -1,0 +1,54 @@
+<%= content_for :menu  do%>
+<ul>
+      <li><%=link_to 'Главная',:root%></li>
+      <li>|&nbsp;Вторая</li>
+      <li>|&nbsp;Третья</li>
+      <li><%= render :partial =>"users/user_bar" %></li>
+    </ul>
+<% end %>
+
+<h1>Тестирующая система MEGA v 0.1.0</h1><br/>
+<p>Find me in app/views/home/index.html.erb</p>
+<div class="base">
+<% if logged_in? %>
+	Добро пожаловать, <%= current_user.login %>.
+	<% if current_user.is_admin? %>
+        <sup>(admin)</sup>
+	<% end %>
+<<<<<<< HEAD
+        <br/><%= link_to 'Выйти',:logout,:class=>"actionbutton" %><br/>
+        <%= link_to "Предметы", disciplines_path ,:class=>"actionbutton"%>&nbsp
+        <%= link_to 'Конфигурации тестов',tconfigurations_path,:class=>"actionbutton" %>
+=======
+        <br/><%= link_to 'Выйти',:logout %><br/>
+        <%= link_to "Предметы", disciplines_path %>&nbsp
+        <%= link_to 'Конфигурации тестов',tconfigurations_path %>
+        <%= link_to 'Перейти к тестированию',:controller=>:testsessions,:action=>:new %>
+>>>>>>> a24bfe814bf7c0a892736b0fa6ff4b430dce084b
+      
+     
+
+<% else %>
+	<h1>Вход</h1>
+
+        <%= form_tag :controller=>:sessions,:action=>:create do -%>
+        <p><%= label_tag 'login' %><br />
+        <%= text_field_tag 'login', @login %></p>
+
+        <p><%= label_tag 'password' %><br/>
+        <%= password_field_tag 'password', nil %></p>
+        
+
+<!-- Uncomment this if you want this functionality
+<p><%= label_tag 'remember_me', 'Запомнить меня' %>
+<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+-->
+
+        <p><%= submit_tag 'Войти' %></p>
+        <p><%= link_to 'Зарегистрироваться', :signup,:class=>"actionbutton" %></p>
+	<% end %>
+<% end%>
+        
+
+<br/>
+</div>

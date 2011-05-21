@@ -116,6 +116,7 @@ class TestsessionsController < ApplicationController
       answs=@question.answers
       @answers=Hash.new
       answs.each { |item| @answers[item.id]=item }
+
       useransw=params[:answ]
       if @question.qtype_id!=9
         @answorder=@test.answorder.split(' ').map{|el| el.to_i}
@@ -131,7 +132,7 @@ class TestsessionsController < ApplicationController
         when 6
           f=false unless useransw && @answers[@answorder[useransw.to_i]].right==1
           ua=""
-          ua=useransw unless useransw
+          ua=useransw #unless useransw
         when 7
           useransw=Hash.new unless useransw
           useransw=useransw.select{|key,value| value=="1"}
@@ -170,8 +171,21 @@ class TestsessionsController < ApplicationController
     @tests=@ts.tests
     qs=@ts.questions
     @ra_count=0
+    @rank=2
+
     @tests.each{|t| @ra_count+=t.ok}
     @percent=@ra_count.to_f/@tests.length.to_f*100.0
+
+    if @percent>= @ts.tconfiguration.degree3 
+      @rank=@rank+1
+    end
+    if @percent>= @ts.tconfiguration.degree4
+      @rank+=1
+    end
+    if @percent >= @ts.tconfiguration.degree5
+      @rank+=1
+    end
+
     @questions=Array.new
     @tests.each{|t| @questions.push(qs.detect{|q| q.id==t.question_id})}
     #@tests.each{|t| @questions.push(Question.find(t.question_id))}

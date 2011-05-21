@@ -1,0 +1,40 @@
+<%= content_for :head do %>
+
+<style>
+	td a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
+
+</style>
+<%end%>
+<h4>Список тестов, в которых участвовал пользователь</h4>
+<table cellspacing="0" cellpadding="0">
+  <tr>
+  <th>#</th>
+  <th>Дата начала</th>
+  <th>Конфигурация</th>
+  <th>Оценка</th>
+  <th>Завершено</th>
+  <th></th>
+  </tr>
+  <% num=0 %>
+  <%  @sessions.each do |i|  %>
+  <tr>
+    <td><%=num=num+1%></td>
+    <td><%=i.created_at.strftime('%H:%M:%S ') %><b><%=i.created_at.strftime(' (%d/%m/%y)') %></b></td>
+    <td><%=i.tconfiguration_id%></td>
+    <td>Здесь будет оценка</td>
+    <td><% if i.completed %>
+      Да
+      <%else%>
+      Нет
+      <%end%>
+    </td>
+    <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%>
+    
+    </td>
+  </tr>
+  <%end%>
+
+  </table>
+<br/>
+<%= link_to 'Назад',user_path(@us),:class=>'actionbutton' %>
+

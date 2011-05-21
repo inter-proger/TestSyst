@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   validates :name,  :format     => { :with => Authentication.name_regex, :message => Authentication.bad_name_message },
                     :length     => { :maximum => 100 },
                     :allow_nil  => true
+  
 
   #validates :email, :presence   => true,
   #                  :uniqueness => true,
@@ -24,11 +25,15 @@ class User < ActiveRecord::Base
 
   easy_roles :roles
   has_many :testsessions
+  belongs_to :education
+  belongs_to :sphere
+  belongs_to :sertype
+  belongs_to :serlevel
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation
+  attr_accessible :login, :email, :name, :password, :password_confirmation,:F,:I,:O,:Birth,:Sex,:workplace,:proff,:sertype_id,:sphere_id,:education_id,:serlevel_id
 
 
 

@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  Name: MyString
+  confType: 1
+  qT1Count: 1
+  qT2Count: 1
+  qT3Count: 1
+  qT4Count: 1
+  qT5Count: 1
+  degree3: 1
+  degree4: 1
+  degree5: 1
+  TestTime: 2011-04-08 21:12:38
+
+two:
+  Name: MyString
+  confType: 1
+  qT1Count: 1
+  qT2Count: 1
+  qT3Count: 1
+  qT4Count: 1
+  qT5Count: 1
+  degree3: 1
+  degree4: 1
+  degree5: 1
+  TestTime: 2011-04-08 21:12:38

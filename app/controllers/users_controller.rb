@@ -39,6 +39,7 @@ class UsersController < ApplicationController
      if @user.id==1
     @user.add_role 'admin'
      end
+    
     success = @user && @user.save
     if success && @user.errors.empty?
             # Protects against session fixation attacks, causes request forgery
@@ -93,5 +94,61 @@ class UsersController < ApplicationController
       render :action => 'index'
     end
   end
+
+    def listsessions
+      @us=User.find(params[:id])
+      ts=Testsession.all
+      @sessions=Array.new
+      ts.each do |t|
+        if t.user_id==@us.id
+          @sessions.push(t)
+        end
+      end
+
+       respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @us }
+    end
+    end
+
+    def edit
+      @us = User.find(params[:id])
+    end
+    def update
+        @us = User.find(params[:id])
+
+    respond_to do |format|
+      if @us.update_attributes(params[:user])
+        format.html { redirect_to(@us, :notice => 'Изменения сохранены') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @us.errors, :status => :unprocessable_entity }
+      end
+    end
+    end
+     def change_password
+      return unless request.post?
+      if User.authenticate(current_user.login, params[:old_password])
+        if ((params[:password] == params[:password_confirmation]) &&
+                              !params[:password_confirmation].blank?)
+          current_user.password_confirmation = params[:password_confirmation]
+          current_user.password = params[:password]
+
+          if current_user.save
+            flash[:notice] = "Password successfully updated"
+            redirect_to profile_url(current_user.login)
+          else
+            flash[:alert] = "Password not changed"
+          end
+
+        else
+          flash[:alert] = "New Password mismatch"
+          @old_password = params[:old_password]
+        end
+      else
+        flash[:alert] = "Old password incorrect"
+      end
+    end
 
 end
