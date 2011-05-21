@@ -3,6 +3,7 @@
 <style type="text/css">
 	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
         span {display: inline-block; vertical-align: top;}
+        .header{padding: 6px 0; text-indent: 1em;}
 </style>
 <%end%>
 
@@ -29,22 +30,27 @@
       <% @class="ui-widget-content" %>
     <%end%>
   <div class="<%=@class%>" >
-    <span style="width: 70%; "><%= disc.title  %></span>
+    <span style="width: 70%; text-indent: 1em;font-weight: normal; color: black;"><%= disc.title  %></span>
     <span style=" width: 28%; " >
-       <% if logged_in?%>
-      <%= link_to tag("span",{:class=>"ui-icon ui-icon-play"}),new_testsession_url,:class=>"ui-state-default ui-corner-all",:title=>"Начать тестирование" %>
- 
-  <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}), disc,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
- <%  if  current_user.is_admin? %>
-    
-<%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),disc,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
+       <% if logged_in?%> 
+        <%  if  current_user.is_admin? %>
+          <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),disc,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
+        <%end%>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}), disc,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-play"}),new_testsession_url,:class=>"ui-state-default ui-corner-all",:title=>"Начать тестирование" %>
+      <% end %>
+    </span>
+  </div>
 <%end%>
-  <% end %>
-</span></div>
+<%if @class=="ui-widget-content"%>
+  <% @class="ui-state-default" %>
+<%else%>
+  <% @class="ui-widget-content" %>
 <%end%>
-</div>
-
+<div class="<%=@class%>" >
 <%  if logged_in? && current_user.is_admin? %>
   <%= link_to 'Новая дисциплина', {:controller=>:disciplines, :action=>:new} ,:class=>"actionbutton"%>
 <% end %>
 <%=link_to 'Назад', :root,:class=>"actionbutton"%>
+</div>
+</div>
