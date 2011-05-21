@@ -8,9 +8,8 @@
 <li><%= link_to 'Пользователи',users_url %></li>
 <%  end %>
 
-<h1>Тестирующая система MEGA v 0.1.5</h1><br/>
-<p>Find me in app/views/home/index.html.erb</p>
-<div class="base">
+<h2 align="center">Тестирующая система MEGA v 0.1.5</h2>
+<div class="base ui-widget ui-state-highlight ui-corner-all">
 <% if logged_in? %>
 	Добро пожаловать, <%= current_user.login %>.
 	<% if current_user.is_admin? %>

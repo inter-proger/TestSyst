@@ -19,7 +19,7 @@
 <h1>Конфигурации тестов</h1>
 
 <div class="ui-widget">
-  <div class="ui-widget-header">
+  <div class="ui-widget-header ui-corner-top">
     <span class="mycell">Имя</span>
     <span class="mycell" style="width: 10%;">Тип конфигурации</span>
     <span class="mycell">Количество вопросов 1</span>
@@ -35,6 +35,7 @@
   
   </div>
 <% @class="ui-state-default" %>
+
 <% @tconfigurations.each do |tconfiguration| %>
   <%if @class=="ui-widget-content"%>
     <% @class="ui-state-default" %>
@@ -59,9 +60,12 @@
   </div>
 
 <% end %>
-</div>
-
-
-<br />
-
-<%= link_to 'Создать', new_tconfiguration_path,:class=>"actionbutton" %>
+  <%if @class=="ui-widget-content"%>
+    <% @class="ui-state-default" %>
+  <%else%>
+    <% @class="ui-widget-content" %>
+  <%end%>
+  <div class="<%=@class%> ui-corner-bottom" >
+    <%= link_to 'Создать', new_tconfiguration_path,:class=>"actionbutton" %>
+  </div>
+  </div>

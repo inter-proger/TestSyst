@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
    before_filter :login_required
   before_filter :find_disc
   before_filter :find_theme
-  before_filter :find_quest,:only=>[:show,:destroy,:answsadd]
+  before_filter :find_quest,:only=>[:show,:destroy,:answsadd,:update]
   
 
   def index
@@ -46,6 +46,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    @quest.update_attribute(:content, params[:question][:content])
+    redirect_to discipline_theme_question_path(@discipline,@theme,@quest),:notice=>"Формулировка вопроса изменена."
   end
 
   def create

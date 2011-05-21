@@ -53,13 +53,15 @@ body
 {
     margin: 0 auto;
     width: 700px;
-    background-color: #d9d9d9;
-    color: blueviolet;
     padding: 10px;
+    text-align: center;
+   /* background-color: #d9d9d9;
+    color: blueviolet;
+    
     text-align: center;
    -moz-border-radius: 20px;
     -webkit-border-radius:20px;
-    border-radius:20px;
+    border-radius:20px;*/
 }
 /*table
 {

@@ -1,13 +1,12 @@
-<h1>Questions#new</h1>
-<p>Find me in app/views/questions/new.html.erb</p>
+<h2>Создать вопрос</h2>
 
 <% form_for([@discipline,@theme,@quest]) do |f| %>
   <%= f.label "Тип вопроса:" %><br/>
   <%= f.collection_select(:qtype_id,Qtype.all,:id,:title) %><br/>
   <%= f.label "Вопрос:" %><br/>
   <%= f.text_area :content %><br/>
-  <%= f.label "Количество вариантов ответа:" %><br/>
-  <%= f.text_field(:answcount) %>
+ <!-- <%= f.label "Количество вариантов ответа:" %><br/>
+  <%= f.text_field(:answcount) %> -->
   <%= f.submit("Создать")  %>
   <input type="reset" value="Очистить" />
 

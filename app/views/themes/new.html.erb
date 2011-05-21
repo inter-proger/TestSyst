@@ -1,10 +1,9 @@
-<h1>Themes#new</h1>
-<p>Find me in app/views/themes/new.html.erb</p>
+<h2>Создать новую тему</h2>
 
 <% form_for([@discipline, @theme]) do |f| %>
   <%= f.error_messages %>
 <p>
-<%= f.label :title %>
+<%= f.label "Название" %>
   <br />
 <%= f.text_field :title %>
 </p>

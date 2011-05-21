@@ -1,7 +1,9 @@
 <%= content_for :head do %>
 
-<style>
-	td a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
+<style type="text/css">
+	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
+        .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
+        .header{padding: 6px 0; text-align: center;}
 
 </style>
 <%end%>
@@ -13,43 +15,57 @@
 <li><%= link_to 'Тестирование',{:controller=>:testsessions,:action=>:new} %></li>
 <li><%= link_to 'Пользователи',users_url %></li>
 <%  end %>
-<h1>Список пользователей</h1>
+<h2>Список пользователей</h2>
 <p>
   Консоль управления пользователями. Вы можете назначать/удалять администраторов ресурса, а так же удалять пользователей
 </p>
 
-<table cellpadding="0" cellspacing="0">
-  <tr>
-  <th>Логин</th>
-  <th>Имя</th>
-  <th>Фамилия</th>
-  <th>Отчество</th>
-   <th>Место работы</th>
-   <th>Должность</th>
-   <th>Роли</th>
+<div class="ui-widget" style="width:100%;">
+  <div class="ui-widget-header ui-corner-top" >
+  <span style="width: 11%; " class="header mycell">Логин</span>
+  <span style="width: 11%; " class="header mycell">Имя</span>
+  <span style="width: 11%; " class="header mycell">Фамилия</span>
+  <span style="width: 11%; " class="header mycell">Отчество</span>
+   <span style="width: 11%; " class="header mycell">Место работы</span>
+   <span style="width: 11%; " class="header mycell">Должность</span>
+   <span style="width: 11%; " class="header mycell">Роли</span>
    
-   <th></th>
-  </tr>
+   <span style="width: 19%; " class="header mycell"></span>
+  </div>
+<% @class="ui-state-default" %>
 <% @us.each do |u| %>
-  <tr>
-    <td><%= u.login%></td>
-    <td><%=u.I %></td>
-    <td><%=u.F %></td>
-    <td><%=u.O %></td>
-    <td><%=u.workplace %></td>
-    <td><%=u.proff %></td>
-     <td><%=u.roles %></td>
-     <td>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-plusthick"}),{ :controller=>'Users',:action=>'newadmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Добавить роль" %>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-minusthick"}),{ :controller=>'Users',:action=>'deladmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Удалить роль" %>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}),edit_user_path(u),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:users,:action=>:listsessions,:id=>u},:class=>'ui-state-default ui-corner-all',:title=>'Отобразить сессии пользователя' %>
+    <%if @class=="ui-widget-content"%>
+      <% @class="ui-state-default" %>
+    <%else%>
+      <% @class="ui-widget-content" %>
+    <%end%>
+  <div class="<%=@class%>" >
+    <span class="mycell" style="width:11%;text-indent: 1em;"><%= u.login%></span>
+    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.I %></span>
+    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.F %></span>
+    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.O %></span>
+    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.workplace %></span>
+    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.proff %></span>
+    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.roles %></span>
+    <span class="mycell" style="width:19%;">
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),u,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:users,:action=>:listsessions,:id=>u},:class=>'ui-state-default ui-corner-all',:title=>'Отобразить сессии пользователя' %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}),edit_user_path(u),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-minusthick"}),{ :controller=>'Users',:action=>'deladmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Удалить роль" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-plusthick"}),{ :controller=>'Users',:action=>'newadmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Добавить роль" %>
+    </span>
 
-     </td>
-
-  </tr>
+  </div>
 
 <%end%>
-  </table>
+
+  <%if @class=="ui-widget-content"%>
+  <% @class="ui-state-default" %>
+<%else%>
+  <% @class="ui-widget-content" %>
+<%end%>
+  <div class="<%=@class%> ui-corner-bottom" style="padding:2px 5px;">
+    <%= link_to 'Регистрация', :signup,:class=>"actionbutton" %>
+  </div>
+</div>
 

@@ -1,11 +1,13 @@
 <%= content_for :head do %>
 
-<style>
-	td a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
-        
+<style type="text/css">
+	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
+        .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
+        .header{padding: 6px 0; text-indent: 1em;}
 
 </style>
 <%end%>
+
 <%= content_for :tabs do %>
 <li><%= link_to "Главная", root_url %></li>
 <li><%= link_to "Предметы", disciplines_path %></li>
@@ -14,40 +16,48 @@
 <li><%= link_to 'Пользователи',users_url %></li>
 <%  end %>
 
+<p id="notice"><%= notice %></p>
+<h2><%= @theme.title %></h2>
 
-<h1><%= @theme.title %></h1>
-
-Themes#show
-<br/>
-Find me at themes/show.html.erb
 <% @qtypes=Qtype.all %>
 <% @c=6 %>
-<table cellspacing="0" cellpadding="0" >
-   <tr>
-    <th>Вопрос</th>
-    <th>Тип</th>
-    <th></th>
-   
-  </tr>
+<div class="ui-widget" style="width:100%;">
+   <div class="ui-widget-header ui-corner-top" >
+      <span style="width: 40%; " class="header mycell">Формулировка вопорса</span>
+      <span style="width: 40%; " class="header mycell">Тип</span>
+      <span class="header mycell"></span>
+   </div>
+<% @class="ui-state-default" %>
 <% @theme.questions.each do |t| %>
-  <tr>
-    <td>
-  <%=t.content%>
-      </td>
-      <td>
-  <%=  @qtypes[t.qtype_id-@c].title %>
-      </td>
-      <td>
-          <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),discipline_theme_question_path(@discipline,@theme,t),:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
-     
-
-         <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),discipline_theme_question_url(@discipline,@theme,t),:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
-      </td>
-  </tr>
+  <%if @class=="ui-widget-content"%>
+        <% @class="ui-state-default" %>
+  <%else%>
+        <% @class="ui-widget-content" %>
+  <%end%>
+  <div class="<%=@class%>" >
+    <span class="mycell" style="padding: 6px 0; width: 40%; text-indent: 1em;font-weight: normal; color: black;">
+      <%=t.content%>
+    </span>
+    <span class="mycell" style="padding: 6px 0; width: 40%; text-indent: 1em;font-weight: normal; color: black;">
+      <%=  @qtypes[t.qtype_id-@c].title %>
+    </span>
+    <span class="mycell" style="width: 18%;">
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),discipline_theme_question_url(@discipline,@theme,t),:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),discipline_theme_question_path(@discipline,@theme,t),:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+    </span>
+  </div>
 <% end %>
-  </table>
 
-<%= link_to 'Создать вопрос', new_discipline_theme_question_path(@discipline,@theme),:class=>'actionbutton' %>
+<%if @class=="ui-widget-content"%>
+  <% @class="ui-state-default" %>
+<%else%>
+  <% @class="ui-widget-content" %>
+<%end%>
+  <div class="<%=@class%> ui-corner-bottom" >
+    <%= link_to 'Создать вопрос', new_discipline_theme_question_path(@discipline,@theme),:class=>'actionbutton' %>
+    <%= link_to 'Назад', discipline_path(@discipline),:class=>'actionbutton' %>
+  </div>
+</div>
 
-<%= link_to 'Назад', discipline_path(@discipline),:class=>'actionbutton' %>
+
 

@@ -4,6 +4,7 @@
 	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
         span {display: inline-block; vertical-align: top;}
         .header{padding: 6px 0; text-indent: 1em;}
+       
 </style>
 <%end%>
 
@@ -15,10 +16,10 @@
 <li><%= link_to 'Пользователи',users_url %></li>
 <%  end %>
 <p id="notice"><%= notice %></p>
-
+<h2>Список дисциплин</h2>
 <div class="ui-widget" style="width:50%;">
-   <div class="ui-widget-header" >
-    <span style="width: 70%; " class="header">Имя</span>
+   <div class="ui-widget-header ui-corner-top" >
+    <span style="width: 70%; " class="header">Название</span>
     <span class="header"></span>
     
     </div>
@@ -30,7 +31,7 @@
       <% @class="ui-widget-content" %>
     <%end%>
   <div class="<%=@class%>" >
-    <span style="width: 70%; text-indent: 1em;font-weight: normal; color: black;"><%= disc.title  %></span>
+    <span class="firstcell" style="padding: 6px 0; width: 70%; text-indent: 1em;font-weight: normal; color: black;"><%= disc.title  %></span>
     <span style=" width: 28%; " >
        <% if logged_in?%> 
         <%  if  current_user.is_admin? %>
@@ -47,7 +48,7 @@
 <%else%>
   <% @class="ui-widget-content" %>
 <%end%>
-<div class="<%=@class%>" >
+<div class="<%=@class%> ui-corner-bottom" >
 <%  if logged_in? && current_user.is_admin? %>
   <%= link_to 'Новая дисциплина', {:controller=>:disciplines, :action=>:new} ,:class=>"actionbutton"%>
 <% end %>
