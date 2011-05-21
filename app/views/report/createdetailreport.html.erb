@@ -15,6 +15,21 @@
   </script>
 
 <%end%>
+
+
+<div class="ui-widget">
+  <div class="ui-widget-header ui-corner-all" style="padding: 8px 30px; ">
+    Отчет
+  </div>
+  <div class="ui-widget-content ui-corner-all" style="padding: 8px 30px; ">
+    Тестируемый: <br/>
+    Дата тестирования: <%= @ts.created_at.day %>.<%= @ts.created_at.month %>.<%= @ts.created_at.year %><br/>
+    Процент решенных заданий: <%= @percent %> %<br/>
+    <h2 style="color:<%=@color%>; display:inline;">Оценка: <%= @mark %></h2><br/>
+    <h2 style="color:<%=@color%>; display:inline;"><%= @zachet %></h2><br/>
+  </div>
+</div>
+
 <% @i=1 %>
 <div id="accordion">
 <%@reports.each do |t|%>
@@ -186,6 +201,6 @@
   </div>
 </div>
 
-<br/>
+
 <% end %>
 </div>

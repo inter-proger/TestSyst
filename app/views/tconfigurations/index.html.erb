@@ -1,8 +1,8 @@
 <%= content_for :head do %>
   
 <style>  
-	 td a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
-	
+	 span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
+	.mycell{display:inline-block; width: 7.5%; text-align: center; vertical-align: top; color: black; font-weight: normal;}
 </style>
 <%end%>
 
@@ -10,43 +10,47 @@
 
 <h1>Конфигурации тестов</h1>
 
-<table cellspacing="0" cellpadding="0">
-  <tr>
-    <th>Имя</th>
-    <th>Тип конфигурации</th>
-    <th>Количество вопросов 1</th>
-    <th>Количество вопросов 2</th>
-    <th>Количество вопросов 3</th>
-    <th>Количество вопросов 4</th>
-    <th>Количество вопросов 5</th>
-    <th>Оценка 3 (%)</th>
-    <th>Оценка 4 (%)</th>
-    <th>Оценка 5 (%)</th>
-    <th>Время тестирования</th>
-    <th></th>
+<div class="ui-widget">
+  <div class="ui-widget-header">
+    <span class="mycell">Имя</span>
+    <span class="mycell" style="width: 10%;">Тип конфигура ции</span>
+    <span class="mycell">Количество вопросов 1</span>
+    <span class="mycell">Количество вопросов 2</span>
+    <span class="mycell">Количество вопросов 3</span>
+    <span class="mycell">Количество вопросов 4</span>
+    <span class="mycell">Количество вопросов 5</span>
+    <span class="mycell">Оценка 3 (%)</span>
+    <span class="mycell">Оценка 4 (%)</span>
+    <span class="mycell">Оценка 5 (%)</span>
+    <span class="mycell">Время тестиро вания</span>
+    <span class="mycell" style="width: 8%;"></span>
   
-  </tr>
-
+  </div>
+<% @class="ui-state-default" %>
 <% @tconfigurations.each do |tconfiguration| %>
-
-  <tr >
-    <td  id="<%=tconfiguration.id%>" onmouseover="setcolor('Red','<%=tconfiguration.id%>')"><%= tconfiguration.Name %></td>
-    <td><%= tconfiguration.configuration_type.Name %></td>
-    <td><%= tconfiguration.qT1Count %></td>
-    <td><%= tconfiguration.qT2Count %></td>
-    <td><%= tconfiguration.qT3Count %></td>
-    <td><%= tconfiguration.qT4Count %></td>
-    <td><%= tconfiguration.qT5Count %></td>
-    <td><%= tconfiguration.degree3 %></td>
-    <td><%= tconfiguration.degree4 %></td>
-    <td><%= tconfiguration.degree5 %></td>
-    <td><%= tconfiguration.TestTime.strftime('%H:%M:%S')  %></td>
-    <td width="95px"><%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}), tconfiguration,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+  <%if @class=="ui-widget-content"%>
+    <% @class="ui-state-default" %>
+  <%else%>
+    <% @class="ui-widget-content" %>
+  <%end%>
+  <div class="<%=@class%>" >
+    <span class="mycell"  id="<%=tconfiguration.id%>" onmouseover="setcolor('Red','<%=tconfiguration.id%>')"><%= tconfiguration.Name %></span>
+    <span class="mycell" style="width: 10%;"><%= tconfiguration.configuration_type.Name %></span>
+    <span class="mycell"><%= tconfiguration.qT1Count %></span>
+    <span class="mycell"><%= tconfiguration.qT2Count %></span>
+    <span class="mycell"><%= tconfiguration.qT3Count %></span>
+    <span class="mycell"><%= tconfiguration.qT4Count %></span>
+    <span class="mycell "><%= tconfiguration.qT5Count %></span>
+    <span class="mycell"><%= tconfiguration.degree3 %></span>
+    <span class="mycell"><%= tconfiguration.degree4 %></span>
+    <span class="mycell"><%= tconfiguration.degree5 %></span>
+    <span class="mycell"><%= tconfiguration.TestTime.strftime('%H:%M:%S')  %></span>
+    <span class="mycell" style="width: 95px;"><%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}), tconfiguration,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
    <%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}), edit_tconfiguration_path(tconfiguration),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
-    <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}), tconfiguration, :confirm => 'Are you sure?', :method => :delete, :class=>"ui-state-default ui-corner-all",:title=>"Удалить"%></td>
-  </tr>
+    <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}), tconfiguration, :confirm => 'Are you sure?', :method => :delete, :class=>"ui-state-default ui-corner-all",:title=>"Удалить"%></span>
+  </div>
 <% end %>
-</table>
+</div>
 
 
 <br />

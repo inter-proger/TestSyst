@@ -1,3 +1,4 @@
+# coding: utf-8
 class ReportController < ApplicationController
   before_filter :login_required
 
@@ -14,9 +15,21 @@ def createdetailreport
   @ts=@user.testsessions.find(params[:id])
   @tests=@ts.tests
   qs=@ts.questions
+  @tconf=@ts.tconfiguration
+  @degrees=[@tconf.degree3,@tconf.degree4,@tconf.degree5]
+
   @ra_count=0
   @tests.each{|t| @ra_count+=t.ok}
   @percent=@ra_count.to_f/@tests.length.to_f*100.0
+  @mark=2
+  @degrees.each { |item2| @mark+=1 if @percent>item2  }
+  if @mark>2
+    @color='#00FF00'
+    @zachet='Зачтено'
+  else
+    @color='#FF0000'
+    @zachet='Не зачтено'
+  end
   @questions=Array.new
   @tests.each{|t| @questions.push(qs.detect{|q| q.id==t.question_id})}
   @rights=Array.new(@tests.length){|u| '-'}

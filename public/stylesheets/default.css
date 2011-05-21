@@ -61,21 +61,21 @@ body
     -webkit-border-radius:20px;
     border-radius:20px;
 }
-table
+/*table
 {
     border: 0px;
     border-color: blue;
     border-style: dotted;
     margin: 0px;
     padding: 0px;
-}
-th
+}*/
+/*th
 {
     background-color: orange;
     margin: 0;
     padding: 2px;
-}
-td
+}*/
+/*td
 {
     border-collapse: separate;
     padding: 5px;
@@ -84,9 +84,9 @@ td
     color: black;
     margin: 0;
     border-bottom: 2px solid #ccc;
-}
+}*/
 
-tr
+/*tr
 {
    
     width: 90%;
@@ -94,7 +94,7 @@ tr
     padding: 0;
     
 
-}
+}*/
 
 
 .vis{
@@ -175,4 +175,9 @@ display:inline;
     font-weight: bold;
     width: 100px;
     height: 90px;
+}
+
+.h4
+{
+    
 }
