@@ -11,9 +11,13 @@
   <script language="javascript" type="text/javascript">
     $(function(){
       $("a.actionbutton,  input:submit, input:reset, button").button();
-      $('a.actionbutton, .body td a').hover(
-					function() { $(this).addClass('ui-state-hover'); },
-					function() { $(this).removeClass('ui-state-hover'); });
+      $('a.actionbutton, .body span a').hover(
+					function() { $(this).addClass('ui-state-hover');
+                                          $(this).css('color','white');
+                                          },
+					function() { $(this).removeClass('ui-state-hover');
+                                          $(this).css('color','#654B24');
+                                          });
 
 
    $("#accordion").accordion({ header: "h3" });
@@ -29,17 +33,20 @@
 </head>
 <body>
 
-  <div class="menu">
+ <div class="menu ">
     <%= yield :menu  %>
-<ul>
-      <li><%=link_to 'Главная',:root%></li>
-     
-      <li>|<%= render :partial =>"users/user_bar" %></li>
-</ul>
+   <ul class="ui-state-highlight ui-corner-all">
+          <li><%=link_to 'Главная',:root%></li>
 
-  
-    
-  </div>
+          <li>|<%= render :partial =>"users/user_bar" %></li>
+    </ul>
+ </div>
+
+
+
+
+
+
 
    <div id="page">
  

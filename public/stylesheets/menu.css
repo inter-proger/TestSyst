@@ -18,22 +18,24 @@
 }
 #top-pads a
 {
-    font-family: 'Courier New', 'Arial';
+    font-family:  'Arial';
     font-variant: small-caps;
-    font-size: 10pt;
-    color: blue;
-    background-color: greenyellow;
-    border-top: 1px solid green;
+    font-size: 13pt;
+    color: darkred;
+    background-color:lime ;
+    /*border-top: 1px solid green;
     border-left: 1px solid green;
-    border-right: 1px solid green;
+    border-right: 1px solid green;*/
     -moz-border-radius: 15px 15px 0px 0px;
     -webkit-border-radius:15px 15px 0px 0px;
     border-radius:15px 15px 0px 0px;
     block-shadow: 0px 0px 1px;
+
 }
 #top-pads a:hover
 {
-    background-color: yellowgreen;
+    background-color: lawngreen;
+    color: indigo;
 }
 #top-pads td
 {
@@ -47,5 +49,5 @@
 
 }
 #top-pads li { list-style: none; float: left; position: relative; top: 1px; margin: 0 .2em 1px 0; border-bottom: 0 !important; padding: 0; white-space: nowrap; }
-#top-pads li a { float: left; padding: .5em 1em; text-decoration: none; }
+#top-pads li a { float: left; padding: .7em 1em; text-decoration: none; }
 
