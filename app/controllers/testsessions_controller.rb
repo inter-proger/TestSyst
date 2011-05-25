@@ -146,7 +146,7 @@ class TestsessionsController < ApplicationController
         when 8
           ra=Hash.new
           @answers.each { |key,value| ra[key]=value.content.mb_chars.downcase.to_s  }
-          f=ra.value?(useransw.mb_chars.downcase.to_s)
+          f=(ra.value?(useransw.mb_chars.downcase.to_s))||(ra.value.downcase?(useransw.downcase))
           ua=useransw
         when 9
           useransw.each { |key,value| f&&=((value.to_i==0)&&(@answers[@answorder2[key.to_i]].right==0))||((value.to_i!=0)&&@answers[@answorder2[key.to_i]].right==@answers[@answorder1[value.to_i-1]].right)}
