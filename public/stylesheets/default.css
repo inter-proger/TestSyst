@@ -121,7 +121,7 @@ body
 .menu
 {
     text-align: right;
-    color: blueviolet;
+    /*color: blueviolet;*/
     display: block;
     min-height:  60px; 
    
@@ -133,15 +133,20 @@ display:inline;
 
 
 }
+
+.menu2 div{
+    display: inline;
+}
+
 .menu ul
 {
     float: right;
-    background-color: #fbf8f3;
-    border: 2px solid black;
+    /*background-color: #fbf8f3;*/
+   /* border: 2px solid black;*/
     padding: 5px;
-     -moz-border-radius: 8px;
+    /* -moz-border-radius: 8px;
     -webkit-border-radius:8px;
-    border-radius:8px;
+    border-radius:8px;*/
 }
 .menu ul li
 {
@@ -151,12 +156,12 @@ display:inline;
 }
 .menu a:link
 {
-    color: cornflowerblue;
+   /* color: cornflowerblue;*/
     
 }
 .menu a:visited
 {
-    color: #9475f2;
+    /*color: #9475f2;*/
 }
 .wraper
 {
@@ -182,4 +187,8 @@ display:inline;
 .h4
 {
     
+}
+
+.whitetext{
+    color: white;
 }
