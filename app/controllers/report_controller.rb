@@ -1,4 +1,6 @@
 # coding: utf-8
+
+
 class ReportController < ApplicationController
   before_filter :login_required
 
@@ -102,6 +104,81 @@ def createdetailreport
       rep.rightansw=rep.answers.sort{|a,b| a[1].right<=>b[1].right }.map{|it| it[1]}
     end
     @reports.push(rep)
+  end
+
+
+end
+
+def new_report
+  @users=User.all
+  @configs_options=Tconfiguration.all.map{|ob| [ob.Name, ob.id]}
+  @configs_options.unshift(['-----',-1])
+  @fam_options=@users.map{|u| []}
+
+end
+
+def create_report
+  toks=params[:beg_testdate].split('-')
+  hsh1=Hash.new
+  hsh1[:testsessions]={}
+  hsh1[:tconfigurations]={}
+  hsh1[:users]={}
+  if params[:beg_testdate]!=""
+    d1=params[:beg_testdate].to_datetime.beginning_of_day
+    if params[:end_testdate]!=""
+      d2=params[:end_testdate].to_datetime.end_of_day
+      hsh1[:testsessions][:created_at]= d1..d2
+    else
+      hsh1[:testsessions][:created_at]=d1..d1.end_of_day
+    end
+  end
+  #hsh2=Hash.new
+  hsh1[:testsessions][:tconfiguration_id]=params[:tconfiguration] if params[:tconfiguration]!='-1'
+  hsh1[:users][:F]=params[:f] if params[:f]!=''
+  hsh1[:users][:I]=params[:i] if params[:i]!=''
+  hsh1[:users][:O]=params[:o] if params[:o]!=''
+  if params[:startdate]!=""
+    d1=params[:startdate].to_datetime.beginning_of_day
+    if params[:enddate]!=""
+      d2=params[:enddate].to_datetime.end_of_day
+      hsh1[:testsessions][:created_at]= d1..d2
+    else
+      hsh1[:testsessions][:created_at]=d1..d1.end_of_day
+    end
+  end
+  hsh1[:users][:sertype_id]=params[:sertype] if params[:sertype]!='-1'
+  hsh1[:users][:serlevel_id]=params[:serlevel] if params[:serlevel]!='-1'
+  hsh1[:users][:education_id]=params[:education] if params[:education]!='-1'
+  hsh1[:users][:sphere_id]=params[:sphere] if params[:sphere]!='-1'
+  hsh1[:users][:workplace]=params[:workplace] if params[:workplace]!=''
+  hsh1[:users][:proff]=params[:proff] if params[:proff]!=''
+
+  @sessions=Testsession.joins(:tconfiguration,:user).select('testsessions.id, testsessions.created_at, testsessions.tconfiguration_id,testsessions.user_id,tconfigurations.Name,users.F,users.I,users.O').where(hsh1)
+  @marks=[]
+  @zachets=[]
+  @colors=[]
+  @percents=[]
+  @sessions.each do |ses|
+    @ts=Testsession.find(ses.id)
+    @tests=@ts.tests
+    @tconf=@ts.tconfiguration
+    @degrees=[@tconf.degree3,@tconf.degree4,@tconf.degree5]
+    @ra_count=0
+    @tests.each{|t| @ra_count+=t.ok}
+    @percent=(@ra_count.to_f/@tests.length.to_f*100.0)
+    @percents.push(@percent)
+    @mark=2
+    @degrees.each { |item2| @mark+=1 if @percent>item2  }
+    @marks.push(@mark)
+    if @mark>2
+      @color='#00FF00'
+      @zachet='Зачтено'
+    else
+      @color='#FF0000'
+      @zachet='Не зачтено'
+    end
+    @zachets.push(@zachet)
+    @colors.push(@color)
   end
 
 

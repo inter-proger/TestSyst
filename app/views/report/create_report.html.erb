@@ -1,0 +1,60 @@
+<%= content_for :head do %>
+
+<style type="text/css">
+	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
+        .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
+        .header{padding: 6px 0; text-indent: 1em;}
+
+</style>
+<%end%>
+
+<%= content_for :tabs do %>
+<li><%= link_to "Главная", root_url %></li>
+<li><%= link_to "Предметы", disciplines_path %></li>
+    <li><%= link_to 'Конфигурации',tconfigurations_path %></li>
+<li><%= link_to 'Тестирование',{:controller=>:testsessions,:action=>:new} %></li>
+<li><%= link_to 'Пользователи',users_url %></li>
+<%  end %>
+<div class="ui-widget" style="width:100%;">
+   <div class="ui-widget-header ui-corner-top" >
+      <span style="width: 30%; " class="header mycell">Пользователь</span>
+      <span style="width: 30%; " class="header mycell">Тест</span>
+      <span style="width: 30%; " class="header mycell">Оценка</span>
+      <span class="header mycell"></span>
+   </div>
+<% @class="ui-state-default" %>
+
+<% i=0 %>
+<%  @sessions.each do |t| %>
+<%if @class=="ui-widget-content"%>
+  <% @class="ui-state-default" %>
+<%else%>
+  <% @class="ui-widget-content" %>
+<%end%>
+  <div class="<%=@class%>" >
+    <span class="mycell" style="padding: 6px 0; width: 30%; text-indent: 1em;font-weight: normal; color: black;">
+      <% us=[t.F,t.I,t.O].join(' ')  %>
+      <%= link_to(us,:controller=>:users,:action=>:show,:id=>t.user_id) %>
+    </span>
+    <span class="mycell" style="padding: 6px 0; width: 30%; text-indent: 1em;font-weight: normal; color: black;">
+      <%= t.Name %>
+    </span>
+    <span class="mycell" style="padding: 6px 0; width: 30%; text-indent: 1em;font-weight: normal; color: black;">
+      <%=  @marks[i] %>, <%= @zachets[i] %>
+      <% i+=1 %>
+    </span>
+    <span class="mycell" style="width: 9%;">
+
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:id=>t.id,:userid=>t.user_id},:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+    </span>
+  </div>
+<% end %>
+<%if @class=="ui-widget-content"%>
+  <% @class="ui-state-default" %>
+<%else%>
+  <% @class="ui-widget-content" %>
+<%end%>
+  <div class="<%=@class%> ui-corner-bottom" >
+
+  </div>
+</div>
