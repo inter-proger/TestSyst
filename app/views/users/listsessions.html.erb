@@ -22,15 +22,17 @@
     <td><%=i.created_at.strftime('%H:%M:%S ') %><b><%=i.created_at.strftime(' (%d/%m/%y)') %></b></td>
     <td><%=i.tconfiguration_id%></td>
     <td>Здесь будет оценка</td>
-    <td><% if i.completed %>
+    <td><% if i.completed? %>
       Да
+    </td>
+      <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%></td>
       <%else%>
       Нет
-      <%end%>
+     
     </td>
-    <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%>
-    
-    </td>
+    <!-- TODO: Редирект к тестированию, если тест еще не завершен.(продолжение сессии)-->
+    <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></td>
+  <%end%>
   </tr>
   <%end%>
 
