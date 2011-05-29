@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110520040437) do
+ActiveRecord::Schema.define(:version => 20110529100203) do
 
   create_table "answers", :force => true do |t|
     t.integer  "right"
@@ -134,6 +134,8 @@ ActiveRecord::Schema.define(:version => 20110520040437) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "completed"
+    t.integer  "mark"
+    t.float    "percent"
   end
 
   create_table "themes", :force => true do |t|

@@ -4,7 +4,7 @@
 	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
         .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
         .header{padding: 6px 0; text-indent: 1em;}
-
+        .paginate{display: inline-block;width:30%; text-align: right; padding: 8px;}
 </style>
 <%end%>
 
@@ -15,6 +15,22 @@
 <li><%= link_to 'Тестирование',{:controller=>:testsessions,:action=>:new} %></li>
 <li><%= link_to 'Пользователи',users_url %></li>
 <%  end %>
+<div style="width:100%;text-align: right;">
+<div class="paginate">
+  Страница <%= @pagenum %> из <%= @pagecount %>.
+  Номера: <%=  link_to '1',{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>'1'})) if @pagenum>2 %>
+  <%=  link_to '2',{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>'2'})) if @pagenum>3 %>
+  <%= '...' if @pagenum>4 %>
+  <%=  link_to (@pagenum-1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})) if @pagenum>=2 %>
+  <%=  link_to (@pagenum).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum)})) %>
+  <%=  link_to (@pagenum+1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})) if @pagenum<@pagecount %>
+  <%= '...' if @pagenum<@pagecount-3 %>
+  <%=  link_to (@pagecount-1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})) if @pagenum<@pagecount-2 %>
+  <%=  link_to (@pagecount).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})) if @pagenum<@pagecount-1 %>
+</div>
+</div>
+
+
 <div class="ui-widget" style="width:100%;">
    <div class="ui-widget-header ui-corner-top" >
       <span style="width: 30%; " class="header mycell">Пользователь</span>
@@ -40,8 +56,13 @@
       <%= t.Name %>
     </span>
     <span class="mycell" style="padding: 6px 0; width: 30%; text-indent: 1em;font-weight: normal; color: black;">
-      <%=  @marks[i] %>, <%= @zachets[i] %>
-      <% i+=1 %>
+      <%=  t.mark %>,
+      <%  if t.mark&&t.mark>2 %>
+        <%= 'Зачтено' %>
+      <% else %>
+        <%= 'Не зачтено' %>
+      <% end %>, <%= (t.percent*100).to_i.to_f/100.00 if t.percent%>
+      <% #i+=1 %>
     </span>
     <span class="mycell" style="width: 9%;">
 
@@ -54,7 +75,18 @@
 <%else%>
   <% @class="ui-widget-content" %>
 <%end%>
-  <div class="<%=@class%> ui-corner-bottom" >
-
+  <div class="<%=@class%> ui-corner-bottom" style="text-align: right;" >
+    <div class="paginate">
+      Страница <%= @pagenum %> из <%= @pagecount %>.
+      Номера: <%=  link_to '1',{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>'1'})) if @pagenum>2 %>
+      <%=  link_to '2',{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>'2'})) if @pagenum>3 %>
+      <%= '...' if @pagenum>4 %>
+      <%=  link_to (@pagenum-1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})) if @pagenum>=2 %>
+      <%=  link_to (@pagenum).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum)})) %>
+      <%=  link_to (@pagenum+1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})) if @pagenum<@pagecount %>
+      <%= '...' if @pagenum<@pagecount-3 %>
+      <%=  link_to (@pagecount-1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})) if @pagenum<@pagecount-2 %>
+      <%=  link_to (@pagecount).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})) if @pagenum<@pagecount-1 %>
+    </div>
   </div>
 </div>

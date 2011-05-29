@@ -5,6 +5,19 @@ class DisciplinesController < ApplicationController
   
   def index
 	@disciplines=Discipline.all
+  #pagination
+  @parametrs=params
+  if params[:pagenum]
+    @pagenum=params[:pagenum].to_i
+  else
+    @pagenum=1
+  end
+  @perpage=30
+  @pagecount=@disciplines.length/@perpage
+  @pagecount+=1 if @disciplines.length%@perpage!=0
+  @firstline=(@pagenum-1)*@perpage
+  @disciplines=@disciplines.drop(@firstline).take(@perpage)
+
 	respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @disciplines }

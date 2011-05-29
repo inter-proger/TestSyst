@@ -33,6 +33,7 @@
 <% @i=1 %>
 <div id="accordion">
 <%@reports.each do |t|%>
+
   <div class="ui-widget ui-corner-all ui-state-active"><h3 >
 
     <% if t.right=='+' %>
@@ -44,8 +45,13 @@
 
   <%= @i.to_s+". " %>
   <% @i+=1 %>
-  <%= t.question %>
+       <% unless t.questionchanged %>
+          <%= t.question %>
+       <%  else %>
+          <%= 'Данный вопрос был изменен. Невозможно просмотреть данные о нем.' %>
+       <% end %>
   </div></h3>
+ <% unless t.questionchanged %>
   <div class="ui-widget-content ui-corner-all">
   <%case t.type %>
     <%when 6%>
@@ -76,8 +82,8 @@
             <input type="radio" <%="checked" if @ua%>/>
           </div>
           <div class="answ">
-      <%= a  %>
-      <% # = t.answers[a].content %>
+      <% # = a  %>
+      <%= t.answers[a].content %>
           </div>
         </div>
       <% end %>
@@ -201,7 +207,9 @@
   <%end%>
   </div>
 </div>
-
+<% else %>
+      <div class="ui-widget-content ui-corner-all"></div>
+<% end %>
 
 <% end %>
 </div>
