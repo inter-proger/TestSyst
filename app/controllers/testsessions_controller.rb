@@ -167,7 +167,7 @@ class TestsessionsController < ApplicationController
         when 8
           ra=Hash.new
           @answers.each { |key,value| ra[key]=value.content.mb_chars.downcase.to_s  }
-          f=(ra.value?(useransw.mb_chars.downcase.to_s))||(ra.value.downcase?(useransw.downcase))
+          f=(ra.value?(useransw.mb_chars.downcase.to_s)) #||(ra.value.downcase?(useransw.downcase))
           ua=useransw
         when 9
           useransw.each { |key,value| f&&=((value.to_i==0)&&(@answers[@answorder2[key.to_i]].right==0))||((value.to_i!=0)&&@answers[@answorder2[key.to_i]].right==@answers[@answorder1[value.to_i-1]].right)}
@@ -188,7 +188,8 @@ class TestsessionsController < ApplicationController
 
   def complete
     @ts=current_user.testsessions.find(params[:id])
-    @ts.update_attribute("completed",1)
+
+    #@ts.update_attribute("completed",1)
     @tests=@ts.tests
     qs=@ts.questions
     @ra_count=0
@@ -206,7 +207,7 @@ class TestsessionsController < ApplicationController
     if @percent >= @ts.tconfiguration.degree5
       @rank+=1
     end
-
+    @ts.update_attributes(:completed=>1,:mark=>@rank,:percent=>@percent) if @ts.completed!=1
     @questions=Array.new
     @tests.each{|t| @questions.push(qs.detect{|q| q.id==t.question_id})}
     #@tests.each{|t| @questions.push(Question.find(t.question_id))}

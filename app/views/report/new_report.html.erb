@@ -1,0 +1,118 @@
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function() {
+		var dates = $( "#from, #to" ).datepicker({
+			changeMonth: true,
+                        changeYear: true,
+                        yearRange: '1940:2010',
+                        dateFormat:'dd-mm-yy',
+                        regional:"ru",
+                        dayNames:['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'],
+                        dayNamesMin:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
+                        dayNamesShort:['Пон','Вт','Ср','Чет','Пят','Суб','Вос'],
+                        monthNames:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+			monthNamesShort:['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+                        onSelect: function( selectedDate ) {
+				var option = this.id == "from" ? "minDate" : "maxDate",
+					instance = $( this ).data( "datepicker" ),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings );
+				dates.not( this ).datepicker( "option", option, date );
+			}
+		});
+                var dates2 = $( "#beg_testdate, #end_testdate" ).datepicker({
+			changeMonth: true,
+                        changeYear: true,
+                        yearRange: '2010:2100',
+                        dateFormat:'dd-mm-yy',
+                        regional:"ru",
+                        dayNames:['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'],
+                        dayNamesMin:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
+                        dayNamesShort:['Пон','Вт','Ср','Чет','Пят','Суб','Вос'],
+                        monthNames:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+			monthNamesShort:['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+                        onSelect: function( selectedDate ) {
+				var option = this.id == "beg_testdate" ? "minDate" : "maxDate",
+					instance = $( this ).data( "datepicker" ),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings );
+				dates2.not( this ).datepicker( "option", option, date );
+			}
+		});
+
+
+	});
+
+</script>
+<% end %>
+<h2>
+  Поиск сеансов тестирования
+</h2>
+<%  @width="width:200px;" %>
+<% form_tag :controller=>:report,:action=>:create_report do  %>
+
+<div>
+  <%= label_tag :tconfiguration,"Конфигурация"%><br/>
+  <%= select_tag  :tconfiguration,options_for_select(@configs_options, 0), :style=>@width  %>
+</div>
+
+<div>
+  Дата прохождения теста:<br/>
+  <%= label_tag :start_date,"От"%>
+  <%= text_field_tag :beg_testdate,nil,:id=>"beg_testdate" %>
+  <%= label_tag :start_date,"До"%>
+  <%= text_field_tag :end_testdate,nil,:id=>"end_testdate" %>
+</div>
+
+<div>
+  <%= label_tag :f,"Фамилия"%><br/>
+  <%= text_field_tag  :f  %>
+</div>
+<div>
+  <%= label_tag :i,"Имя"%><br/>
+  <%= text_field_tag  :i  %>
+</div>
+<div>
+  <%= label_tag :o,"Отчество"%><br/>
+  <%= text_field_tag  :o %>
+</div>
+<div>
+  Дата рождения:<br/>
+  <%= label_tag :start_date,"От"%>
+  <%= text_field_tag :startdate,nil,:id=>"from" %>
+  <%= label_tag :start_date,"до"%>
+  <%= text_field_tag :enddate,nil,:id=>"to" %>
+</div>
+
+<div>
+  <%= label_tag :sertype,"Тип службы"%><br/>
+  <%= select_tag :sertype,options_for_select([['-----',-1]],-1)+options_from_collection_for_select(Sertype.all,:id,:name), :style=>@width%>
+</div>
+<div>
+  <%= label_tag :serlevel,"Уровень службы"%><br/>
+  <%= select_tag :serlevel,options_for_select([['-----',-1]],-1)+options_from_collection_for_select(Serlevel.all,:id,:name), :style=>@width %>
+</div>
+<div>
+  <%= label_tag :education,"Образование"%><br/>
+  <%= select_tag :education,options_for_select([['-----',-1]],-1)+options_from_collection_for_select(Education.all,:id,:name), :style=>@width %>
+</div>
+<div>
+  <%= label_tag :sphere,"Сфера деятельности"%><br/>
+  <%= select_tag :sphere,options_for_select([['-----',-1]],-1)+options_from_collection_for_select(Sphere.all,:id,:name), :style=>@width %>
+</div>
+<div>
+  <%= label_tag :workplace,"Место работы"%><br/>
+  <%= text_field_tag :workplace,nil %>
+</div>
+<div>
+  <%= label_tag :proff,"Должность"%><br/>
+  <%= text_field_tag :proff,nil %>
+</div>
+
+<div><%= submit_tag "Просмотр" %></div>
+
+<% end %>
