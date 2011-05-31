@@ -26,7 +26,19 @@ class DisciplinesController < ApplicationController
 
   def show
     @discipline=Discipline.find(params[:id])
-
+    @themes=@discipline.themes
+    #pagination
+    @parametrs=params
+    if params[:pagenum]
+      @pagenum=params[:pagenum].to_i
+    else
+      @pagenum=1
+    end
+    @perpage=30
+    @pagecount=@themes.length/@perpage
+    @pagecount+=1 if @themes.length%@perpage!=0
+    @firstline=(@pagenum-1)*@perpage
+    @themes=@themes.drop(@firstline).take(@perpage)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @discipline }
