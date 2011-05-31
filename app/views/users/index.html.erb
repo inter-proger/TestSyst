@@ -49,10 +49,10 @@
     <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.roles %></span>
     <span class="mycell" style="width:19%;">
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),u,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:users,:action=>:listsessions,:id=>u},:class=>'ui-state-default ui-corner-all',:title=>'Отобразить сессии пользователя' %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-note"}),{:controller=>:users,:action=>:listsessions,:id=>u},:class=>'ui-state-default ui-corner-all',:title=>'Отобразить сессии пользователя' %>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}),edit_user_path(u),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-minusthick"}),{ :controller=>'Users',:action=>'deladmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Удалить роль" %>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-plusthick"}),{ :controller=>'Users',:action=>'newadmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Добавить роль" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-plusthick"}),{ :controller=>'Users',:action=>'newadmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Назначить администратором" %>
     </span>
 
   </div>

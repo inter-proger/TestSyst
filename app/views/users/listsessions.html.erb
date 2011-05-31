@@ -25,13 +25,13 @@
     <td><% if i.completed? %>
       Да
     </td>
-      <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%></td>
+      <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-search"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%></td>
       <%else%>
       Нет
      
     </td>
     <!-- TODO: Редирект к тестированию, если тест еще не завершен.(продолжение сессии)-->
-    <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></td>
+    <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-search"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></td>
   <%end%>
   </tr>
   <%end%>
