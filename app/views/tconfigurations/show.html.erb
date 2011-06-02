@@ -1,60 +1,63 @@
 <p id="notice"><%= notice %></p>
+<h2>Просмотр конфигурации: </h2>
+<div class="ui-widget ui-state-highlight ui-corner-all">
+  <table cellpadding="10">
+<tr>
+  <td><b>Название:</b></td>
+  <td><%= @tconfiguration.Name %></td>
+</tr>
 
-<p>
-  <b>Name:</b>
-  <%= @tconfiguration.Name %>
-</p>
+<tr>
+  <td><b>Тип:</b></td>
+  <td><%= @tconfiguration.configuration_type.Name %></td>
+</tr>
 
-<p>
-  <b>Conftype:</b>
-  <%= @tconfiguration.configuration_type.Name %>
-</p>
+<tr>
+  <td><b>Количество вопросов с одним правильным вариантом ответа:</b></td>
+  <td><%= @tconfiguration.qT1Count %></td>
+</tr>
 
-<p>
-  <b>Qt1count:</b>
-  <%= @tconfiguration.qT1Count %>
-</p>
+<tr>
+  <td><b>Количество вопросов с несколькими правильными вариантами ответа:</b></td>
+  <td><%= @tconfiguration.qT2Count %></td>
+</tr>
 
-<p>
-  <b>Qt2count:</b>
-  <%= @tconfiguration.qT2Count %>
-</p>
+<tr>
+  <td><b>Количество вопросов без предлагаемых вариантов оответа:</b></td>
+  <td><%= @tconfiguration.qT3Count %></td>
+</tr>
 
-<p>
-  <b>Qt3count:</b>
-  <%= @tconfiguration.qT3Count %>
-</p>
+<tr>
+  <td><b>Количество вопросов на упорядочивание:</b></td>
+  <td><%= @tconfiguration.qT4Count %></td>
+</tr>
 
-<p>
-  <b>Qt4count:</b>
-  <%= @tconfiguration.qT4Count %>
-</p>
+<tr>
+  <td><b>Количество вопросов на соотношение:</b></td>
+  <td><%= @tconfiguration.qT5Count %></td>
+</tr>
 
-<p>
-  <b>Qt5count:</b>
-  <%= @tconfiguration.qT5Count %>
-</p>
+<tr>
+  <td><b> Минимальный процент правильных ответов для получения оценки 3 (зачет):</b></td>
+  <td><%= @tconfiguration.degree3 %></td>
+</tr>
 
-<p>
-  <b>Degree3:</b>
-  <%= @tconfiguration.degree3 %>
-</p>
+<tr>
+  <td><b>Минимальный процент правильных ответов для получения оценки 4:</b></td>
+  <td><%= @tconfiguration.degree4 %></td>
+</tr>
 
-<p>
-  <b>Degree4:</b>
-  <%= @tconfiguration.degree4 %>
-</p>
+<tr>
+  <td><b>Минимальный процент правильных ответов для получения оценки 5:</b></td>
+  <td><%= @tconfiguration.degree5 %></td>
+</tr>
 
-<p>
-  <b>Degree5:</b>
-  <%= @tconfiguration.degree5 %>
-</p>
-
-<p>
-  <b>Testtime:</b>
-  <%= @tconfiguration.TestTime %>
-</p>
-
+<tr>
+  <td><b>Время на тест:</b></td>
+  <td><%= @tconfiguration.TestTime %></td>
+</tr>
+</table>
 
 <%= link_to 'Изменить', edit_tconfiguration_path(@tconfiguration),:class=>'actionbutton' %>
 <%= link_to 'Назад', tconfigurations_path,:class=>'actionbutton' %>
+</div>

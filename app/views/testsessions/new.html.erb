@@ -1,18 +1,10 @@
-<h1>Testsessions#new</h1>
-<p>Find me in app/views/testsessions/new.html.erb</p>
+<h2>Выберите тест для прохождения тестирования</h2>
 
-<%= content_for :tabs do %>
-<li><%= link_to "Главная", root_url %></li>
-<li><%= link_to "Предметы", disciplines_path %></li>
-    <li><%= link_to 'Конфигурации',tconfigurations_path %></li>
-<li><%= link_to 'Тестирование',{:controller=>:testsessions,:action=>:new} %></li>
-<li><%= link_to 'Пользователи',users_url %></li>
-<%  end %>
 
 
 <% form_for(@ts) do |f| %>
-  <%= f.collection_select(:tconfiguration_id,Tconfiguration.all,:id,:Name) %>
-  <%= f.submit "Начать тестирование" ,:class=>'actionbutton' %>
+  <%= f.collection_select :tconfiguration_id,Tconfiguration.all.sort{|a,b|a.Name<=>b.Name},:id,:Name,{} ,:size=>20,:style=>"width:300px;" %><br/>
+  <%= f.submit "Начать тестирование" ,:class=>'actionbutton',:style=>"width:300px;" %>
 
 
 <% end %>

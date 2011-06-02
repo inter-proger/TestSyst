@@ -136,8 +136,16 @@
 
 <div id="timer">
 </div>
-<h1>Testsessions#show</h1>
-<p>Find me in app/views/testsessions/show.html.erb</p>
+<h2>Тест <%= @ts.tconfiguration.Name %>. 
+  
+  <% if @num+1<=@count %>
+  Вопрос № <%= @num+1 %>.
+  <%else%>
+    Окончание.
+  <%end%>
+
+</h2>
+
 
 
 <%unless @end%>

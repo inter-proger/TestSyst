@@ -1,27 +1,16 @@
-<table cellpadding="0" cellspacing="0">
-  <tr>
-  <th>Логин</th>
-  <th>Имя</th>
-  <th>Фамилия</th>
-  <th>Отчество</th>
-   <th>Место работы</th>
-   <th>Должность</th>
-   <th>Роли</th>
-  </tr>
+<h2>Просмотр данных о пользователе.</h2>
 
-  <tr>
-      <td><%= @us.login%></td>
-    <td><%=@us.I %></td>
-    <td><%=@us.F %></td>
-    <td><%=@us.O %></td>
-    <td><%=@us.workplace %></td>
-    <td><%=@us.proff %></td>
-     <td><%=@us.roles %></td>
-
-  </tr>
-
-
+<div class="ui-widget ui-state-highlight ui-corner-all">
+<table cellpadding="10" cellspacing="0" width="100%">
+  <tr ><td width="20%"><b>Логин:</b></td><td><%= @us.login%></td></tr>
+  <tr><td><b>Имя:</b></td><td><%=@us.I %></td></tr>
+  <tr><td><b>Фамилия:</b></td><td><%=@us.F %></td></tr>
+  <tr><td><b>Отчество:</b></td><td><%=@us.O %></td></tr>
+   <tr><td><b>Место работы:</b></td><td><%=@us.workplace %></td></tr>
+  <tr> <td><b>Должность:</b></td><td><%=@us.proff %></td></tr>
+   <tr><td><b>Роли:</b></td><td><%=@us.roles %></td></tr>
   </table>
 <br/>
 <%= link_to 'Отобразить сессии',{:controller=>:users,:action=>:listsessions,:id=>@us},:class=>'actionbutton' %>&nbsp;
 <%= link_to "Редактировать",edit_user_path(@us),:class=>'actionbutton' %>
+</div>

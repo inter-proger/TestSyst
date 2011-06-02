@@ -97,6 +97,7 @@ class UsersController < ApplicationController
 
     def listsessions
       @us=User.find(params[:id])
+=begin
       ts=Testsession.all
       @sessions=Array.new
       ts.each do |t|
@@ -104,8 +105,23 @@ class UsersController < ApplicationController
           @sessions.push(t)
         end
       end
+=end
+      @sessions=@us.testsessions
 
-       respond_to do |format|
+        #pagination
+  @parametrs=params
+  if params[:pagenum]
+    @pagenum=params[:pagenum].to_i
+  else
+    @pagenum=1
+  end
+  @perpage=20
+  @pagecount=@sessions.length/@perpage
+  @pagecount+=1 if @sessions.length%@perpage!=0
+  @firstline=(@pagenum-1)*@perpage
+  @sessions=@sessions.drop(@firstline).take(@perpage)
+
+      respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @us }
     end

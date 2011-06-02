@@ -2,41 +2,70 @@
 
 <style>
 	td a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
-
+        span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float:right;  list-style: none;display: inline;}
+        .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
+         .header{padding: 6px 0; text-indent: 1em;}
+         .paginate{display: inline-block;width:65%; text-align: right;/* padding: 8px;*/}
 </style>
 <%end%>
 <h4>Список тестов, в которых участвовал пользователь</h4>
-<table cellspacing="0" cellpadding="0">
-  <tr>
-  <th>#</th>
-  <th>Дата начала</th>
-  <th>Конфигурация</th>
-  <th>Оценка</th>
-  <th>Завершено</th>
-  <th></th>
-  </tr>
-  <% num=0 %>
+<div class="ui-widget" style="width:100%;">
+  <div class="ui-widget-header ui-corner-top" >
+  <span style="width: 8%; " class="header mycell">#</span>
+  <span style="width: 18%; " class="header mycell">Дата начала</span>
+  <span style="width: 18%; " class="header mycell">Конфигурация</span>
+  <span style="width: 18%; " class="header mycell">Оценка</span>
+  <span style="width: 18%; " class="header mycell">Завершено</span>
+  <span style="width: 18%; " class="header mycell"></span>
+  </div>
+  <% num=(@pagenum-1)*@perpage %>
+  <% @class="ui-state-default" %>
+
+
+
   <%  @sessions.each do |i|  %>
-  <tr>
-    <td><%=num=num+1%></td>
-    <td><%=i.created_at.strftime('%H:%M:%S ') %><b><%=i.created_at.strftime(' (%d/%m/%y)') %></b></td>
-    <td><%=i.tconfiguration_id%></td>
-    <td>Здесь будет оценка</td>
-    <td><% if i.completed? %>
-      Да
-    </td>
-      <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%></td>
+    <%if @class=="ui-widget-content"%>
+      <% @class="ui-state-default" %>
+    <%else%>
+      <% @class="ui-widget-content" %>
+    <%end%>
+  <div class="<%=@class%>" >
+    <span style="width: 8%; " class="header mycell"><%=num=num+1%></span>
+    <span style="width: 18%; " class="header mycell"><%=i.created_at.strftime('%H:%M:%S ') %><b><%=i.created_at.strftime(' (%d/%m/%y)') %></b></span>
+    <span style="width: 18%; " class="header mycell"><%=i.tconfiguration_id%></span>
+    <span style="width: 18%; " class="header mycell"><%=i.mark%></span>
+    <span style="width: 18%; " class="header mycell"><% if i.completed? %>
+      Да</span>
+    
+      <span style="width: 18%; " ><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%></span>
       <%else%>
       Нет
      
-    </td>
+    </span>
     <!-- TODO: Редирект к тестированию, если тест еще не завершен.(продолжение сессии)-->
-    <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></td>
+    <span style="width: 18%; " ><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></span>
   <%end%>
-  </tr>
+  </div>
   <%end%>
-
-  </table>
-<br/>
+<%if @class=="ui-widget-content"%>
+  <% @class="ui-state-default" %>
+<%else%>
+  <% @class="ui-widget-content" %>
+<%end%>
+<div class="<%=@class%> ui-corner-bottom" >
 <%= link_to 'Назад',user_path(@us),:class=>'actionbutton' %>
 
+    <div class="paginate" style="float:right;">
+      Страница <%= @pagenum %> из <%= @pagecount %>.
+      Номера: <%=  link_to '1',{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>'1'})),:class=>:actionbutton if @pagenum>2 %>
+      <%=  link_to '2',{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>'2'})),:class=>:actionbutton if @pagenum>3 %>
+      <%= '...' if @pagenum>4 %>
+      <%=  link_to (@pagenum-1).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})),:class=>:actionbutton if @pagenum>=2 %>
+      <%=  link_to (@pagenum).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagenum)})),:class=>:actionbutton %>
+      <%=  link_to (@pagenum+1).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})),:class=>:actionbutton if @pagenum<@pagecount %>
+      <%= '...' if @pagenum<@pagecount-3 %>
+      <%=  link_to (@pagecount-1).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})),:class=>:actionbutton if @pagenum<@pagecount-2 %>
+      <%=  link_to (@pagecount).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})),:class=>:actionbutton if @pagenum<@pagecount-1 %>
+    </div>
+</div>
+</div>
