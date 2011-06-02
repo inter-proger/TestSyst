@@ -49,7 +49,21 @@ class TconfigurationsController < ApplicationController
   end
 
   def fastconf
-    
+    th=Array.new
+    onet=Theme.find(5)
+    th.push(onet)
+    hsh=Hash.new
+
+
+      tt=Tconfiguration.create( :themes=>th,:Name=>"fastconf",:configuration_type_id=>1,:qT1Count=>5,:qT2Count=>0,:qT3Count=>0,:qT4Count=>0,:qT5Count=>0,:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>DateTime.now)
+      hsh["tconfiguration_id"]=tt.id
+      redirect_to :controller => :testsessions,:action=>:create,:tconfiguration=>hsh and return
+#      ts=Testsession.create!(:tconfiguration_id=>tt.id,:user_id=>current_user.id,:completed=>0)
+
+
+ #      redirect_to ts,:action=>:show,:num=>1 and return
+
+      
   end
   # POST /tconfigurations
   # POST /tconfigurations.xml
