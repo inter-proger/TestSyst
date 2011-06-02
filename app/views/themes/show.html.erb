@@ -37,7 +37,7 @@
     </span>
     <span class="mycell" style="width: 18%;">
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),discipline_theme_question_url(@discipline,@theme,t),:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),discipline_theme_question_path(@discipline,@theme,t),:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-search"}),discipline_theme_question_path(@discipline,@theme,t),:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
     </span>
   </div>
 <% end %>

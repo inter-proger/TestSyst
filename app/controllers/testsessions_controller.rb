@@ -5,6 +5,27 @@ class TestsessionsController < ApplicationController
     @ts=Testsession.new
   end
 
+  def fastconf
+
+    @themes=params[:the]
+   
+    tt=Tconfiguration.create(:themes=>Themes.find(5), :name=>"fastconf",:configuration_type_id=>1,:qT1Count=>5,:qT2Count=>0,:qT3Count=>0,:qT4Count=>0,:qT5Count=>0,:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>DateTime.now)
+    respond_to do |format|
+      if tt.save
+        format.html {
+         params [:themes].each do |t|
+            @rel=tt.configthemerelations.create(:theme_id=>t)
+          end
+          redirect_to(tt, :notice => 'Конфигурация успешно создана') }
+        format.xml  { render :xml => tt, :status => :created, :location => tt }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => tt.errors, :status => :unprocessable_entity }
+      end
+  redirect_to tconfiguration_path(tt)
+  end
+  end
+
   def create
     @tconf=Tconfiguration.find(params[:testsession][:tconfiguration_id])
     @themes=@tconf.themes.map{|t| t.id}

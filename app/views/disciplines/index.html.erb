@@ -30,7 +30,7 @@
         <%  if  current_user.is_admin? %>
           <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),disc,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
         <%end%>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}), disc,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-search"}), disc,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-play"}),new_testsession_url,:class=>"ui-state-default ui-corner-all",:title=>"Начать тестирование" %>
       <% end %>
     </span>
