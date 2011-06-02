@@ -9,7 +9,7 @@ class TestsessionsController < ApplicationController
 
     @themes=params[:the]
    
-    tt=Tconfiguration.create(:themes=>@t, :name=>"fastconf",:configuration_type_id=>1,:qT1Count=>5,:qT2Count=>0,:qT3Count=>0,:qT4Count=>0,:qT5Count=>0,:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>DateTime.now)
+    tt=Tconfiguration.create(:themes=>Themes.find(5), :name=>"fastconf",:configuration_type_id=>1,:qT1Count=>5,:qT2Count=>0,:qT3Count=>0,:qT4Count=>0,:qT5Count=>0,:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>DateTime.now)
     respond_to do |format|
       if tt.save
         format.html {

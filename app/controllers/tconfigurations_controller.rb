@@ -48,6 +48,9 @@ class TconfigurationsController < ApplicationController
         
   end
 
+  def fastconf
+    
+  end
   # POST /tconfigurations
   # POST /tconfigurations.xml
   def create
