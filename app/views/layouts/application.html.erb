@@ -11,7 +11,7 @@
   <script language="javascript" type="text/javascript">
     $(function(){
       $("a.actionbutton,  input:submit, input:reset, button").button();
-      $('a.actionbutton, .body span a').hover(
+      $('a.actionbutton, .body span.ui-icon a').hover(
 					function() { $(this).addClass('ui-state-hover');
                                           $(this).css('color','white');
                                           },
@@ -21,7 +21,19 @@
 
 
    $("#accordion").accordion({ header: "h3" });
+  $('#top-pads li a').removeClass(" ui-corner-top ");
+  $('#top-pads li a').addClass("ui-state-highlight ui-corner-top ");
+  $('#top-pads li a').css('border','0px');
+  $('#top-pads li a').hover(function(){
+    $(this).removeClass("ui-state-highlight ui-corner-top ");
+    $(this).addClass("ui-widget-header ui-corner-top ");
+    $(this).css('border','0px');
+  }, function(){
 
+    $(this).removeClass("ui-widget-header ui-corner-top ");
+    $(this).addClass("ui-state-highlight ui-corner-top ");
+    $(this).css('border','0px');
+  });
 
   });
    
@@ -45,7 +57,7 @@
 
 
 
-
+<!-- -->
 
 
    <div id="page">
@@ -53,7 +65,16 @@
 
       <div id="top-pads">
         <ul>
-          <%=  yield :tabs%>
+          <li class="ui-state-default ui-corner-top"><%= link_to "Главная", root_url %></li>
+          <% if current_user&&current_user.is_admin? %>
+            <li class="ui-state-default ui-corner-top"><%= link_to "Предметы", disciplines_path %></li>
+            <li class="ui-state-default ui-corner-top"><%= link_to 'Конфигурации',tconfigurations_path %></li>
+          <% end %>
+          <li class="ui-state-default ui-corner-top"><%= link_to 'Тестирование',{:controller=>:testsessions,:action=>:new} %></li>
+          <% if current_user&&current_user.is_admin? %>
+          <li class="ui-state-default ui-corner-top"><%= link_to 'Пользователи',users_url %></li>
+          <% end %>
+          <%= yield :tabs %>
         </ul>
         <div class="wraper"></div>
       </div>

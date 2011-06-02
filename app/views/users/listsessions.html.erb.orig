@@ -24,7 +24,7 @@
 
 
   <%  @sessions.each do |i|  %>
-
+<<<<<<< HEAD
     <%if @class=="ui-widget-content"%>
       <% @class="ui-state-default" %>
     <%else%>
@@ -39,13 +39,27 @@
       Да</span>
     
       <span style="width: 18%; " ><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%></span>
+=======
+  <tr>
+    <td><%=num=num+1%></td>
+    <td><%=i.created_at.strftime('%H:%M:%S ') %><b><%=i.created_at.strftime(' (%d/%m/%y)') %></b></td>
+    <td><%=i.tconfiguration_id%></td>
+    <td>Здесь будет оценка</td>
+    <td><% if i.completed? %>
+      Да
+    </td>
+      <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-search"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%></td>
+>>>>>>> 55fa61812e434f2ac3411aed360deee19a43a590
       <%else%>
       Нет
      
     </span>
     <!-- TODO: Редирект к тестированию, если тест еще не завершен.(продолжение сессии)-->
-
+<<<<<<< HEAD
     <span style="width: 18%; " ><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></span>
+=======
+    <td><%=link_to tag("span",{:class=>"ui-icon ui-icon-search"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></td>
+>>>>>>> 55fa61812e434f2ac3411aed360deee19a43a590
   <%end%>
   </div>
   <%end%>
