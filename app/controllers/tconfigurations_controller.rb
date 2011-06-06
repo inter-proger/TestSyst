@@ -6,6 +6,7 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations
   # GET /tconfigurations.xml
   def index
+    @ai='#item3'
     @tconfigurations = Tconfiguration.all
 
     respond_to do |format|
@@ -17,6 +18,7 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations/1
   # GET /tconfigurations/1.xml
   def show
+    @ai='#item3'
     @tconfiguration = Tconfiguration.find(params[:id])
 
     respond_to do |format|
@@ -28,6 +30,7 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations/new
   # GET /tconfigurations/new.xml
   def new
+    @ai='#item3'
     @tconfiguration = Tconfiguration.new
     @themes= Theme.all.map{|th| [th.title, th.id]}
 
@@ -39,6 +42,7 @@ class TconfigurationsController < ApplicationController
 
   # GET /tconfigurations/1/edit
   def edit
+    @ai='#item3'
     @tconfiguration = Tconfiguration.find(params[:id])
     @themes= Theme.all.map{|th| [th.title, th.id]}
     @the=@tconfiguration.themes.map { |e| e.id } 
@@ -54,6 +58,7 @@ class TconfigurationsController < ApplicationController
   # POST /tconfigurations
   # POST /tconfigurations.xml
   def create
+    @ai='#item3'
     @tconfiguration = Tconfiguration.new(params[:tconfiguration])
     unless params[:themes]
       @tconfiguration.errors.add("Вопросов","не достаточно")
@@ -90,7 +95,7 @@ class TconfigurationsController < ApplicationController
   # PUT /tconfigurations/1
   # PUT /tconfigurations/1.xml
   def update
-
+    @ai='#item3'
     @tconfiguration = Tconfiguration.find(params[:id])
      @themes= Theme.all.map{|th| [th.title, th.id]}
      #=========from create===========

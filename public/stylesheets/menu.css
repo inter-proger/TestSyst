@@ -13,8 +13,9 @@
 
 #top-pads
 {
-    padding-left: 80px;
-    display: block;
+    /*padding-left: 80px;*/
+    /*display: block;*/
+    
 }
 #top-pads a
 {
@@ -48,6 +49,8 @@
     height: 25px;
 
 }*/
-#top-pads li { list-style: none; float: left; position: relative; top: 1px; margin: 0 .2em 1px 0; border-bottom: 0 !important; padding: 0; white-space: nowrap; }
-#top-pads li a { float: left; padding: .7em 1em; /*text-decoration: none;*/ }
+#menu{padding: 0px;}
+#menu ul{}
+#menu1 ul li { display: inline-block; vertical-align: bottom; float: none; top:1px;}
+#menu1 ul li a{ }
 

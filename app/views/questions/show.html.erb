@@ -1,267 +1,44 @@
 <%= content_for :head do %>
   <%= javascript_include_tag "answ_form" %>
 <style type="text/css">
-  .mycontent{padding: 5px;}
+  .mycontent{}
 </style>
 
 <% end %>
-<p id="notice"><%= notice %></p>
-<div class="ui-widget">
-  <div class="ui-widget-header mycontent ui-corner-top">
-    <h2 style="">Просмотр и изменение вопроса.</h2>
 
-  </div>
-  <div class="ui-widget-content ui-corner-bottom" style="vertical-align: top;">
-<div class="ui-widget-content mycontent" style="width:30%; display: inline-block; min-height: 400px;vertical-align: top;">
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+
+<%= content_for :secondmenu do %>
+  <%= link_to 'Предмет: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Тема: '+@theme.title, discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
+  <%= link_to 'Изменение вопроса', discipline_theme_question_path(@discipline,@theme,@quest),:class=>'actionbutton',:id=>'active' %>
+  <%= link_to 'Ответы', {:controller=>:questions,:action=>:answers,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton' %>
+  <%= link_to 'Изображение', {:controller=>:questions,:action=>:picture,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton',:id=>'active' %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+  <h2>
+    Просмотр и редактирование вопроса.
+  </h2>
+  
 <% form_for([@discipline,@theme,@quest]) do |f| %>
   
-    <div class="ui-state-default " style="padding: 4px;">
+    
       <%= f.label "Формулировка вопроса:" %>
-    </div>
-    <div >
-      <%= f.text_area :content,:rows=>10%><br/>
+    <br/>
+      <%= f.text_area :content,:rows=>10,:style=>"width:99%;"%><br/>
       <%= f.submit("Изменить")  %>
-    </div>
+
   
 <% end %>
-</div>
-<div class="ui-widget-content mycontent" style="width:30%; display: inline-block; min-height: 400px; vertical-align: top;">
-<% if @qtid==6 %>
-
-  <div class="ui-state-default " >
-  <div class="mycontent" style="display: inline-block;width: 45%;">
-  Вариант ответа
-  </div>
-  <div class="mycontent" style="display: inline-block; width: 45%;">
-  Правильность
-  </div>
-  </div>
-  <% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
-    <% if @answs_count == 0 %>
-    <div id="ans1" class="vis">
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-        <%= text_field_tag "content[1]",nil,:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-        <%= radio_button_tag  "right","1",true%>
-      </div>
-    </div>
-      <% @answs_count=@answs_count+1 %>
-    <% else %>
-    <div id="ans1" class="vis">
-      <% @fl=@quest.answers[0].right==1 %>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= text_field_tag "content[1]",@quest.answers[0].content,:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= radio_button_tag  "right","1",@fl%>
-      </div>
-    </div>
-    <% end %>
-
-  <% 2.upto(@answs_count) do |i| %>
-    <div id="ans<%=i%> "class="vis">
-      <% @fl=@quest.answers[i-1].right==1 %>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= text_field_tag "content["+i.to_s+"]",@quest.answers[i-1].content,:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= radio_button_tag "right",i.to_s,@fl %>
-      </div>
-    </div>
-  <%end%>
-
-  <% (@answs_count+1).upto(10) do |i| %>
-    <div id="ans<%=i%> "class="hid">
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-        <%= text_field_tag "content["+i.to_s+"]",nil,:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= radio_button_tag "right",i.to_s,nil %>
-      </div>
-    </div>
-  <%end%>
-  <a href="#" type="button" class="actionbutton" onClick="add_ans();">Добавить вариант ответа</a>
-    <%= submit_tag "Подтвердить"  %>
-  
-  <% end %>
-
-<%end%>
-<% if @qtid==7 %>
-  <div class="ui-state-default " >
-  <div class="mycontent" style="display: inline-block;width: 45%;">
-  Вариант ответа
-  </div>
-  <div class="mycontent" style="display: inline-block; width: 45%;">
-  Правильность
-  </div>
-  </div>
-  <% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
-    <% if @answs_count == 0 %>
-    <div id="ans1" class="vis">
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= text_field_tag "content[1]",nil,:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= check_box_tag "right[1]","1" %>
-      </div>
-    </div>
-        <% @answs_count=@answs_count+1 %>
-    <% else %>
-    <div id="ans1" class="vis">
-      <% @fl=@quest.answers[0].right==1 %>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= text_field_tag "content[1]",@quest.answers[0].content,:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%=check_box_tag  "right[1]","1",@fl%>
-      </div>
-    </div>
-    <% end %>
-
-  <% 2.upto(@answs_count) do |i| %>
-    <div id="ans<%=i%> "class="vis">
-      <% @fl=@quest.answers[i-1].right==1 %>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= text_field_tag "content["+i.to_s+"]",@quest.answers[i-1].content,:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= check_box_tag "right["+i.to_s+"]","1",@fl %>
-      </div>
-    </div>
-  <%end%>
-
-  <% (@answs_count+1).upto(10) do |i| %>
-    <div id="ans<%=i%> "class="hid">
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= text_field_tag "content["+i.to_s+"]",nil,:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-      <%= check_box_tag "right["+i.to_s+"]","1" %>
-      </div>
-    </div>
-  <%end%>
-    <a href="#" type="button" class="actionbutton" onClick="add_ans();">Добавить вариант ответа</a>
-    <%= submit_tag "Подтвердить"  %>
-  <%end%>
-
-<%end%>
-
-<% if @qtid==8 || @qtid==10 %>
-  <% if @qtid==8 %>
-    <div class="ui-state-default mycontent">
-      Возможный вариант ответа
-    </div>
-  <%else%>
-    <div class="ui-state-default mycontent">
-      Правильный порядок вариантов ответа
-    </div>
-  <%end%>
-  <% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
-    <% if @answs_count == 0 %>
-    <div id="ans1" class="vis">
-      <div class="mycontent" style="display: inline-block;width: 100%;">
-      <%= text_field_tag "content[1]",nil,:size=>"20"  %>
-      </div>
-    </div>
-        <% @answs_count=@answs_count+1 %>
-    <% else %>
-    <div id="ans1" class="vis">
-      <% @fl=@quest.answers[0].right==1 %>
-      <div class="mycontent" style="display: inline-block;width: 100%;">
-      <%= text_field_tag "content[1]",@quest.answers[0].content,:size=>"20"  %>
-      </div>
-    </div>
-    <% end %>
-
-  <% 2.upto(@answs_count) do |i| %>
-    <div id="ans<%=i%> "class="vis">
-      <% @fl=@quest.answers[i-1].right==1 %>
-      <div class="mycontent" style="display: inline-block;width: 100%;">
-      <%= text_field_tag "content["+i.to_s+"]",@quest.answers[i-1].content,:size=>"20"  %>
-      </div>
-    </div>
-  <%end%>
-
-  <% (@answs_count+1).upto(10) do |i| %>
-    <div id="ans<%=i%> "class="hid">
-      <div class="mycontent" style="display: inline-block;width: 45%;">
-        <%= text_field_tag "content["+i.to_s+"]",nil,:size=>"20"  %>
-      </div>
-    </div>
-  <%end%>
-<a href="#" type="button" class="actionbutton" onClick="add_ans();">Добавить вариант ответа</a>
-    <%= submit_tag "Подтвердить"  %>
-  <%end%>
-
-<%end%>
-
-<% if @qtid==9 %>
-  <div class="ui-state-default " >
-  <div class="mycontent" style="display: inline-block;width: 45%;">
-  Ответ 1
-  </div>
-  <div class="mycontent" style="display: inline-block; width: 45%;">
-  Ответ 2
-  </div>
-  </div>
-  <% form_tag :controller=>:questions,:action=>:answsadd,:id=>@quest.id.to_s,:discipline_id=>@discipline.id,:theme_id=>@theme.id do %>
-
-    <div id="ans1" class="vis">
-      <div class="mycontent" style="display: inline-block; width: 45%;">
-      <%= text_field_tag "content1[1]",@arr1[0],:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block; width: 45%;">
-      <%= text_field_tag "content2[1]",@arr2[0],:size=>"20"  %>
-      </div>
-    </div>
 
 
-  <% 2.upto(10) do |i| %>
-    <%if @arr1[i-1]==nil && @arr2[i-1]==nil;@cl="hid"; else;@cl="vis";end %>
-    <div id="ans<%=i%> "class="<%=@cl%>">
-      <div class="mycontent" style="display: inline-block; width: 45%;">
-      <%= text_field_tag "content1["+i.to_s+"]",@arr1[i-1],:size=>"20"  %>
-      </div>
-      <div class="mycontent" style="display: inline-block; width: 45%;">
-      <%= text_field_tag "content2["+i.to_s+"]",@arr2[i-1],:size=>"20"  %>
-      </div>
-    </div>
-  <%end%>
 
-<a href="#" type="button" class="actionbutton" onClick="add_ans();">Добавить вариант ответа</a>
-
-    <%= submit_tag "Подтвердить"  %>
-  
-  <%end%>
-
-<%end%>
-</div>
-<div class="ui-widget-content mycontent" style="width:30%; display: inline-block; min-height: 400px; vertical-align: top;">
-  <div class="ui-state-default " >
-  <div class="mycontent" style="display: inline-block;width: 100%;">
-  Изображение
-  </div>
-  </div>
-
-<%if @quest.pictures.any? %>
-  <%@p=@quest.pictures[0]%>
-  <%if @p.pict_url!=nil%>
-  <div>
-    <%= image_tag(@p.pict_url,:width=>"100%") %>
-  </div>
-  <%end%>
-<%end%>
-<% form_for([@discipline,@theme,@quest,@pict],:html => {:multipart => true}) do |f| %>
-  <%= f.file_field :pict %>
-  <%= f.hidden_field :pict_cache %>
-  <%= f.submit 'Загрузить' %>
-<%  end %>
-
-
-</div>
-    <div style="padding: 5px;">
       <%= link_to "К списку вопросов",discipline_theme_path(@discipline,@theme),:class=>'actionbutton'%>
-    </div>
-</div>
-</div>
+   

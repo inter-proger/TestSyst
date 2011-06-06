@@ -90,6 +90,7 @@ A3::Application.routes.draw do
 
   get "disciplines/new"
 
+  get "disciplines/show"
   get "disciplines/create"
 
   get "disciplines/destroy"
@@ -175,7 +176,7 @@ A3::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "home#index"
+  root :to => "testsessions#new"
 
   # See how all your routes lay out with "rake routes"
   match ":testsesions/fastconf/"=>"testsesstions#fastconf"

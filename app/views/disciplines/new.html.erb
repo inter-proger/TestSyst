@@ -1,8 +1,22 @@
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+
+<%= content_for :secondmenu do %>
+  <%= link_to 'Список предметов', disciplines_path,:class=>"actionbutton"%>
+  <%= link_to 'Новый передмет', new_discipline_path, :class=>"actionbutton",:id=>:active %>
+<% end %>
+
+
 <p id="notice"><%= notice %></p>
-<h2>Создать новую дисциплину:</h2>
+<h2>Создать новый предмет:</h2>
 <%form_for @discipline do |f|%>
 
-  <%= f.error_messages :header_message=>"Ошибка при создании дисциплины",
+  <%= f.error_messages :header_message=>"Ошибка при создании предмета",
     :message=>"Обнаружены следующие ошибки:" %>
   <div class="field">
     <%= f.label "Название" %><br />

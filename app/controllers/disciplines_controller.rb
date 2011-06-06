@@ -2,9 +2,11 @@
 class DisciplinesController < ApplicationController
    before_filter :login_required
   before_filter :admin_required, :only=>[:new,:create,:destroy,:edit]
-  
+  before_filter :secondmenu
+
   def index
 	@disciplines=Discipline.all
+
   #pagination
   @parametrs=params
   if params[:pagenum]
@@ -25,6 +27,7 @@ class DisciplinesController < ApplicationController
   end
 
   def show
+
     @discipline=Discipline.find(params[:id])
     @themes=@discipline.themes
     #pagination
@@ -48,7 +51,8 @@ class DisciplinesController < ApplicationController
 
 
   def new
-	@discipline=Discipline.new
+	
+    @discipline=Discipline.new
 	respond_to do |format|
         format.html # new.html.erb
         format.xml  { render :xml => @discipline }
@@ -56,7 +60,8 @@ class DisciplinesController < ApplicationController
   end
 
   def create
-	@discipline = Discipline.new(params[:discipline])
+	
+    @discipline = Discipline.new(params[:discipline])
 
     respond_to do |format|
       if @discipline.save
@@ -77,5 +82,9 @@ class DisciplinesController < ApplicationController
         format.xml  { head :ok }
     end
   end
-
+private
+ def secondmenu
+   @secondmenu=true
+   @ai='#item2'
+ end
 end

@@ -3,14 +3,15 @@ class QuestionsController < ApplicationController
    before_filter :login_required
   before_filter :find_disc
   before_filter :find_theme
-  before_filter :find_quest,:only=>[:show,:destroy,:answsadd,:update]
-  
+  before_filter :find_quest,:only=>[:show,:destroy,:answsadd,:update,:answers,:picture]
+  before_filter :secondmenu
 
   def index
     redirect_to discipline_theme_path(@discipline,@theme)
   end
 
   def new
+    @ai='#item2'
     @pict=Picture.new
     @quest=@theme.questions.build
     respond_to do |format|
@@ -20,21 +21,9 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @ai='#item2'
     @pict=Picture.new
-    @answs_count=@quest.answers.count
-    @qtid=@quest.qtype_id
-    if @qtid==9
-      @answs=@quest.answers
-      @arr1=Array.new(10){|i| nil}
-      @arr2=Array.new(10){|i| nil}
-      @answs.each do |elem|
-        if elem.col==1
-          @arr1[elem.right-1]=elem.content
-        else
-          @arr2[elem.right-1]=elem.content
-        end
-      end
-    end
+
     
     respond_to do |format|
       format.html # show
@@ -61,7 +50,29 @@ class QuestionsController < ApplicationController
     redirect_to discipline_theme_path(@discipline,@theme)
   end
 
+  def answers
+    @answs_count=@quest.answers.count
+    @qtid=@quest.qtype_id
+    if @qtid==9
+      @answs=@quest.answers
+      @arr1=Array.new(10){|i| nil}
+      @arr2=Array.new(10){|i| nil}
+      @answs.each do |elem|
+        if elem.col==1
+          @arr1[elem.right-1]=elem.content
+        else
+          @arr2[elem.right-1]=elem.content
+        end
+      end
+    end
+  end
+
+  def picture
+    @pict=Picture.new
+  end
+
   def answsadd
+    
     @quest.answers.clear
     @qtid=@quest.qtype_id
     1.upto(10) do |i|
@@ -134,5 +145,10 @@ private
 
   def find_quest
     @quest=@theme.questions.find(params[:id])
+  end
+
+  def secondmenu
+    @secondmenu=true
+    @ai='#item2'
   end
 end

@@ -1,0 +1,27 @@
+<% unless logged_in? %>
+<h3>Вход</h3>
+
+        <%= form_tag :controller=>:sessions,:action=>:create do -%>
+       <%= label_tag 'Имя пользователя' %><br />
+        <%= text_field_tag 'login', @login %>
+        <br/>
+        <%= label_tag 'Пароль' %><br/>
+        <%= password_field_tag 'password', nil %><br/>
+
+
+<!-- Uncomment this if you want this functionality
+<p><%= label_tag 'remember_me', 'Запомнить меня' %>
+<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+-->
+
+        <%= submit_tag 'Войти' %>
+      <!--  <%= link_to 'Зарегистрироваться', :signup %>-->
+
+        <% end -%>
+<% else %>
+        <div style="height: 125px; vertical-align: middle; font-size:14pt; ">
+          <br/>
+          <h3>Добро пожаловать!</h3> Вы вошли как <%= current_user.login %>.<br/>
+          <%= link_to "Выйти", logout_path, { :title => "Выход",  }  %>
+        </div>
+<% end %>

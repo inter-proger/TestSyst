@@ -8,11 +8,13 @@ class UsersController < ApplicationController
 
   # render new.rhtml
   def new
+    @ai='#item4'
     @user = User.new
   end
 
   def index
   @us = User.all
+  @ai='#item4'
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @us }
@@ -20,6 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @ai='#item4'
      @us = User.find(params[:id])
     respond_to do |format|
       format.html # index.html.erb
@@ -64,6 +67,7 @@ class UsersController < ApplicationController
   end
 
   def newadmin
+    @ai='#item4'
     @us=User.find(params[:id])
     @us.add_role 'admin'
        success = @us && @us.save
@@ -80,6 +84,7 @@ class UsersController < ApplicationController
   end
 
     def deladmin
+      @ai='#item4'
     @us=User.find(params[:id])
     @us.remove_role 'admin'
        success = @us && @us.save
@@ -96,6 +101,7 @@ class UsersController < ApplicationController
   end
 
     def listsessions
+      @ai='#item4'
       @us=User.find(params[:id])
 =begin
       ts=Testsession.all

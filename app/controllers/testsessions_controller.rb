@@ -1,15 +1,18 @@
 # coding: utf-8
 class TestsessionsController < ApplicationController
-  before_filter :login_required
+  before_filter :login_required,:only=>[:fastconf,:create,:check,:complete]
   def new
+    @ai='#item1'
     @ts=Testsession.new
   end
 
   def fastconf
-
+    @ai='#item1'
     @themes=params[:the]
    
-    tt=Tconfiguration.create(:themes=>Themes.find(5), :name=>"fastconf",:configuration_type_id=>1,:qT1Count=>5,:qT2Count=>0,:qT3Count=>0,:qT4Count=>0,:qT5Count=>0,:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>DateTime.now)
+   # tt=Tconfiguration.create(:themes=>Themes.find(5), :name=>"fastconf",:configuration_type_id=>1,:qT1Count=>5,:qT2Count=>0,:qT3Count=>0,:qT4Count=>0,:qT5Count=>0,:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>DateTime.now)
+   redirect_to :controller=>:tconfigurations,:action => :create,:tconfiguration=>{:qT1Count=>1}
+=begin
     respond_to do |format|
       if tt.save
         format.html {
@@ -23,7 +26,7 @@ class TestsessionsController < ApplicationController
         format.xml  { render :xml => tt.errors, :status => :unprocessable_entity }
       end
   redirect_to tconfiguration_path(tt)
-  end
+=end
   end
 
   def create
@@ -71,7 +74,7 @@ class TestsessionsController < ApplicationController
 
   def show
     @num=params[:num].to_i-1
-
+    @ai='#item1'
     @ts=current_user.testsessions.find(params[:id])
     @count=@ts.tests.count
     @has_answer=@ts.tests.map{|i| i.useransw.length>0 }.unshift(false)
@@ -188,7 +191,7 @@ class TestsessionsController < ApplicationController
 
   def complete
     @ts=current_user.testsessions.find(params[:id])
-
+    @ai='#item1'
     #@ts.update_attribute("completed",1)
     @tests=@ts.tests
     qs=@ts.questions
