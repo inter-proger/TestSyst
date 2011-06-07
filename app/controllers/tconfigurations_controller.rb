@@ -50,14 +50,17 @@ class TconfigurationsController < ApplicationController
 
   def fastconf
     th=Array.new
-    onet=Theme.find(5)
+    qtypes=Array.new
+    onet=Theme.find(params[:th])
     th.push(onet)
-    hsh=Hash.new
-
-
-      tt=Tconfiguration.create( :themes=>th,:Name=>"fastconf",:configuration_type_id=>1,:qT1Count=>5,:qT2Count=>0,:qT3Count=>0,:qT4Count=>0,:qT5Count=>0,:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>DateTime.now)
-      hsh["tconfiguration_id"]=tt.id
-      redirect_to :controller => :testsessions,:action=>:create,:tconfiguration=>hsh and return
+    all_themes_id=th.map{|i| i.id}
+   
+    st=" and (theme_id in ("+all_themes_id.join(", ")+"))"
+    (0).upto(4) { |i|  (qtypes[i]=Question.where("(qtype_id= #{i+6})"+ st).count) }
+      
+      tt=Tconfiguration.create( :themes=>th,:Name=>"fastconf",:configuration_type_id=>1,:qT1Count=>qtypes[0],:qT2Count=>qtypes[1],:qT3Count=>qtypes[2],:qT4Count=>qtypes[3],:qT5Count=>qtypes[4],:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>DateTime.now)
+   
+      redirect_to :controller => :testsessions,:action=>:create,:testsession=>{:tconfiguration_id=>tt}
 #      ts=Testsession.create!(:tconfiguration_id=>tt.id,:user_id=>current_user.id,:completed=>0)
 
 
