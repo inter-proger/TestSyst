@@ -6,6 +6,7 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations
   # GET /tconfigurations.xml
   def index
+    @ai='#item3'
     @tconfigurations = Tconfiguration.all
 
     respond_to do |format|
@@ -17,6 +18,7 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations/1
   # GET /tconfigurations/1.xml
   def show
+    @ai='#item3'
     @tconfiguration = Tconfiguration.find(params[:id])
 
     respond_to do |format|
@@ -28,6 +30,7 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations/new
   # GET /tconfigurations/new.xml
   def new
+    @ai='#item3'
     @tconfiguration = Tconfiguration.new
     @themes= Theme.all.map{|th| [th.title, th.id]}
 
@@ -39,6 +42,7 @@ class TconfigurationsController < ApplicationController
 
   # GET /tconfigurations/1/edit
   def edit
+    @ai='#item3'
     @tconfiguration = Tconfiguration.find(params[:id])
     @themes= Theme.all.map{|th| [th.title, th.id]}
     @the=@tconfiguration.themes.map { |e| e.id } 
@@ -52,15 +56,18 @@ class TconfigurationsController < ApplicationController
     th=Array.new
     qtypes=Array.new
     onet=Theme.find(params[:th])
-    th.push(onet)
-    all_themes_id=th.map{|i| i.id}
+   # th.push(onet)
+    all_themes_id=onet.map{|i| i.id}
    
     st=" and (theme_id in ("+all_themes_id.join(", ")+"))"
     (0).upto(4) { |i|  (qtypes[i]=Question.where("(qtype_id= #{i+6})"+ st).count) }
-      
-      tt=Tconfiguration.create( :themes=>th,:Name=>"fastconf",:configuration_type_id=>1,:qT1Count=>qtypes[0],:qT2Count=>qtypes[1],:qT3Count=>qtypes[2],:qT4Count=>qtypes[3],:qT5Count=>qtypes[4],:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>DateTime.now)
+    d=Tconfiguration.where("Name='fastconf'").first
+    d.destroy
+    #del=Tconfiguration.where(["Name= ?","fastconf"])
+   # del.destroy
+   tt=Tconfiguration.create( :themes=>onet,:Name=>"fastconf",:configuration_type_id=>1,:qT1Count=>qtypes[0],:qT2Count=>qtypes[1],:qT3Count=>qtypes[2],:qT4Count=>qtypes[3],:qT5Count=>qtypes[4],:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>Time.zone.parse("2000-01-01 00:45:00"))
    
-      redirect_to :controller => :testsessions,:action=>:create,:testsession=>{:tconfiguration_id=>tt}
+      redirect_to :controller => :testsessions,:action=>:create,:testsession=>{:tconfiguration_id=>tt.id}
 #      ts=Testsession.create!(:tconfiguration_id=>tt.id,:user_id=>current_user.id,:completed=>0)
 
 
@@ -71,6 +78,7 @@ class TconfigurationsController < ApplicationController
   # POST /tconfigurations
   # POST /tconfigurations.xml
   def create
+    @ai='#item3'
     @tconfiguration = Tconfiguration.new(params[:tconfiguration])
     unless params[:themes]
       @tconfiguration.errors.add("Вопросов","не достаточно")
@@ -107,7 +115,7 @@ class TconfigurationsController < ApplicationController
   # PUT /tconfigurations/1
   # PUT /tconfigurations/1.xml
   def update
-
+    @ai='#item3'
     @tconfiguration = Tconfiguration.find(params[:id])
      @themes= Theme.all.map{|th| [th.title, th.id]}
      #=========from create===========

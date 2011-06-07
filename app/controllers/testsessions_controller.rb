@@ -1,12 +1,10 @@
 # coding: utf-8
 class TestsessionsController < ApplicationController
-  before_filter :login_required
+  before_filter :login_required,:only=>[:fastconf,:create,:check,:complete]
   def new
+    @ai='#item1'
     @ts=Testsession.new
   end
-
-  
-  
 
   def create
     @tconf=Tconfiguration.find(params[:testsession][:tconfiguration_id])
@@ -55,7 +53,7 @@ class TestsessionsController < ApplicationController
 
   def show
     @num=params[:num].to_i-1
-
+    @ai='#item1'
     @ts=current_user.testsessions.find(params[:id])
     @count=@ts.tests.count
     @has_answer=@ts.tests.map{|i| i.useransw.length>0 }.unshift(false)
@@ -172,7 +170,7 @@ class TestsessionsController < ApplicationController
 
   def complete
     @ts=current_user.testsessions.find(params[:id])
-
+    @ai='#item1'
     #@ts.update_attribute("completed",1)
     @tests=@ts.tests
     qs=@ts.questions

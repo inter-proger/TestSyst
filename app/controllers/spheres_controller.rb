@@ -1,6 +1,7 @@
 class SpheresController < ApplicationController
    def new
-    @st=Sphere.new
+    @ai='#item4'
+     @st=Sphere.new
        respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @st }

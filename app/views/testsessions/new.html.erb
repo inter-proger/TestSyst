@@ -1,10 +1,37 @@
+
+<% if logged_in?%>
 <h2>Выберите тест для прохождения тестирования</h2>
 
 
 
 <% form_for(@ts) do |f| %>
-  <%= f.collection_select :tconfiguration_id,Tconfiguration.all.sort{|a,b|a.Name<=>b.Name},:id,:Name,{} ,:size=>20,:style=>"width:300px;" %><br/>
+  <%= f.collection_select :tconfiguration_id,Tconfiguration.all.sort{|a,b|a.Name<=>b.Name},:id,:Name,{} ,:size=>20,:style=>"width:100%;" %><br/>
+  <br/>
   <%= f.submit "Начать тестирование" ,:class=>'actionbutton',:style=>"width:300px;" %>
 
+
+<% end %>
+<% else %>
+  <div class="base ui-widget ui-widget-content ui-corner-all">
+<h1>Вход</h1>
+
+        <%= form_tag :controller=>:sessions,:action=>:create do -%>
+        <p><%= label_tag 'login' %><br />
+        <%= text_field_tag 'login', @login %></p>
+
+        <p><%= label_tag 'password' %><br/>
+        <%= password_field_tag 'password', nil %></p>
+
+
+<!-- Uncomment this if you want this functionality
+<p><%= label_tag 'remember_me', 'Запомнить меня' %>
+<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+-->
+
+        <p><%= submit_tag 'Войти' %></p>
+        <p><%= link_to 'Зарегистрироваться', :signup,:class=>'actionbutton' %></p>
+
+<% end -%>
+</div>
 
 <% end %>

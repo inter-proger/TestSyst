@@ -1,0 +1,95 @@
+<%= content_for :head do %>
+  <%= javascript_include_tag "answ_form" %>
+<style type="text/css">
+  .mycontent{}
+
+div.fileinputs {
+	position: relative;
+}
+
+div.fakefile {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}
+
+input.file {
+	position: relative;
+	text-align: right;
+	-moz-opacity:0 ;
+	filter: alpha(opacity:0);
+	opacity: 0;
+	z-index: 2;
+
+}
+</style>
+
+<script type="text/javascript">
+  $(function(){
+    $('input:file').hover(function(){
+      $('#f').removeClass("ui-state-default ui-corner-all");
+      $('#f').addClass("ui-state-hover ui-corner-all");
+    },
+    function(){
+      $('#f').removeClass("ui-state-hover ui-corner-all");
+      $('#f').addClass("ui-state-default ui-corner-all");
+    }
+    );
+      $('input:file').change(function(){
+        $('#ffield').val($(this).val());
+      });
+  });
+</script>
+<% end %>
+
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+
+<%= content_for :secondmenu do %>
+  <%= link_to 'Предмет: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Тема: '+@theme.title, discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
+  <%= link_to 'Изменение вопроса', discipline_theme_question_path(@discipline,@theme,@quest),:class=>'actionbutton' %>
+  <%= link_to 'Ответы', {:controller=>:questions,:action=>:answers,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton' %>
+  <%= link_to 'Изображение', {:controller=>:questions,:action=>:picture,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton',:id=>'active' %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+  <h2>
+    Прикрепить изображение к вопросу.
+  </h2>
+
+<h3>Вопрос</h3>
+<div class="ui-widget-content ui-corner-all" style="text-indent: 1em;">
+  <%=@quest.content%>
+</div>
+<br/>
+<h3>Текущее изображение</h3>
+<%if @quest.pictures.any? %>
+  <%@p=@quest.pictures[0]%>
+  <%if @p.pict_url!=nil%>
+  <div>
+    <%= image_tag(@p.pict_url) %>
+  </div>
+  <%end%>
+<% else %>
+  Нет
+<%end%>
+<% form_for([@discipline,@theme,@quest,@pict],:html => {:multipart => true}) do |f| %>
+  
+  <div class="fileinputs">
+    <%= f.file_field :pict,:class=>"file" %>
+    	<div class="fakefile">
+		<input id="ffield"/>
+                <span class="ui-state-default ui-corner-all" style="padding: 3px;" id="f">Обзор</span>
+	</div>
+  </div>
+  <%= f.hidden_field :pict_cache %>
+  <br/>
+  <%= f.submit 'Загрузить' %>
+<%  end %>

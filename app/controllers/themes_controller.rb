@@ -3,9 +3,10 @@ class ThemesController < ApplicationController
   before_filter :login_required
   before_filter :find_disc
   before_filter :find_theme,:only=>[:show,:destroy]
-  
+  before_filter :secondmenu
   
   def show
+
     @questions=@theme.questions
     #pagination
     @parametrs=params
@@ -26,6 +27,7 @@ class ThemesController < ApplicationController
   end
 
   def new
+
     @theme=@discipline.themes.build
     respond_to do |format|
         format.html # new.html.erb
@@ -54,5 +56,9 @@ private
   def find_theme
     @theme=@discipline.themes.find(params[:id])
   end
-
+  
+ def secondmenu
+   @secondmenu=true
+   @ai='#item2'
+ end
 end

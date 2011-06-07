@@ -1,3 +1,17 @@
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+
+<%= content_for :secondmenu do %>
+  <%= link_to 'Список предметов', disciplines_path,:class=>"actionbutton"%>
+  <%= link_to 'Предмет: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Новая тема', new_discipline_theme_path(@discipline), :class=>"actionbutton",:id=>'active' %>
+<% end %>
+
 <h2>Создать новую тему</h2>
 
 <% form_for([@discipline, @theme]) do |f| %>

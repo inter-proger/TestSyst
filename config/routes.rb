@@ -20,14 +20,17 @@ A3::Application.routes.draw do
   get "testsessions/show"
 
   get "testsessions/destroy"
-  get "testswssions/fastconf"
-
+  match ':tconfigurations/fastconf'=>'tconfigurations#fastconf'
+ 
+  resources :tconfigurations do
+    collection do
+      get "fastconf"
+    end
+  end
   resources :testsessions
   resources :configuration_types
 
-  resources :tconfigurations do
-    post "fastconf"
-  end
+  
   resources :serlevels
   resources :sertypes
   resources :spheres
@@ -92,6 +95,7 @@ A3::Application.routes.draw do
 
   get "disciplines/new"
 
+  get "disciplines/show"
   get "disciplines/create"
 
   get "disciplines/destroy"
@@ -102,7 +106,7 @@ A3::Application.routes.draw do
   get "sessions/show"
   get "users/new"
   get "users/create"
-  post "tconfigurations/fastconf"
+  get "tconfigurations/fastconf"
 
   resources :users
 
@@ -178,11 +182,12 @@ A3::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "home#index"
+  root :to => "testsessions#new"
 
   # See how all your routes lay out with "rake routes"
  
 match ':testsessions/show/:id' =>"testsessions#show"
+
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

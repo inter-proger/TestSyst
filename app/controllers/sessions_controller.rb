@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 
   # render new.rhtml
   def new
+    @ai='#item1'
   end
 
   def create

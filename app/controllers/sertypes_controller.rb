@@ -1,5 +1,6 @@
 class SertypesController < ApplicationController
   def new
+    @ai='#item4'
     @st=Sertype.new
        respond_to do |format|
       format.html # new.html.erb

@@ -3,7 +3,7 @@
 <head>
   <title>A3</title>
   <%= stylesheet_link_tag :all %>
-  <link href="/stylesheets/pepper-grinder/jquery-ui-1.8.11.custom.css" type="text/css" rel="stylesheet"/>
+  <link href="/stylesheets/redmond/jquery-ui-1.8.13.custom.css" type="text/css" rel="stylesheet"/>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
  
@@ -11,28 +11,37 @@
   <script language="javascript" type="text/javascript">
     $(function(){
       $("a.actionbutton,  input:submit, input:reset, button").button();
-      $('a.actionbutton, .body span.ui-icon a').hover(
-					function() { $(this).addClass('ui-state-hover');
-                                          $(this).css('color','white');
+      $('a.actionbutton, .body .micon a').hover(
+					function() {
+                                          if(!$(this).hasClass("ui-state-active"))
+                                            $(this).addClass('ui-state-hover');
+                                          //$(this).css('color','white');
                                           },
-					function() { $(this).removeClass('ui-state-hover');
-                                          $(this).css('color','#654B24');
+					function() {
+                                          if(!$(this).hasClass("ui-state-active"))
+                                            $(this).removeClass('ui-state-hover');
+                                          //$(this).css('color','#654B24');
+                                          $('#active').addClass('ui-state-active');
                                           });
 
 
    $("#accordion").accordion({ header: "h3" });
-  $('#top-pads li a').removeClass(" ui-corner-top ");
-  $('#top-pads li a').addClass("ui-state-highlight ui-corner-top ");
-  $('#top-pads li a').css('border','0px');
-  $('#top-pads li a').hover(function(){
-    $(this).removeClass("ui-state-highlight ui-corner-top ");
-    $(this).addClass("ui-widget-header ui-corner-top ");
-    $(this).css('border','0px');
+  var activeitem="<%= if @ai then @ai else '#item1' end%>";
+  $(activeitem).removeClass("ui-state-default");
+  $(activeitem).addClass("ui-state-active");
+  $('.menu1.ui-state-default').removeClass(" ui-corner-top ");
+  $('.menu1.ui-state-active').css("border-bottom-color","white")
+  $('.menu1.ui-state-default').addClass("ui-state-default ui-corner-top ");
+  //$('.menu1').css('border','0px');
+  $('.menu1.ui-state-default').hover(function(){
+    $(this).removeClass("ui-state-default ui-corner-top ");
+    $(this).addClass("ui-state-hover ui-corner-top ");
+    //$(this).css('border','0px');
   }, function(){
 
-    $(this).removeClass("ui-widget-header ui-corner-top ");
-    $(this).addClass("ui-state-highlight ui-corner-top ");
-    $(this).css('border','0px');
+    $(this).removeClass("ui-state-hover ui-corner-top ");
+    $(this).addClass("ui-state-default ui-corner-top ");
+    //$(this).css('border','0px');
   });
 
   });
@@ -43,44 +52,65 @@
     a span.ui-icon {float: left; margin: 0 4px;}
     </style>
 </head>
-<body>
+<body class="ui-widget">
 
- <div class="menu ">
+
+
+
+
+<!-- 
+<div class="menu ">
     <%= yield :menu  %>
    <ul class="ui-state-highlight ui-corner-all">
           <li><%=link_to 'Главная',:root%></li>
 
           <li>|<%= render :partial =>"users/user_bar" %></li>
     </ul>
- </div>
+ </div>-->
+
+<div id="page" class="ui-widget-content ui-corner-top" >
 
 
-
-
-<!-- -->
-
-
-   <div id="page">
+     <div  class="ui-tabs ui-widget-header ui-corner-top" style="border-bottom-width: 0px; padding: 0px;" id="menu1" >
+       <div style="text-align: left; text-indent: 1em; padding-top: 1em;width: 100%; ">
+         <div style="display: inline-block;width: 20%;"><%=image_tag "g3.png"%></div>
+         <div style="display: inline-block;width: 50%; text-indent: 0;">
+           <div style="font-size: 35pt;font-variant: small-caps;">
+             Тестирование
+           </div>
+           <div style="font-size: 15pt;font-variant: small-caps; ">
+             Филиал ФГОУ ВПО<br/> Уральская академия Государственной службы<br/> в городе Оренбурге
+           </div>
+         </div>
+         <div  style="display: inline-block;width: 26%; text-indent: 0;vertical-align: top; height: 130px;"><%= render :partial =>"testsessions/userenter" %></div>
+       </div>
  
+       <ul style="vertical-align: bottom; border-bottom-width: 0px;padding: 1em 2em 0px;" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ">
+          <li ><%= link_to "Тестирование", root_url,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item1" %></li>
+          <% if logged_in? %>
+            <li ><%= link_to 'Отчеты',{:controller=>:report,:action=>:new_report},:class=>"menu1 ui-state-default ui-corner-top",:id=>"item5" %></li>
+          <% end %>
+          <% if current_user&&current_user.is_admin? %>
+            <li ><%= link_to "Предметы", disciplines_path,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item2" %></li>
+            <li ><%= link_to 'Конфигурации',tconfigurations_path,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item3" %></li>
+          <% end %>
+          <% if current_user&&current_user.is_admin? %>
+          <li ><%= link_to 'Пользователи',users_url,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item4" %></li
+          <% end %>
 
-      <div id="top-pads">
-        <ul>
-          <li class="ui-state-default ui-corner-top"><%= link_to "Главная", root_url %></li>
-          <% if current_user&&current_user.is_admin? %>
-            <li class="ui-state-default ui-corner-top"><%= link_to "Предметы", disciplines_path %></li>
-            <li class="ui-state-default ui-corner-top"><%= link_to 'Конфигурации',tconfigurations_path %></li>
-          <% end %>
-          <li class="ui-state-default ui-corner-top"><%= link_to 'Тестирование',{:controller=>:testsessions,:action=>:new} %></li>
-          <% if current_user&&current_user.is_admin? %>
-          <li class="ui-state-default ui-corner-top"><%= link_to 'Пользователи',users_url %></li>
-          <% end %>
           <%= yield :tabs %>
         </ul>
-        <div class="wraper"></div>
-      </div>
+     </div>
+<% if @secondmenu %>
+  <div class="ui-widget-content" style="border-top-width: 0px; border-left-width: 0px; border-right-width: 0px; padding:.3em 2em ;">
+    <%= yield :secondmenu %>
+
+  </div>
+      <!-- <div class="wraper"></div>-->
+<% end %>
  <div id ="left-pad">
 
-    <div class="body">
+   <div class="body" style="">
     <%= yield %>
     </div></div>
 

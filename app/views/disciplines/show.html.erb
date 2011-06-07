@@ -5,16 +5,30 @@
         .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
          .header{padding: 6px 0; text-indent: 1em;}
          .paginate{display: inline-block;width:65%; text-align: right;/* padding: 8px;*/}
+         span a.toleft{float: left;text-decoration: none;font-weight: bold;}
 </style>
 <%end%>
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+
+<%= content_for :secondmenu do %>
+  <%= link_to 'Список предметов', disciplines_path,:class=>"actionbutton"%>
+  <%= link_to 'Предмет:'+@discipline.title,discipline_path(@discipline),:class=>:actionbutton,:id=>'active' %>
+  <%= link_to 'Новая тема', new_discipline_theme_path(@discipline), :class=>"actionbutton" %>
+<% end %>
 
 
 <p id="notice"><%= notice %></p>
-<h2><%= @discipline.title %></h2>
-
+<h2>Пердмет <%=  @discipline.title %></h2>
+<h3>Список тем:</h3>
 <div class="ui-widget" style="width:100%;">
    <div class="ui-widget-header ui-corner-top" >
-      <span style="width: 70%; " class="header mycell">Название раздела</span>
+      <span style="width: 70%; " class="header mycell">Название темы</span>
       <span class="header mycell"></span>
    </div>
 
@@ -29,9 +43,9 @@
 
   <div class="<%=@class%>" >
     <span class="mycell" style="padding: 6px 0; width: 70%; text-indent: 1em;font-weight: normal; color: black;">
-      <%= t.title %>
+      <%= link_to t.title ,discipline_theme_url(@discipline,t),:class=>:toleft%>
     </span>
-    <span class="mycell" style=" width: 28%; " >
+    <span class="mycell micon" style=" width: 28%; " >
    <% if logged_in?%>
       <% if  current_user.is_admin? %>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),discipline_theme_url(@discipline,t),:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>

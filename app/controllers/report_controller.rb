@@ -13,6 +13,7 @@ class ReportController < ApplicationController
   end
 
 def createdetailreport
+  @ai='#item5'
   @user=User.find(params[:userid])
   @ts=@user.testsessions.find(params[:id])
 
@@ -122,6 +123,7 @@ def createdetailreport
 end
 
 def new_report
+  @ai='#item5'
   @users=User.all
   @configs_options=Tconfiguration.all.map{|ob| [ob.Name, ob.id]}
   @configs_options.unshift(['-----',-1])
@@ -130,6 +132,7 @@ def new_report
 end
 
 def create_report
+  @ai='#item5'
   toks=params[:beg_testdate].split('-')
   hsh1=Hash.new
   hsh1[:testsessions]={}
@@ -212,7 +215,7 @@ def create_report
 end
 
 def configwereupdated
-
+  @ai='#item5'
 end
 
 private
