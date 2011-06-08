@@ -258,15 +258,21 @@
 
 <%end%>
 <br/>
-Список вопросов:<br/>
-<div class="answlist">
-<%1.upto(@count) do |i|%>
-  <%= link_to (i).to_s,{ :controller => :testsessions, :action => :show, :id=>@ts.id.to_s, :num=>(i).to_s },:class=>'actionbutton' %>
-  <%if @has_answer[i] %>
-    +
-  <%else%>
-    -
-  <%end%>
-<%end%>
 
+<div class="floating  ui-corner-all  ui-widget-header" >
+Список вопросов:<br/>
+<div style="width: 420px;height: 45px;overflow: auto;float: left;">
+<div class="answlist " style="float: left;" >
+<%1.upto(@count) do |i|%>
+  <% if @has_answer[i] then  @cls='actionbutton ui-state-default' else @cls='actionbutton ui-widget-shadow' end %>
+  <%   if i==params[:num].to_i then @cls+=" ui-state-active" end%>
+  <%= link_to (i).to_s,{ :controller => :testsessions, :action => :show, :id=>@ts.id.to_s, :num=>(i).to_s },:class=>@cls %>
+  
+<%end%>
+</div></div><div style="float: right;margin-left:15px;">
+ <%= form_tag({ :controller => :testsessions, :action => :complete, :id=>@ts.id.to_s }, :method=>:post) do %>
+      <%= submit_tag "Завершить" %>
+  <% end %>
+  </div>
+  
 </div>
