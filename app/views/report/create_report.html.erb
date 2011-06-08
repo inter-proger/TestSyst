@@ -68,7 +68,7 @@
       <% end %>, <%= ((t.percent*100).to_i.to_f/100.00).to_s+"%" if t.percent%>
       <% #i+=1 %>
     </span>
-    <span class="mycell" style="width: 17%;">
+    <span class="mycell micon" style="width: 17%;">
 
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:id=>t.id,:userid=>t.user_id},:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
     </span>
