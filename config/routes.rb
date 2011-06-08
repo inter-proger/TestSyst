@@ -20,12 +20,17 @@ A3::Application.routes.draw do
   get "testsessions/show"
 
   get "testsessions/destroy"
-  get "testswssions/fastconf"
-
+  match ':tconfigurations/fastconf'=>'tconfigurations#fastconf'
+ 
+  resources :tconfigurations do
+    collection do
+      get "fastconf"
+    end
+  end
   resources :testsessions
   resources :configuration_types
 
-  resources :tconfigurations
+  
   resources :serlevels
   resources :sertypes
   resources :spheres
@@ -101,6 +106,7 @@ A3::Application.routes.draw do
   get "sessions/show"
   get "users/new"
   get "users/create"
+  get "tconfigurations/fastconf"
 
   resources :users
 
@@ -179,8 +185,9 @@ A3::Application.routes.draw do
   root :to => "testsessions#new"
 
   # See how all your routes lay out with "rake routes"
-  match ":testsesions/fastconf/"=>"testsesstions#fastconf"
+ 
 match ':testsessions/show/:id' =>"testsessions#show"
+
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

@@ -192,3 +192,14 @@ display:inline;
 .whitetext{
     color: white;
 }
+
+.floating
+{
+    position: fixed;
+    float: right;
+    top:88%;
+    left: 60%;
+    padding: 5px;
+    width: 600px;
+    
+}

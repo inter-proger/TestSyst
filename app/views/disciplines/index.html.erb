@@ -56,7 +56,7 @@
           <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),disc,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
         <%end%>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-search"}), disc,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-play"}),new_testsession_url,:class=>"ui-state-default ui-corner-all",:title=>"Начать тестирование" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-play"}),{:controller=>:tconfigurations, :action=>:fastconf,:id=>1,:th=>disc.themes.map{|i|i.id}},:class=>"ui-state-default ui-corner-all",:title=>"Начать тестирование" %>
       <% end %>
     </span>
   </div>
