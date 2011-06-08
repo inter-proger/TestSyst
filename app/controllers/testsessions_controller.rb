@@ -11,7 +11,7 @@ class TestsessionsController < ApplicationController
     @themes=@tconf.themes.map{|t| t.id}
     st=" and (theme_id in ("+@themes.join(", ")+"))"
     qtypes=[@tconf.qT1Count, @tconf.qT2Count, @tconf.qT3Count, @tconf.qT4Count, @tconf.qT5Count]
-    if @tconf.configuration_type_id==4
+    if @tconf.configuration_type_id==5
       f=true
       qtypes.each_index { |i| f=f && (Question.where("(qtype_id= #{i+6})"+ st).count>=qtypes[i]) }
 
@@ -23,7 +23,7 @@ class TestsessionsController < ApplicationController
       @ts.errors.add("Вопросов","в базе данных недостаточно.")
       render :action=>:new and return
     end
-    if @tconf.configuration_type_id==4
+    if @tconf.configuration_type_id==5
       @q=Array.new(5){|i| nil}
       0.upto(4) do |i|
         @q[i]=Question.where("(qtype_id= #{i+6})"+ st).map { |u| u.id }
@@ -35,7 +35,7 @@ class TestsessionsController < ApplicationController
     @ts.completed=0
     @ts.save
     @quests=Array.new
-    if @tconf.configuration_type_id==4
+    if @tconf.configuration_type_id==5
       0.upto(4) { |i| @quests.concat(@q[i].shuffle.first(qtypes[i])) }
       @quests.shuffle!
     else

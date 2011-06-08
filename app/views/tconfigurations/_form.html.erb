@@ -45,7 +45,7 @@
                       });
       $('.type2').hide();
       $('#tconfiguration_configuration_type_id').change(function(){
-        if($(this).val()==4){
+        if($(this).val()==5){
             $('.type2').hide();
             $('.type1').show();
           }
@@ -59,7 +59,7 @@
 <%end%>
 <%= form_for(@tconfiguration) do |f| %>
   <% if @tconfiguration.errors.any? %>
-    <div id="error_explanation">
+<div id="error_explanation" class="ui-state-error">
       <h2><%= pluralize(@tconfiguration.errors.count, "error") %>
           prohibited this tconfiguration from being saved:</h2>
 

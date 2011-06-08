@@ -85,7 +85,7 @@ class TconfigurationsController < ApplicationController
       @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "new" and return
     end
-    if @tconfiguration.configuration_type_id==4
+    if @tconfiguration.configuration_type_id==5
       st=" and (theme_id in ("+params[:themes].join(", ")+"))"
       f1=Question.where("(qtype_id= 6)"+ st).count>=params[:tconfiguration][:qT1Count].to_i
       f2=Question.where("(qtype_id= 7)"+ st).count>=params[:tconfiguration][:qT2Count].to_i
@@ -106,6 +106,9 @@ class TconfigurationsController < ApplicationController
         @themes=Theme.all.map{|t| [t.title,t.id]}
         render :action => "new" and return
       end
+      #@tconfiguration =Tconfiguration.new
+      #@tconfiguration.Name=params[:tconfiguration][:Name]
+      #@tconfiguration.
       @tconfiguration.qT1Count=params[:qCount].to_i
       @tconfiguration.qT2Count=0
       @tconfiguration.qT3Count=0
@@ -140,7 +143,7 @@ class TconfigurationsController < ApplicationController
       @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "edit" and return
     end
-    if @tconfiguration.configuration_type_id==4
+    if @tconfiguration.configuration_type_id==5
       st=" and (theme_id in ("+params[:themes].join(", ")+"))"
       f1=Question.where("(qtype_id= 6)"+ st).count>=params[:tconfiguration][:qT1Count].to_i
       f2=Question.where("(qtype_id= 7)"+ st).count>=params[:tconfiguration][:qT2Count].to_i
