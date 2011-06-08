@@ -2,7 +2,7 @@
 
 <style type="text/css">
 	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
-        .mycell{display:inline-block; vertical-align: middle; color: black; font-weight: normal;  word-wrap: break-word;}
+        .mycell{display:inline-block; vertical-align: middle; color: black; font-weight: normal;  word-wrap: break-word;font-size: small;}
         .header{padding: 6px 0; text-indent: 1em;}
         .paginate{display: inline-block;width:30%; text-align: right; padding: 8px;}
 </style>
@@ -68,7 +68,7 @@
       <% end %>, <%= ((t.percent*100).to_i.to_f/100.00).to_s+"%" if t.percent%>
       <% #i+=1 %>
     </span>
-    <span class="mycell" style="width: 17%;">
+    <span class="mycell micon" style="width: 17%;">
 
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:id=>t.id,:userid=>t.user_id},:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
     </span>
