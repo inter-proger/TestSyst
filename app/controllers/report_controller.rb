@@ -3,6 +3,8 @@
 
 class ReportController < ApplicationController
   before_filter :login_required
+  before_filter :menu
+  before_filter :admin_required,:only=>[:adv_search_report]
 
   class AnswerReport
     attr_accessor :answorder,:answorder2,:useransw,:question,:rightansw,:type,:answers,:right,:questionchanged
@@ -13,7 +15,7 @@ class ReportController < ApplicationController
   end
 
 def createdetailreport
-  @ai='#item5'
+
   @user=User.find(params[:userid])
   @ts=@user.testsessions.find(params[:id])
 
@@ -123,24 +125,30 @@ def createdetailreport
 end
 
 def new_report
-  @ai='#item5'
+
   @users=User.all
   @configs_options=Tconfiguration.all.map{|ob| [ob.Name, ob.id]}
   @configs_options.unshift(['-----',-1])
-  @fam_options=@users.map{|u| []}
+  #@fam_options=@users.map{|u| []}
 
 end
 
+def adv_search_report
+  @users=User.all
+  @configs_options=Tconfiguration.all.map{|ob| [ob.Name, ob.id]}
+  @configs_options.unshift(['-----',-1])
+end
+
 def create_report
-  @ai='#item5'
-  toks=params[:beg_testdate].split('-')
+
   hsh1=Hash.new
   hsh1[:testsessions]={}
   hsh1[:tconfigurations]={}
   hsh1[:users]={}
-  if params[:beg_testdate]!=""
+  hsh1[:users][:id]=current_user.id unless current_user.is_admin?
+  if params[:beg_testdate]&&params[:beg_testdate]!=""
     d1=params[:beg_testdate].to_datetime.beginning_of_day
-    if params[:end_testdate]!=""
+    if  params[:end_testdate]&&params[:end_testdate]!=""
       d2=params[:end_testdate].to_datetime.end_of_day
       hsh1[:testsessions][:created_at]= d1..d2
     else
@@ -148,25 +156,25 @@ def create_report
     end
   end
   #hsh2=Hash.new
-  hsh1[:testsessions][:tconfiguration_id]=params[:tconfiguration] if params[:tconfiguration]!='-1'
-  hsh1[:users][:F]=params[:f] if params[:f]!=''
-  hsh1[:users][:I]=params[:i] if params[:i]!=''
-  hsh1[:users][:O]=params[:o] if params[:o]!=''
-  if params[:startdate]!=""
+  hsh1[:testsessions][:tconfiguration_id]=params[:tconfiguration] if params[:tconfiguration]&&params[:tconfiguration]!='-1'
+  hsh1[:users][:F]=params[:f] if params[:f]&&params[:f]!=''
+  hsh1[:users][:I]=params[:i] if params[:i]&&params[:i]!=''
+  hsh1[:users][:O]=params[:o] if params[:o]&&params[:o]!=''
+  if params[:startdate]&&params[:startdate]!=""
     d1=params[:startdate].to_datetime.beginning_of_day
-    if params[:enddate]!=""
+    if params[:enddate]&&params[:enddate]!=""
       d2=params[:enddate].to_datetime.end_of_day
       hsh1[:testsessions][:created_at]= d1..d2
     else
       hsh1[:testsessions][:created_at]=d1..d1.end_of_day
     end
   end
-  hsh1[:users][:sertype_id]=params[:sertype] if params[:sertype]!='-1'
-  hsh1[:users][:serlevel_id]=params[:serlevel] if params[:serlevel]!='-1'
-  hsh1[:users][:education_id]=params[:education] if params[:education]!='-1'
-  hsh1[:users][:sphere_id]=params[:sphere] if params[:sphere]!='-1'
-  hsh1[:users][:workplace]=params[:workplace] if params[:workplace]!=''
-  hsh1[:users][:proff]=params[:proff] if params[:proff]!=''
+  hsh1[:users][:sertype_id]=params[:sertype] if params[:sertype]&&params[:sertype]!='-1'
+  hsh1[:users][:serlevel_id]=params[:serlevel] if params[:serlevel]&&params[:serlevel]!='-1'
+  hsh1[:users][:education_id]=params[:education] if params[:education]&&params[:education]!='-1'
+  hsh1[:users][:sphere_id]=params[:sphere] if params[:sphere]&&params[:sphere]!='-1'
+  hsh1[:users][:workplace]=params[:workplace] if params[:workplace]&&params[:workplace]!=''
+  hsh1[:users][:proff]=params[:proff] if params[:proff]&&params[:proff]!=''
 
   @sessions=Testsession.joins(:tconfiguration,:user).select('testsessions.id, testsessions.created_at, testsessions.tconfiguration_id,testsessions.user_id,tconfigurations.Name,users.F,users.I,users.O,testsessions.mark,testsessions.percent').where(hsh1)
   #pagination
@@ -237,6 +245,11 @@ def questchange?(test,quest)
     return true unless answs.detect{|h| h==a.id}
   end
   false
+end
+
+def menu
+  @ai='#item5'
+  @secondmenu=true
 end
 
 end
