@@ -65,18 +65,34 @@ class TconfigurationsController < ApplicationController
       @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "new" and return
     end
-    st=" and (theme_id in ("+params[:themes].join(", ")+"))"
-    f1=Question.where("(qtype_id= 6)"+ st).count.to_s>=params[:tconfiguration][:qT1Count]
-    f2=Question.where("(qtype_id= 7)"+ st).count.to_s>=params[:tconfiguration][:qT2Count]
-    f3=Question.where("(qtype_id= 8)"+ st).count.to_s>=params[:tconfiguration][:qT3Count]
-    f4=Question.where("(qtype_id= 9)"+ st).count.to_s>=params[:tconfiguration][:qT4Count]
-    f5=Question.where("(qtype_id= 10)"+ st).count.to_s>=params[:tconfiguration][:qT5Count]
-    f=f1&&f2&&f3&&f4&&f5
-    if !f
-      @tconfiguration.errors.add("Вопросов","не достаточно")
-      @themes=Theme.all.map{|t| [t.title,t.id]}
-      render :action => "new" and return
+    if @tconfiguration.configuration_type_id==4
+      st=" and (theme_id in ("+params[:themes].join(", ")+"))"
+      f1=Question.where("(qtype_id= 6)"+ st).count>=params[:tconfiguration][:qT1Count].to_i
+      f2=Question.where("(qtype_id= 7)"+ st).count>=params[:tconfiguration][:qT2Count].to_i
+      f3=Question.where("(qtype_id= 8)"+ st).count>=params[:tconfiguration][:qT3Count].to_i
+      f4=Question.where("(qtype_id= 9)"+ st).count>=params[:tconfiguration][:qT4Count].to_i
+      f5=Question.where("(qtype_id= 10)"+ st).count>=params[:tconfiguration][:qT5Count].to_i
+      f=f1&&f2&&f3&&f4&&f5
+      unless f
+        @tconfiguration.errors.add("Вопросов","не достаточно")
+        @themes=Theme.all.map{|t| [t.title,t.id]}
+        render :action => "new" and return
+      end
+    else
+      hsh={}
+      hsh[:theme_id]=params[:themes]
+      unless Question.where(hsh).count>=params[:qCount].to_i
+        @tconfiguration.errors.add("Вопросов","не достаточно")
+        @themes=Theme.all.map{|t| [t.title,t.id]}
+        render :action => "new" and return
+      end
+      @tconfiguration.qT1Count=params[:qCount].to_i
+      @tconfiguration.qT2Count=0
+      @tconfiguration.qT3Count=0
+      @tconfiguration.qT4Count=0
+      @tconfiguration.qT5Count=0
     end
+
     respond_to do |format|
       if @tconfiguration.save
         format.html {
@@ -86,7 +102,7 @@ class TconfigurationsController < ApplicationController
           redirect_to(@tconfiguration, :notice => 'Конфигурация успешно создана') }
         format.xml  { render :xml => @tconfiguration, :status => :created, :location => @tconfiguration }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to :action => "new" }
         format.xml  { render :xml => @tconfiguration.errors, :status => :unprocessable_entity }
       end
     end
@@ -104,21 +120,36 @@ class TconfigurationsController < ApplicationController
       @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "edit" and return
     end
-    st=" and (theme_id in ("+params[:themes].join(", ")+"))"
-    f1=Question.where("(qtype_id= 6)"+ st).count.to_s>=params[:tconfiguration][:qT1Count]
-    f2=Question.where("(qtype_id= 7)"+ st).count.to_s>=params[:tconfiguration][:qT2Count]
-    f3=Question.where("(qtype_id= 8)"+ st).count.to_s>=params[:tconfiguration][:qT3Count]
-    f4=Question.where("(qtype_id= 9)"+ st).count.to_s>=params[:tconfiguration][:qT4Count]
-    f5=Question.where("(qtype_id= 10)"+ st).count.to_s>=params[:tconfiguration][:qT5Count]
-    f=f1&&f2&&f3&&f4&&f5
-    if !f
-      @tconfiguration.errors.add("Вопросов","не достаточно")
-      @themes=Theme.all.map{|t| [t.title,t.id]}
-      render :action => "edit" and return
+    if @tconfiguration.configuration_type_id==4
+      st=" and (theme_id in ("+params[:themes].join(", ")+"))"
+      f1=Question.where("(qtype_id= 6)"+ st).count>=params[:tconfiguration][:qT1Count].to_i
+      f2=Question.where("(qtype_id= 7)"+ st).count>=params[:tconfiguration][:qT2Count].to_i
+      f3=Question.where("(qtype_id= 8)"+ st).count>=params[:tconfiguration][:qT3Count].to_i
+      f4=Question.where("(qtype_id= 9)"+ st).count>=params[:tconfiguration][:qT4Count].to_i
+      f5=Question.where("(qtype_id= 10)"+ st).count>=params[:tconfiguration][:qT5Count].to_i
+      f=f1&&f2&&f3&&f4&&f5
+      if !f
+        @tconfiguration.errors.add("Вопросов","не достаточно")
+        @themes=Theme.all.map{|t| [t.title,t.id]}
+        render :action => "edit" and return
+      end
+    else
+      hsh={}
+      hsh[:theme_id]=params[:themes]
+      unless Question.where(hsh).count>=params[:qCount].to_i
+        @tconfiguration.errors.add("Вопросов","не достаточно")
+        @themes=Theme.all.map{|t| [t.title,t.id]}
+        render :action => "new" and return
+      end
+      @tconfiguration.qT1Count=params[:qCount].to_i
+      @tconfiguration.qT2Count=0
+      @tconfiguration.qT3Count=0
+      @tconfiguration.qT4Count=0
+      @tconfiguration.qT5Count=0
     end
      #====================
     respond_to do |format|
-      if @tconfiguration.update_attributes(params[:tconfiguration])
+      if @tconfiguration.update_attributes(params[:tconfiguration].merge({:qt1Count=>params[:qCount].to_i,:qt2Count=>0,:qt3Count=>0,:qt4Count=>0,:qt5Count=>0}))
         format.html {
           
           @tconfiguration.themes.delete(@tconfiguration.themes)

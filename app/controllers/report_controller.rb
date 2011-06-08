@@ -4,6 +4,7 @@
 class ReportController < ApplicationController
   before_filter :login_required
   before_filter :menu
+  before_filter :admin_required,:only=>[:adv_search_report]
 
   class AnswerReport
     attr_accessor :answorder,:answorder2,:useransw,:question,:rightansw,:type,:answers,:right,:questionchanged
@@ -144,6 +145,7 @@ def create_report
   hsh1[:testsessions]={}
   hsh1[:tconfigurations]={}
   hsh1[:users]={}
+  hsh1[:users][:id]=current_user.id unless current_user.is_admin?
   if params[:beg_testdate]&&params[:beg_testdate]!=""
     d1=params[:beg_testdate].to_datetime.beginning_of_day
     if  params[:end_testdate]&&params[:end_testdate]!=""

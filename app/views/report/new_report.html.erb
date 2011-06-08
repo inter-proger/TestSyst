@@ -57,7 +57,11 @@
 <%end%>
 <%= content_for :secondmenu do %>
   <%= link_to 'Простой поиск', {:controller=>:report,:action=>:new_report},:class=>"actionbutton",:id=>:active%>
-  <%= link_to 'Расширенный поиск', {:controller=>:report,:action=>:adv_search_report},:class=>"actionbutton"%>
+  <% if current_user.is_admin? %>
+    <%= link_to 'Расширенный поиск', {:controller=>:report,:action=>:adv_search_report},:class=>"actionbutton"%>
+  <% else %>
+    <%= link_to 'Пройденные тесты',{:controller=>:users,:action=>:listsessions,:id=>current_user.id},:class=>'actionbutton',:title=>'Отобразить сессии пользователя' %>
+  <% end %>
 <%end%>
 <h2>
   Поиск сеансов тестирования

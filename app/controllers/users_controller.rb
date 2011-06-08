@@ -122,7 +122,7 @@ class UsersController < ApplicationController
   else
     @pagenum=1
   end
-  @perpage=20
+  @perpage=15
   @pagecount=@sessions.length/@perpage
   @pagecount+=1 if @sessions.length%@perpage!=0
   @firstline=(@pagenum-1)*@perpage

@@ -2,8 +2,8 @@
 
 <style type="text/css">
 	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
-        .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
-        .header{padding: 6px 0; text-align: center;}
+        .mycell{text-align: center; display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word; padding: 0em .3em;}
+        .header{ text-align: center;}
 
 </style>
 <%end%>
@@ -17,14 +17,12 @@
 <div class="ui-widget" style="width:100%;">
   <div class="ui-widget-header ui-corner-top" >
   <span style="width: 11%; " class="header mycell">Логин</span>
-  <span style="width: 11%; " class="header mycell">Имя</span>
-  <span style="width: 11%; " class="header mycell">Фамилия</span>
-  <span style="width: 11%; " class="header mycell">Отчество</span>
+  <span style="width: 25%; " class="header mycell">Фамилия Имя Отчество</span>
    <span style="width: 11%; " class="header mycell">Место работы</span>
    <span style="width: 11%; " class="header mycell">Должность</span>
-   <span style="width: 11%; " class="header mycell">Роли</span>
+   <span style="width: 10%; " class="header mycell">Роли</span>
    
-   <span style="width: 19%; " class="header mycell"></span>
+   <span style="width: 20%; " class="header mycell"></span>
   </div>
 <% @class="ui-state-default" %>
 <% @us.each do |u| %>
@@ -34,14 +32,16 @@
       <% @class="ui-widget-content" %>
     <%end%>
   <div class="<%=@class%>" >
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%= u.login%></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.I %></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.F %></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.O %></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.workplace %></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.proff %></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.roles %></span>
-    <span class="mycell" style="width:19%;">
+    <span class="mycell" style="width:11%;"><%= u.login%></span>
+    <span class="mycell" style="width:25%;">
+    <%=u.F %>
+    <%=u.I %>
+    <%=u.O %>
+    </span>
+    <span class="mycell" style="width:11%;"><%=u.workplace %></span>
+    <span class="mycell" style="width:11%;"><%=u.proff %></span>
+    <span class="mycell" style="width:10%;"><%=u.roles %></span>
+    <span class="mycell micon" style="width:20%;">
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),u,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-note"}),{:controller=>:users,:action=>:listsessions,:id=>u},:class=>'ui-state-default ui-corner-all',:title=>'Отобразить сессии пользователя' %>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}),edit_user_path(u),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>

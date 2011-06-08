@@ -34,23 +34,36 @@ class TestsessionsController < ApplicationController
     @themes=@tconf.themes.map{|t| t.id}
     st=" and (theme_id in ("+@themes.join(", ")+"))"
     qtypes=[@tconf.qT1Count, @tconf.qT2Count, @tconf.qT3Count, @tconf.qT4Count, @tconf.qT5Count]
-    f=true
-    qtypes.each_index { |i| f=f && (Question.where("(qtype_id= #{i+6})"+ st).count>=qtypes[i]) }
+    if @tconf.configuration_type_id==4
+      f=true
+      qtypes.each_index { |i| f=f && (Question.where("(qtype_id= #{i+6})"+ st).count>=qtypes[i]) }
+
+    else
+      f=Question.where({:theme_id=>@themes}).count>=qtypes[0]
+    end
     unless f
       @ts=current_user.testsessions.build
       @ts.errors.add("Вопросов","в базе данных недостаточно.")
       render :action=>:new and return
-    end  
-    @q=Array.new(5){|i| nil}
-    0.upto(4) do |i|
-      @q[i]=Question.where("(qtype_id= #{i+6})"+ st).map { |u| u.id }
+    end
+    if @tconf.configuration_type_id==4
+      @q=Array.new(5){|i| nil}
+      0.upto(4) do |i|
+        @q[i]=Question.where("(qtype_id= #{i+6})"+ st).map { |u| u.id }
+      end
+    else
+      @q=Question.where({:theme_id=>@themes}).map{ |u| u.id }
     end
     @ts=current_user.testsessions.build(params[:testsession])
     @ts.completed=0
     @ts.save
-    @quests=Array.new  
-    0.upto(4) { |i| @quests.concat(@q[i].shuffle.first(qtypes[i])) }
-    @quests.shuffle!
+    @quests=Array.new
+    if @tconf.configuration_type_id==4
+      0.upto(4) { |i| @quests.concat(@q[i].shuffle.first(qtypes[i])) }
+      @quests.shuffle!
+    else
+      @quests=@q.shuffle.first(qtypes[0])
+    end
     @quests.each do |q|
       question=Question.find(q)
       if question.qtype_id != 9 #не на соотношение
