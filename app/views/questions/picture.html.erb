@@ -52,7 +52,7 @@ input.file {
 <%end%>
 
 <%= content_for :secondmenu do %>
-  <%= link_to 'Предмет: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Раздел: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
   <%= link_to 'Тема: '+@theme.title, discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
   <%= link_to 'Изменение вопроса', discipline_theme_question_path(@discipline,@theme,@quest),:class=>'actionbutton' %>
   <%= link_to 'Ответы', {:controller=>:questions,:action=>:answers,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton' %>

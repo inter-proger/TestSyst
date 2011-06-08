@@ -74,8 +74,12 @@ class QtypesController < ApplicationController
   # DELETE /qtypes/1
   # DELETE /qtypes/1.xml
   def destroy
+    begin
     @qtype = Qtype.find(params[:id])
+   
     @qtype.destroy
+    rescue ActiveRecord::RecordNotFound
+    end
     respond_to do |format|
       format.html { redirect_to(qtypes_url) }
       format.xml  { head :ok }

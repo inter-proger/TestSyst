@@ -3,11 +3,10 @@
 <style>
 	td a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
         span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float:right;  list-style: none;display: inline;}
-
         .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;font-size: small;}
         .header{padding: 6px .5em; text-indent: 0em;}
-          .paginate{display: inline-block;width:80%; text-align: right;/* padding: 8px;*/}
-
+          .paginate{display: inline-block;width:80%; text-align: right;}
+        
 </style>
 <script type="text/javascript">
   $(function(){
@@ -57,36 +56,38 @@
     <% else %>
       <%= 'не зачтено, ' %>
     <% end %>
-      <%= ((i.percent*100).to_i.to_f/100.00).to_s+"%" if i.percent%>%
+      <%= ((i.percent*100).to_i.to_f/100.00).to_s+"%" if i.percent%>
     </span>
     <span style="width: 18%; " class="header mycell"><% if i.completed? %>Да</span>
       <span  class="header mycell micon" style="text-align: right; width: 8%"><%=  link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет' %>
       </span>
       <%  else %>Нет</span>
-    <!-- TODO: Редирект к тестированию, если тест еще не завершен.(продолжение сессии)-->
+ 
     <span class="header mycell micon" style="text-align: right;width: 8%"><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></span>
   
   <%  end %>
 
   </div>
   <%end%>
-
+<%if @class=="ui-widget-content"%>
+  <% @class="ui-state-default" %>
+<%else%>
   <% @class="ui-widget-content" %>
-
+<%end%>
 <div class="<%=@class%> ui-corner-bottom" >
 <%= link_to 'Назад',user_path(@us),:class=>'actionbutton' %>
 
-    <div class="paginate" style="float:right; vertical-align: middle; padding: .5em 0px;">
+    <div class="paginate" style="float:right; vertical-align: middle; ">
       Страница <%= @pagenum %> из <%= @pagecount %>.
-      Номера: <%=  link_to '1',{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>'1'})) if @pagenum>2 %>
-      <%=  link_to '2',{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>'2'})) if @pagenum>3 %>
+      Номера: <%=  link_to '1',{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>'1'})),:class=>:actionbutton if @pagenum>2 %>
+      <%=  link_to '2',{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>'2'})),:class=>:actionbutton if @pagenum>3 %>
       <%= '...' if @pagenum>4 %>
-      <%=  link_to (@pagenum-1).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})) if @pagenum>=2 %>
-      <%=  link_to (@pagenum).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagenum)})) %>
-      <%=  link_to (@pagenum+1).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})) if @pagenum<@pagecount %>
+      <%=  link_to (@pagenum-1).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})),:class=>:actionbutton if @pagenum>=2 %>
+      <%=  link_to (@pagenum).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagenum)})),:class=>:actionbutton %>
+      <%=  link_to (@pagenum+1).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})),:class=>:actionbutton if @pagenum<@pagecount %>
       <%= '...' if @pagenum<@pagecount-3 %>
-      <%=  link_to (@pagecount-1).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})) if @pagenum<@pagecount-2 %>
-      <%=  link_to (@pagecount).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})) if @pagenum<@pagecount-1 %>
+      <%=  link_to (@pagecount-1).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})),:class=>:actionbutton if @pagenum<@pagecount-2 %>
+      <%=  link_to (@pagecount).to_s,{:controller=>:users,:action=>:listsessions}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})),:class=>:actionbutton if @pagenum<@pagecount-1 %>
     </div>
 </div>
 </div>

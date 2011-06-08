@@ -75,8 +75,12 @@ class DisciplinesController < ApplicationController
   end
 
   def destroy
+    begin
+  end
 	@discipline=Discipline.find(params[:id])
 	@discipline.destroy
+   rescue ActiveRecord::RecordNotFound
+    end
 	respond_to do |format|
         format.html { redirect_to(disciplines_url) }
         format.xml  { head :ok }

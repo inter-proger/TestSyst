@@ -73,8 +73,12 @@ class ConfigurationTypesController < ApplicationController
   # DELETE /configuration_types/1
   # DELETE /configuration_types/1.xml
   def destroy
+    begin
     @configuration_type = ConfigurationType.find(params[:id])
+    
     @configuration_type.destroy
+     rescue ActiveRecord::RecordNotFound
+    end
 
     respond_to do |format|
       format.html { redirect_to(configuration_types_url) }

@@ -4,7 +4,7 @@
 	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
         .mycell{display:inline-block; vertical-align: middle; color: black; font-weight: normal;  word-wrap: break-word;font-size: small;}
         .header{padding: 6px 0; text-indent: 1em;}
-        .paginate{display: inline-block;width:30%; text-align: right; padding: 8px;}
+        .paginate{display: inline-block;width:30%; text-align: right;}
 </style>
 <script type="text/javascript">
   $(function(){
@@ -80,17 +80,17 @@
   <% @class="ui-widget-content" %>
 <%end%>
   <div class="<%=@class%> ui-corner-bottom" style="text-align: right;" >
-    <div class="paginate">
+    <div class="paginate style="float:right;">
       Страница <%= @pagenum %> из <%= @pagecount %>.
-      Номера: <%=  link_to '1',{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>'1'})) if @pagenum>2 %>
-      <%=  link_to '2',{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>'2'})) if @pagenum>3 %>
+      Номера: <%=  link_to '1',{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>'1'})),:class=>:actionbutton if @pagenum>2 %>
+      <%=  link_to '2',{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>'2'})),:class=>:actionbutton if @pagenum>3 %>
       <%= '...' if @pagenum>4 %>
-      <%=  link_to (@pagenum-1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})) if @pagenum>=2 %>
-      <%=  link_to (@pagenum).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum)})) %>
-      <%=  link_to (@pagenum+1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})) if @pagenum<@pagecount %>
+      <%=  link_to (@pagenum-1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})),:class=>:actionbutton if @pagenum>=2 %>
+      <%=  link_to (@pagenum).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum)})),:class=>:actionbutton %>
+      <%=  link_to (@pagenum+1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})),:class=>:actionbutton if @pagenum<@pagecount %>
       <%= '...' if @pagenum<@pagecount-3 %>
-      <%=  link_to (@pagecount-1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})) if @pagenum<@pagecount-2 %>
-      <%=  link_to (@pagecount).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})) if @pagenum<@pagecount-1 %>
+      <%=  link_to (@pagecount-1).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})),:class=>:actionbutton if @pagenum<@pagecount-2 %>
+      <%=  link_to (@pagecount).to_s,{:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})),:class=>:actionbutton if @pagenum<@pagecount-1 %>
     </div>
   </div>
 </div>
