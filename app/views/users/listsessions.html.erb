@@ -3,7 +3,7 @@
 <style>
 	td a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline;}
         span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float:right;  list-style: none;display: inline;}
-        .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
+        .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;font-size: small;}
          .header{padding: 6px 0; text-indent: 1em;}
          .paginate{display: inline-block;width:65%; text-align: right;/* padding: 8px;*/}
 </style>
@@ -35,17 +35,16 @@
     <span style="width: 18%; " class="header mycell"><%=i.created_at.strftime('%H:%M:%S ') %><b><%=i.created_at.strftime(' (%d/%m/%y)') %></b></span>
     <span style="width: 18%; " class="header mycell"><%=i.tconfiguration_id%></span>
     <span style="width: 18%; " class="header mycell"><%=i.mark%></span>
-    <span style="width: 18%; " class="header mycell"><% if i.completed? %>
-      Да</span>
+    <span style="width: 18%; " class="header mycell">
+<% if i.completed? %>Да</span>
     
-      <span style="width: 18%; " ><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%></span>
-      <%else%>
-      Нет
-     
-    </span>
+      <span style="width: 18%;" class='header mycell' ><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:userid=>@us,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Отчет'%></span>
+      <%else%> Нет     
+   
     <!-- TODO: Редирект к тестированию, если тест еще не завершен.(продолжение сессии)-->
 
-    <span style="width: 18%; " ><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></span>
+    <span style="width: 18%;" class='header mycell' ><%=link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:testessions,:action=>:show,:num=>1,:id=>i.id},:class=>'ui-state-default ui-corner-all',:title=>'Продолжить'%></span>
+     </span>
   <%end%>
   </div>
   <%end%>

@@ -2,7 +2,7 @@
 
 <style type="text/css">
 	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
-        .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
+        .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word; font-size: small;}
         .header{padding: 6px 0; text-align: center;}
 
 </style>
@@ -16,12 +16,10 @@
 
 <div class="ui-widget" style="width:100%;">
   <div class="ui-widget-header ui-corner-top" >
-  <span style="width: 11%; " class="header mycell">Логин</span>
-  <span style="width: 11%; " class="header mycell">Имя</span>
-  <span style="width: 11%; " class="header mycell">Фамилия</span>
-  <span style="width: 11%; " class="header mycell">Отчество</span>
-   <span style="width: 11%; " class="header mycell">Место работы</span>
-   <span style="width: 11%; " class="header mycell">Должность</span>
+  <span style="width: 10%; " class="header mycell">Логин</span>
+  <span style="width: 30%; " class="header mycell">ФИО</span>
+   <span style="width: 13%; " class="header mycell">Место работы</span>
+   <span style="width: 13%; " class="header mycell">Должность</span>
    <span style="width: 11%; " class="header mycell">Роли</span>
    
    <span style="width: 19%; " class="header mycell"></span>
@@ -34,12 +32,11 @@
       <% @class="ui-widget-content" %>
     <%end%>
   <div class="<%=@class%>" >
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%= u.login%></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.I %></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.F %></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.O %></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.workplace %></span>
-    <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.proff %></span>
+    <span class="mycell" style="width:10%;text-indent: 1em;"><%= u.login%></span>
+    <span class="mycell" style="width:30%;text-indent: 1em;"><%=u.F+' '+u.I+' '+u.O %></span>
+ 
+    <span class="mycell" style="width:13%;text-indent: 1em;"><%=u.workplace %></span>
+    <span class="mycell" style="width:13%;text-indent: 1em;"><%=u.proff %></span>
     <span class="mycell" style="width:11%;text-indent: 1em;"><%=u.roles %></span>
     <span class="mycell" style="width:19%;">
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),u,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
