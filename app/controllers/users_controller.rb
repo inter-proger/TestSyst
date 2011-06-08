@@ -101,7 +101,8 @@ class UsersController < ApplicationController
   end
 
     def listsessions
-      @ai='#item4'
+      @ai='#item5'
+      @secondmenu=true
       @us=User.find(params[:id])
 =begin
       ts=Testsession.all
@@ -113,7 +114,7 @@ class UsersController < ApplicationController
       end
 =end
       @sessions=@us.testsessions
-
+      @confs=Hash[Tconfiguration.all.map{|u| [u.id,u.Name]}]
         #pagination
   @parametrs=params
   if params[:pagenum]

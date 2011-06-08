@@ -6,6 +6,17 @@
         .header{padding: 6px 0; text-indent: 1em;}
         .paginate{display: inline-block;width:30%; text-align: right; padding: 8px;}
 </style>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+<%= content_for :secondmenu do %>
+  <%= link_to 'Простой поиск', {:controller=>:report,:action=>:new_report},:class=>"actionbutton"%>
+  
+  <%= link_to 'Расширенный поиск', {:controller=>:report,:action=>:adv_search_report},:class=>"actionbutton"%>
+  <%= link_to 'Просмотр отчетов', {:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum)})),:class=>"actionbutton",:id=>:active %>
 <%end%>
 
 <div style="width:100%;text-align: right;">

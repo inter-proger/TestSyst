@@ -13,7 +13,7 @@
   <div class="ui-widget-header ui-corner-top" >
   <span style="width: 8%; " class="header mycell">#</span>
   <span style="width: 18%; " class="header mycell">Дата начала</span>
-  <span style="width: 18%; " class="header mycell">Конфигурация</span>
+  <span style="width: 18%; " class="header mycell">Тест</span>
   <span style="width: 18%; " class="header mycell">Оценка</span>
   <span style="width: 18%; " class="header mycell">Завершено</span>
   <span style="width: 18%; " class="header mycell"></span>
@@ -33,8 +33,8 @@
   <div class="<%=@class%>" >
     <span style="width: 8%; " class="header mycell"><%=num=num+1%></span>
     <span style="width: 18%; " class="header mycell"><%=i.created_at.strftime('%H:%M:%S ') %><b><%=i.created_at.strftime(' (%d/%m/%y)') %></b></span>
-    <span style="width: 18%; " class="header mycell"><%=i.tconfiguration_id%></span>
-    <span style="width: 18%; " class="header mycell"><%=i.mark%></span>
+    <span style="width: 18%; " class="header mycell"><%=@confs[i.tconfiguration_id]%></span>
+    <span style="width: 18%; " class="header mycell"><%=i.mark%>,<%%></span>
     <span style="width: 18%; " class="header mycell"><% if i.completed? %>
       Да</span>
     
