@@ -91,7 +91,7 @@
             <li ><%= link_to 'Отчеты',{:controller=>:report,:action=>:new_report},:class=>"menu1 ui-state-default ui-corner-top",:id=>"item5" %></li>
           <% end %>
           <% if current_user&&current_user.is_admin? %>
-            <li ><%= link_to "Предметы", disciplines_path,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item2" %></li>
+            <li ><%= link_to "Разделы", disciplines_path,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item2" %></li>
             <li ><%= link_to 'Конфигурации',tconfigurations_path,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item3" %></li>
           <% end %>
           <% if current_user&&current_user.is_admin? %>

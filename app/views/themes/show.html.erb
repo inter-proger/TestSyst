@@ -17,8 +17,8 @@
 <%end%>
 
 <%= content_for :secondmenu do %>
-  <%= link_to 'Список предметов', disciplines_path,:class=>"actionbutton"%>
-  <%= link_to 'Предмет: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Список Разделов', disciplines_path,:class=>"actionbutton"%>
+  <%= link_to 'Раздел: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
   <%= link_to 'Тема: '+@theme.title, discipline_theme_path(@discipline,@theme), :class=>"actionbutton",:id=>'active' %>
   <%= link_to 'Новый вопрос', new_discipline_theme_question_path(@discipline,@theme),:class=>'actionbutton' %>
 
@@ -27,7 +27,7 @@
 <% if notice %>
 <!--<p id="notice"><%= notice %></p>-->
 <% end %>
-<h2>Предмет: <%=@discipline.title%> Тема: <%= @theme.title %></h2>
+<h2>Раздел: <%=@discipline.title%> Тема: <%= @theme.title %></h2>
 <h3> Список вопросов:</h3>
 
 <% @qtypes=Qtype.all %>

@@ -156,8 +156,7 @@
 </style>
 <%end%>
 
-<div id="timer">
-</div>
+
 <h2>Тест <%= @ts.tconfiguration.Name %>. 
   
   <% if @num+1<=@count %>
@@ -282,6 +281,10 @@
 <br/>
 
 <div class="floating  ui-corner-all  ui-widget-header" >
+  <div style="float:right">Осталось времени:
+  <div id="timer">
+</div>
+    </div>
 Список вопросов:<br/>
 <div style="width: 440px;height: 60px;overflow: auto;float: left;">
 <div class="answlist " style="width: 2000px;" >

@@ -57,10 +57,11 @@ class TconfigurationsController < ApplicationController
     st=" and (theme_id in ("+all_themes_id.join(", ")+"))"
     (0).upto(4) { |i|  (qtypes[i]=Question.where("(qtype_id= #{i+6})"+ st).count) }
     d=Tconfiguration.where("Name='fastconf'").first
+
     d.destroy if d
     #del=Tconfiguration.where(["Name= ?","fastconf"])
    # del.destroy
-   tt=Tconfiguration.create( :themes=>onet,:Name=>"fastconf",:configuration_type_id=>1,:qT1Count=>qtypes[0],:qT2Count=>qtypes[1],:qT3Count=>qtypes[2],:qT4Count=>qtypes[3],:qT5Count=>qtypes[4],:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>Time.zone.parse("2000-01-01 00:45:00"))
+   tt=Tconfiguration.create( :themes=>onet,:Name=>"fastconf",:configuration_type_id=>1,:qT1Count=>qtypes[0],:qT2Count=>qtypes[1],:qT3Count=>qtypes[2],:qT4Count=>qtypes[3],:qT5Count=>qtypes[4],:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>Time.zone.parse("2000-01-01 00:45:00"),:created_at=>Time.zone.now,:updated_at=>Time.zone.now)
    
       redirect_to :controller => :testsessions,:action=>:create,:testsession=>{:tconfiguration_id=>tt.id}
 #      ts=Testsession.create!(:tconfiguration_id=>tt.id,:user_id=>current_user.id,:completed=>0)
@@ -191,8 +192,12 @@ class TconfigurationsController < ApplicationController
   # DELETE /tconfigurations/1
   # DELETE /tconfigurations/1.xml
   def destroy
+    begin
     @tconfiguration = Tconfiguration.find(params[:id])
+   
     @tconfiguration.destroy
+   rescue ActiveRecord::RecordNotFound
+    end
 
     respond_to do |format|
       format.html { redirect_to(tconfigurations_url) }
