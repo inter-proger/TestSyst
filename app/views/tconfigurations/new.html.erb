@@ -1,3 +1,16 @@
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+
+<%= content_for :secondmenu do %>
+  <%= link_to 'Список', tconfigurations_url,:class=>"actionbutton"%>
+  <%= link_to 'Создать', new_tconfiguration_path,:class=>"actionbutton",:id=>:active %>
+<%end%>
+
 <h1>Создание конфигурации теста</h1>
 
 <%= render 'form' %>

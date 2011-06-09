@@ -5,6 +5,12 @@
 
 <h2>Тест завершен</h2>
 <br/>
+<h4>
+  Тестируемый: <%= current_user.F %> <%= current_user.I %> <%= current_user.O %>
+</h4>
+<h4>
+  Тест: <%= @ts.tconfiguration.Name %>
+</h4>
 <h4>Выполнено:&nbsp;
 <%= @percent.to_i.to_s %>&nbsp;%</h4>
 
@@ -12,7 +18,7 @@
 <%= @rank %>
 </h4>
 <h4>Результат: &nbsp;
-  <% if @questions.length>2 %>
+  <% if @rank>4 %>
   Зачтено
   <%else%>
     Не зачтено

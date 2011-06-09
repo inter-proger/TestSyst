@@ -3,12 +3,12 @@
 class TconfigurationsController < ApplicationController
   before_filter :login_required
   before_filter :admin_required, :only=>[:new,:create,:destroy,:edit]
+  before_filter :prepare
+  
   # GET /tconfigurations
   # GET /tconfigurations.xml
   def index
-    @ai='#item3'
     @tconfigurations = Tconfiguration.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tconfigurations }
@@ -18,9 +18,7 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations/1
   # GET /tconfigurations/1.xml
   def show
-    @ai='#item3'
     @tconfiguration = Tconfiguration.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @tconfiguration }
@@ -30,10 +28,8 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations/new
   # GET /tconfigurations/new.xml
   def new
-    @ai='#item3'
     @tconfiguration = Tconfiguration.new
     @themes= Theme.all.map{|th| [th.title, th.id]}
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @tconfiguration }
@@ -42,7 +38,6 @@ class TconfigurationsController < ApplicationController
 
   # GET /tconfigurations/1/edit
   def edit
-    @ai='#item3'
     @tconfiguration = Tconfiguration.find(params[:id])
     @themes= Theme.all.map{|th| [th.title, th.id]}
     @the=@tconfiguration.themes.map { |e| e.id } 
@@ -62,7 +57,7 @@ class TconfigurationsController < ApplicationController
     st=" and (theme_id in ("+all_themes_id.join(", ")+"))"
     (0).upto(4) { |i|  (qtypes[i]=Question.where("(qtype_id= #{i+6})"+ st).count) }
     d=Tconfiguration.where("Name='fastconf'").first
-    d.destroy
+    d.destroy if d
     #del=Tconfiguration.where(["Name= ?","fastconf"])
    # del.destroy
    tt=Tconfiguration.create( :themes=>onet,:Name=>"fastconf",:configuration_type_id=>1,:qT1Count=>qtypes[0],:qT2Count=>qtypes[1],:qT3Count=>qtypes[2],:qT4Count=>qtypes[3],:qT5Count=>qtypes[4],:degree3=>60,:degree4=>80,:degree5=>90,:TestTime=>Time.zone.parse("2000-01-01 00:45:00"))
@@ -78,14 +73,14 @@ class TconfigurationsController < ApplicationController
   # POST /tconfigurations
   # POST /tconfigurations.xml
   def create
-    @ai='#item3'
     @tconfiguration = Tconfiguration.new(params[:tconfiguration])
+
     unless params[:themes]
       @tconfiguration.errors.add("Вопросов","не достаточно")
       @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "new" and return
     end
-    if @tconfiguration.configuration_type_id==5
+    unless @tconfiguration.configuration_type_id==@ctypes[@simpleconf]
       st=" and (theme_id in ("+params[:themes].join(", ")+"))"
       f1=Question.where("(qtype_id= 6)"+ st).count>=params[:tconfiguration][:qT1Count].to_i
       f2=Question.where("(qtype_id= 7)"+ st).count>=params[:tconfiguration][:qT2Count].to_i
@@ -134,7 +129,7 @@ class TconfigurationsController < ApplicationController
   # PUT /tconfigurations/1
   # PUT /tconfigurations/1.xml
   def update
-    @ai='#item3'
+    
     @tconfiguration = Tconfiguration.find(params[:id])
      @themes= Theme.all.map{|th| [th.title, th.id]}
      #=========from create===========
@@ -143,7 +138,8 @@ class TconfigurationsController < ApplicationController
       @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "edit" and return
     end
-    if @tconfiguration.configuration_type_id==5
+    
+    unless @tconfiguration.configuration_type_id==@ctypes[@simpleconf]
       st=" and (theme_id in ("+params[:themes].join(", ")+"))"
       f1=Question.where("(qtype_id= 6)"+ st).count>=params[:tconfiguration][:qT1Count].to_i
       f2=Question.where("(qtype_id= 7)"+ st).count>=params[:tconfiguration][:qT2Count].to_i
@@ -203,4 +199,14 @@ class TconfigurationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+private
+
+  def prepare
+    @ctypes=Hash[ConfigurationType.all.map{|u| [u.Name,u.id]}]
+    @ai='#item3'
+    @simpleconf="Простой"
+    @secondmenu=true
+  end
+
 end

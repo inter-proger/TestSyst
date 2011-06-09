@@ -2,8 +2,17 @@
   
 <style type="text/css">
 	 span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline; }
-	.mycell{display:inline-block; width: 7.3%; text-align: center; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;font-size: small;}
+	.mycell{display:inline-block; width: 12%; text-align: center; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;font-size: small;}
 </style>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+<%= content_for :secondmenu do %>
+  <%= link_to 'Список', tconfigurations_url,:class=>"actionbutton",:id=>:active%>
+  <%= link_to 'Создать', new_tconfiguration_path,:class=>"actionbutton" %>
 <%end%>
 
 
@@ -13,13 +22,10 @@
 
 <div class="ui-widget">
   <div class="ui-widget-header ui-corner-top">
-    <span class="mycell">Имя</span>
+    <span class="mycell">Название теста</span>
     <span class="mycell" style="width: 10%;">Тип конфигурации</span>
-    <span class="mycell">Количество вопросов 1</span>
-    <span class="mycell">Количество вопросов 2</span>
-    <span class="mycell">Количество вопросов 3</span>
-    <span class="mycell">Количество вопросов 4</span>
-    <span class="mycell">Количество вопросов 5</span>
+    <span class="mycell" >Общее количество вопросов</span>
+
     <span class="mycell">Оценка 3 (%)</span>
     <span class="mycell">Оценка 4 (%)</span>
     <span class="mycell">Оценка 5 (%)</span>
@@ -36,13 +42,10 @@
     <% @class="ui-widget-content" %>
   <%end%>
   <div class="<%=@class%>" >
-    <span class="mycell"  id="<%=tconfiguration.id%>"><%= tconfiguration.Name %></span>
+    <span class="mycell"  id="<%=tconfiguration.id%>"><%=link_to tconfiguration.Name,tconfiguration_path(tconfiguration),:style=>"padding:0px  0px 0px 1em; text-decoration:none;" %></span>
     <span class="mycell" style="width: 10%;"><%= tconfiguration.configuration_type.Name %></span>
-    <span class="mycell"><%= tconfiguration.qT1Count %></span>
-    <span class="mycell"><%= tconfiguration.qT2Count %></span>
-    <span class="mycell"><%= tconfiguration.qT3Count %></span>
-    <span class="mycell"><%= tconfiguration.qT4Count %></span>
-    <span class="mycell "><%= tconfiguration.qT5Count %></span>
+    <span class="mycell" ><%= tconfiguration.qT5Count+tconfiguration.qT1Count+tconfiguration.qT2Count+tconfiguration.qT3Count+tconfiguration.qT4Count %>
+    </span>
     <span class="mycell"><%= tconfiguration.degree3 %></span>
     <span class="mycell"><%= tconfiguration.degree4 %></span>
     <span class="mycell"><%= tconfiguration.degree5 %></span>

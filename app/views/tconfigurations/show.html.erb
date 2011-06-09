@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <h2>Просмотр конфигурации: </h2>
-<div class="ui-widget ui-state-highlight ui-corner-all">
+<div class="ui-widget ui-widget-content ui-corner-all">
   <table cellpadding="10">
 <tr>
   <td><b>Название:</b></td>
@@ -13,10 +13,14 @@
 </tr>
 
 <tr>
-  <td><b>Количество вопросов с одним правильным вариантом ответа:</b></td>
+  <td><b>Количество вопросов
+<% unless @tconfiguration.configuration_type_id==@ctypes[@simpleconf] %>
+      с одним правильным вариантом ответа:
+<% end %>
+    </b></td>
   <td><%= @tconfiguration.qT1Count %></td>
 </tr>
-
+<% unless @tconfiguration.configuration_type_id==@ctypes[@simpleconf] %>
 <tr>
   <td><b>Количество вопросов с несколькими правильными вариантами ответа:</b></td>
   <td><%= @tconfiguration.qT2Count %></td>
@@ -36,7 +40,7 @@
   <td><b>Количество вопросов на соотношение:</b></td>
   <td><%= @tconfiguration.qT5Count %></td>
 </tr>
-
+<% end %>
 <tr>
   <td><b> Минимальный процент правильных ответов для получения оценки 3 (зачет):</b></td>
   <td><%= @tconfiguration.degree3 %></td>
