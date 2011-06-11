@@ -1,0 +1,19 @@
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+
+<%= content_for :secondmenu do %>
+  <%= link_to 'Список Разделов', disciplines_path,:class=>"actionbutton"%>
+  <%= link_to 'Текущий раздел',discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Текущая тема', discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
+  <%= link_to 'Редактировать', edit_discipline_theme_path(@discipline,@theme),:class=>'actionbutton',:id=>'active' %>
+
+<% end %>
+<h2>Раздел: <%=@discipline.title%></h2>
+<h2>Изменить название темы</h2>
+<%= render "form" %>
+<%= link_to 'Назад', discipline_theme_path(@discipline,@theme),:class=>'actionbutton' %>

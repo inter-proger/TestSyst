@@ -9,9 +9,11 @@
 <%= content_for :secondmenu do %>
   <%= link_to 'Список разделов', disciplines_path,:class=>"actionbutton"%>
   <%= link_to 'Текущий раздел',discipline_path(@discipline),:class=>:actionbutton %>
-  <%= link_to 'Новая тема', new_discipline_theme_path(@discipline), :class=>"actionbutton",:id=>'active' %>
+  <%= link_to 'Редактировать', edit_discipline_path(@discipline),:class=>:actionbutton,:id=>'active' %>
+  <%= link_to 'Новая тема', new_discipline_theme_path(@discipline), :class=>"actionbutton" %>
 <% end %>
-<h2>Раздел: <%=@discipline.title%></h2>
-<h2>Создать новую тему</h2>
+
+
+<p id="notice"><%= notice %></p>
+<h2>Редактировать название раздела:</h2>
 <%= render "form" %>
-<%= link_to 'Назад', discipline_path(@discipline),:class=>'actionbutton' %>

@@ -2,7 +2,7 @@
 class ThemesController < ApplicationController
   before_filter :login_required
   before_filter :find_disc
-  before_filter :find_theme,:only=>[:show,:destroy]
+  before_filter :find_theme,:only=>[:show,:destroy,:edit,:update]
   before_filter :secondmenu
   
   def show
@@ -27,7 +27,7 @@ class ThemesController < ApplicationController
   end
 
   def new
-
+    @submit_label="Создать"
     @theme=@discipline.themes.build
     respond_to do |format|
         format.html # new.html.erb
@@ -36,8 +36,13 @@ class ThemesController < ApplicationController
   end
 
   def create
-    @theme=@discipline.themes.create(params[:theme])
-    redirect_to discipline_theme_path(@discipline,@theme)
+    @theme=@discipline.themes.build(params[:theme])
+    if @theme.save
+      redirect_to discipline_theme_path(@discipline,@theme),:notice=>"Тема успешно создана"
+    else
+      @submit_label="Создать"
+      render :new
+    end
   end
 
   def destroy
@@ -45,6 +50,20 @@ class ThemesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(discipline_path(@discipline)) }
         format.xml  { head :ok }
+    end
+  end
+
+  def edit
+    @submit_label="Изменить"
+  end
+
+  def update
+
+    if @theme.update_attributes(params[:theme])
+      redirect_to discipline_theme_path(@discipline,@theme),:notice=>"Название темы успешно изменено"
+    else
+      @submit_label="Изменить"
+      render :edit
     end
   end
 private

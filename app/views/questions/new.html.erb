@@ -1,4 +1,19 @@
-<h2>Создать вопрос</h2>
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+
+<%= content_for :secondmenu do %>
+  <%= link_to 'Список Разделов', disciplines_path,:class=>"actionbutton"%>
+  <%= link_to 'Текущий раздел',discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Текущая тема', discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
+  <%= link_to 'Новый вопрос', new_discipline_theme_question_path(@discipline,@theme),:class=>'actionbutton',:id=>'active' %>
+<% end %>
+<h2>Раздел: <%=@discipline.title%> Тема: <%=@theme.title%></h2>
+<h2>Создать вопрос</h2><br/>
 
 <% form_for([@discipline,@theme,@quest]) do |f| %>
   <%= f.label "Тип вопроса:" %><br/>

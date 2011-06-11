@@ -115,8 +115,8 @@ A3::Application.routes.draw do
 
   resources :themes, :only =>[:new, :create, :show, :destroy]
 
-  resources :disciplines, :only => [:index, :new, :create, :destroy, :show] do
-    resources :themes, :only =>[:new, :create, :show, :destroy] do
+  resources :disciplines do
+    resources :themes, :only =>[:new, :create, :show, :destroy, :edit, :update] do
       resources :questions do
         resources :pictures
       end

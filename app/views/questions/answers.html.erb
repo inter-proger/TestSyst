@@ -1,7 +1,7 @@
 <%= content_for :head do %>
   <%= javascript_include_tag "answ_form" %>
 <style type="text/css">
-  .mycontent{}
+  .mycontent{padding: .2em;}
 </style>
 
 <% end %>
@@ -15,17 +15,16 @@
 <%end%>
 
 <%= content_for :secondmenu do %>
-  <%= link_to 'Раздел: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
-  <%= link_to 'Тема: '+@theme.title, discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
+  <%= link_to 'Текущий раздел',discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Текущая тема', discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
   <%= link_to 'Изменение вопроса', discipline_theme_question_path(@discipline,@theme,@quest),:class=>'actionbutton' %>
   <%= link_to 'Ответы', {:controller=>:questions,:action=>:answers,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton',:id=>'active' %>
   <%= link_to 'Изображение', {:controller=>:questions,:action=>:picture,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton' %>
 <% end %>
 
 <p id="notice"><%= notice %></p>
-  <h2>
-    Просмотр и редактирование вариантов ответа.
-  </h2>
+<h2>Раздел: <%=@discipline.title%> Тема: <%= @theme.title %></h2>
+<h3>Просмотр и редактирование вариантов ответа.</h3>
 
 <h3>Вопрос</h3>
 <div class="ui-widget-content ui-corner-all" style="text-indent: 1em;">

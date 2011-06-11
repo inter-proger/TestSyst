@@ -21,6 +21,7 @@ input.file {
 	filter: alpha(opacity:0);
 	opacity: 0;
 	z-index: 2;
+        cursor: pointer;
 
 }
 </style>
@@ -52,8 +53,8 @@ input.file {
 <%end%>
 
 <%= content_for :secondmenu do %>
-  <%= link_to 'Раздел: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
-  <%= link_to 'Тема: '+@theme.title, discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
+  <%= link_to 'Текущий раздел',discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Текущая тема', discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
   <%= link_to 'Изменение вопроса', discipline_theme_question_path(@discipline,@theme,@quest),:class=>'actionbutton' %>
   <%= link_to 'Ответы', {:controller=>:questions,:action=>:answers,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton' %>
   <%= link_to 'Изображение', {:controller=>:questions,:action=>:picture,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton',:id=>'active' %>

@@ -14,15 +14,4 @@
 
 <p id="notice"><%= notice %></p>
 <h2>Создать новый Раздел:</h2>
-<%form_for @discipline do |f|%>
-
-  <%= f.error_messages :header_message=>"Ошибка при создании Раздела",
-    :message=>"Обнаружены следующие ошибки:" %>
-  <div class="field">
-    <%= f.label "Название" %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Создать'%>
-  </div>
-<% end %>
+<%= render "form" %>

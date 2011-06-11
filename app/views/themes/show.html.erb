@@ -18,10 +18,10 @@
 
 <%= content_for :secondmenu do %>
   <%= link_to 'Список Разделов', disciplines_path,:class=>"actionbutton"%>
-  <%= link_to 'Раздел: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
-  <%= link_to 'Тема: '+@theme.title, discipline_theme_path(@discipline,@theme), :class=>"actionbutton",:id=>'active' %>
+  <%= link_to 'Текущий раздел',discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Текущая тема', discipline_theme_path(@discipline,@theme), :class=>"actionbutton",:id=>'active' %>
   <%= link_to 'Новый вопрос', new_discipline_theme_question_path(@discipline,@theme),:class=>'actionbutton' %>
-
+  <%= link_to 'Редактировать', edit_discipline_theme_path(@discipline,@theme),:class=>'actionbutton' %>
 <% end %>
 
 <% if notice %>

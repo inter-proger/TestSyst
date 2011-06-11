@@ -15,17 +15,16 @@
 <%end%>
 
 <%= content_for :secondmenu do %>
-  <%= link_to 'Раздел: '+@discipline.title,discipline_path(@discipline),:class=>:actionbutton %>
-  <%= link_to 'Тема: '+@theme.title, discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
+  <%= link_to 'Текущий раздел',discipline_path(@discipline),:class=>:actionbutton %>
+  <%= link_to 'Текущая тема', discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
   <%= link_to 'Изменение вопроса', discipline_theme_question_path(@discipline,@theme,@quest),:class=>'actionbutton',:id=>'active' %>
   <%= link_to 'Ответы', {:controller=>:questions,:action=>:answers,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton' %>
   <%= link_to 'Изображение', {:controller=>:questions,:action=>:picture,:id=>@quest.id,:discipline_id=>@discipline.id,:theme_id=>@theme.id},:class=>'actionbutton',:id=>'active' %>
 <% end %>
 
 <p id="notice"><%= notice %></p>
-  <h2>
-    Просмотр и редактирование вопроса.
-  </h2>
+<h2>Раздел: <%=@discipline.title%> Тема: <%= @theme.title %></h2>
+<h3>Просмотр и редактирование вопроса.</h3>
   
 <% form_for([@discipline,@theme,@quest]) do |f| %>
   

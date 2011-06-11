@@ -1,0 +1,19 @@
+<%form_for @discipline do |f|%>
+  <% if @discipline.errors.any? %>
+<div class="ui-state-error ui-corner-all" style="padding: .5em;">
+  <h3>Ошибка при создании или редактировании раздела</h3>
+  <ul>
+    <% @discipline.errors.each do |n,err| %>
+      <li><%= err %></li>
+    <%end%>
+  </ul>
+</div>
+  <% end %>
+  <div class="field">
+    <%= f.label "Название" %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="actions">
+    <%= f.submit @submit_label%>
+  </div>
+<% end %>

@@ -1,8 +1,9 @@
 # coding: utf-8
 class DisciplinesController < ApplicationController
    before_filter :login_required
-  before_filter :admin_required, :only=>[:new,:create,:destroy,:edit]
+  before_filter :admin_required, :only=>[:new,:create,:destroy,:edit,:update]
   before_filter :secondmenu
+  before_filter :find_discipline, :only=>[:new, :edit, :show,:update]
 
   def index
 	@disciplines=Discipline.all
@@ -28,7 +29,7 @@ class DisciplinesController < ApplicationController
 
   def show
 
-    @discipline=Discipline.find(params[:id])
+    
     @themes=@discipline.themes
     #pagination
     @parametrs=params
@@ -50,9 +51,23 @@ class DisciplinesController < ApplicationController
   end
 
 
+  def edit
+    @submit_label="Изменить"
+  end
+
+  def update
+    if @discipline.update_attributes(params[:discipline])
+      redirect_to @discipline,:notice=>'Название темы успешно изменено.'
+    else
+      @submit_label="Изменить"
+      render :edit
+    end
+  end
+
   def new
 	
     @discipline=Discipline.new
+    @submit_label="Создать"
 	respond_to do |format|
         format.html # new.html.erb
         format.xml  { render :xml => @discipline }
@@ -68,6 +83,7 @@ class DisciplinesController < ApplicationController
         format.html { redirect_to(disciplines_path, :notice => 'Дисциплина успешно создана.') }
         format.xml  { render :xml => @post, :status => :created, :location => @post }
       else
+        @submit_label="Создать"
         format.html { render :action => "new" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
       end
@@ -76,7 +92,7 @@ class DisciplinesController < ApplicationController
 
   def destroy
     begin
-	@discipline=Discipline.find(params[:id])
+	
 	@discipline.destroy
    rescue ActiveRecord::RecordNotFound
     end
@@ -89,5 +105,9 @@ private
  def secondmenu
    @secondmenu=true
    @ai='#item2'
+ end
+
+ def find_discipline
+  @discipline=Discipline.find(params[:id])
  end
 end
