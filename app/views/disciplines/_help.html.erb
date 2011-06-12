@@ -1,0 +1,34 @@
+<%= content_for :tabs do %>
+<li><a href="#" id="helpbutton" class="menu1 ui-state-default ui-corner-top">Помощь</a></li>
+<% end %>
+
+<div id="help" title="Помощь">
+  <h2>Список разделов</h2>
+
+  <div style="text-indent: 1em;">
+    Список разделов упорядочен по алфавиту. Доступные действия:
+    <ul>   
+      <li>Необходимый раздел можно открыть кликом мыши по названию раздела
+      или по кнопке <span class="ui-state-default ui-corner-all" style="display: inline-block; padding: .2em;"><span class="ui-icon ui-icon-search"/></span>. Подробнее в пункте <b>Просмотр раздела</b></li>
+      <li>Пройти тестирование по всем вопросам данного раздела нажав на кнопку
+        <span class="ui-state-default ui-corner-all" style="display: inline-block; padding: .2em;"><span class="ui-icon ui-icon-play"/></span>
+      </li>
+      <li>
+        Удалить ненужный раздел можно нажав на кнопку
+        <span class="ui-state-default ui-corner-all" style="display: inline-block; padding: .2em;"><span class="ui-icon ui-icon-trash"/></span>
+      </li>
+      <li>Создать раздел можно нажав на кнопку "Новый раздел". Дальнейшие интсрукции см. в пункте <b>Новый раздел</b></li>
+    </ul>
+  </div>
+  <h2>Новый раздел</h2>
+  <div style="text-indent: 1em;" id="new_disc">   
+    Для создания нового раздела необходимо ввести название раздела и нажать кнопку
+    "Создать". Название должно содержать не менее 3 символов.
+  </div>
+    <h2>Просмотр раздела.</h2>
+    <div style="text-indent: 1em;">
+      Для просмотра <b>подробного отчета</b> необходимо в правой части таблицы в
+      нужной строке нажать на кнопку
+      <span class="ui-state-default ui-corner-all" style="display: inline-block; padding: .2em;"><span class="ui-icon ui-icon-document"/></span>
+    </div>
+</div>

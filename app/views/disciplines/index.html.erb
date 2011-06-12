@@ -16,7 +16,7 @@
 <%end%>
 
 <%= content_for :secondmenu do %>
-  <%= link_to 'Список Разделов', disciplines_path,:class=>"actionbutton",:id=>:active%>
+  <%= link_to 'Список разделов', disciplines_path,:class=>"actionbutton",:id=>:active%>
   <%= link_to 'Новый раздел', new_discipline_path, :class=>"actionbutton" %>
 <% end %>
 
@@ -84,3 +84,4 @@
 </div>
 </div>
 </div>
+<%= render "help" %>

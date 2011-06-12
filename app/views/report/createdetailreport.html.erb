@@ -29,6 +29,7 @@
   <%=  link_to 'Подробный отчет',{:controller=>:report,:action=>'createdetailreport',:userid=>current_user.id,:id=>@ts.id},:class=>'actionbutton',:id=>:active %>
 <%end%>
 
+
 <div class="ui-widget">
   <div class="ui-widget-header ui-corner-all" style="padding: 8px 30px; ">
     Отчет
@@ -225,3 +226,4 @@
 
 <% end %>
 </div>
+<%= render "help" %>

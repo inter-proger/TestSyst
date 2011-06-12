@@ -77,7 +77,9 @@ def createdetailreport
         rep.useransw=Array.new(rep.answorder.length){|it| Type9Format.new}
         rep.useransw.each{|it| it.a2=""}
         rep.answorder.each_index{|it| rep.useransw[it].a1=rep.answers[rep.answorder[it]].content }
-        ans=@tests[i].useransw.split('|%').map{|it| it.to_i-1}
+        ans=@tests[i].useransw.split('|%',-100).map{|it| it.to_i-1}
+        @ans=ans
+        @t=@tests[i].useransw
         ans.push(-1) if ans.length<rep.answorder2.length
         ans.each_index do|it|
           if ans[it]!=-1
