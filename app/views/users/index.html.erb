@@ -3,7 +3,7 @@
 <style type="text/css">
 	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: right;  list-style: none;display: inline;}
         .header{ text-align: center;}
-        .mycell{text-align: center;display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word; font-size: small;}
+        .mycell{text-align: center;display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word; font-size: 12pt;}
       
 </style>
 <%end%>
@@ -47,7 +47,7 @@
 
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),u,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-note"}),{:controller=>:users,:action=>:listsessions,:id=>u},:class=>'ui-state-default ui-corner-all',:title=>'Отобразить сессии пользователя' %>
-        <%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}),edit_user_path(u),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
+        <%= link_to tag("span",{:class=>"ui-icon ui-icon-pencil"}),edit_user_path(u),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-minusthick"}),{ :controller=>'Users',:action=>'deladmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Удалить роль" %>
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-plusthick"}),{ :controller=>'Users',:action=>'newadmin',:id=>u.id},:class=>"ui-state-default ui-corner-all",:title=>"Назначить администратором" %>
     </span>

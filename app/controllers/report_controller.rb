@@ -228,6 +228,18 @@ def configwereupdated
   @ai='#item5'
 end
 
+def delete
+  ch=params[:del]
+  ss=params[:ses]
+ if ch && ss
+  ss.each_index do |i|
+    if ch[i.to_s]=='1'
+       Testsession.find(ss[i]).destroy
+    end
+  end
+ end
+  redirect_back_or_default(:controller=>:report,:action=>:new_report)
+end
 private
 def questchange?(test,quest)
   return true unless quest
