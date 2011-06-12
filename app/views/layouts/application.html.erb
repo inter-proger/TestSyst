@@ -44,8 +44,14 @@
     //$(this).css('border','0px');
   });
 
+  $('#help').dialog({ autoOpen:false,height:500,width:500,buttons: {
+				"OK": function() {
+					$( this ).dialog( "close" );
+				}}});
+  $('#helpbutton').click(function(){
+    $( "#help" ).dialog( "open" );
   });
-   
+  });
 
   </script>
   <style>
@@ -95,7 +101,7 @@
             <li ><%= link_to 'Конфигурации',tconfigurations_path,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item3" %></li>
           <% end %>
           <% if current_user&&current_user.is_admin? %>
-          <li ><%= link_to 'Пользователи',users_url,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item4" %></li
+          <li ><%= link_to 'Пользователи',users_url,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item4" %></li>
           <% end %>
 
           <%= yield :tabs %>

@@ -3,7 +3,7 @@ class DisciplinesController < ApplicationController
    before_filter :login_required
   before_filter :admin_required, :only=>[:new,:create,:destroy,:edit,:update]
   before_filter :secondmenu
-  before_filter :find_discipline, :only=>[:new, :edit, :show,:update]
+  before_filter :find_discipline, :only=>[ :edit, :show,:update]
 
   def index
 	@disciplines=Discipline.all

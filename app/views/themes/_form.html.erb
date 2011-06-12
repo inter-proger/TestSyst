@@ -1,14 +1,5 @@
 <% form_for([@discipline, @theme]) do |f| %>
-    <% if @theme.errors.any? %>
-<div class="ui-state-error ui-corner-all" style="padding: .5em;">
-  <h3>Ошибка при создании или редактировании темы</h3>
-  <ul>
-    <% @theme.errors.each do |n,err| %>
-      <li><%= err %></li>
-    <%end%>
-  </ul>
-</div>
-  <% end %>
+  <%= jerror_message(@theme) %>
 <p>
 <%= f.label "Название" %>
   <br />
