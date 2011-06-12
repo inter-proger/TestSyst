@@ -2,7 +2,7 @@
   
 <style type="text/css">
 	 span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline; }
-	.mycell{display:inline-block; width: 12%; text-align: center; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;font-size: small;}
+	.mycell{display:inline-block; width: 12%; text-align: center; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;font-size: 12pt;}
 </style>
 <script type="text/javascript">
   $(function(){
@@ -51,7 +51,7 @@
     <span class="mycell"><%= tconfiguration.degree5 %></span>
     <span class="mycell"><%= tconfiguration.TestTime.strftime('%H:%M:%S')  %></span>
     <span class="mycell micon" style="width: 95px;"><%= link_to tag("span",{:class=>"ui-icon ui-icon-search"}), tconfiguration,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
-   <%= link_to tag("span",{:class=>"ui-icon ui-icon-folder-open"}), edit_tconfiguration_path(tconfiguration),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
+   <%= link_to tag("span",{:class=>"ui-icon ui-icon-pencil"}), edit_tconfiguration_path(tconfiguration),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
     <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}), tconfiguration, :confirm => 'Are you sure?', :method => :delete, :class=>"ui-state-default ui-corner-all",:title=>"Удалить"%></span>
   </div>
 

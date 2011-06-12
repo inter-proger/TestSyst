@@ -35,6 +35,8 @@ class TestsessionsController < ApplicationController
     end
     @ts=current_user.testsessions.build(params[:testsession])
     @ts.completed=0
+    @ts.mark=2
+    @ts.percent=0
     @ts.save
     @quests=Array.new
     unless @tconf.configuration_type_id==@ctypes[@simpleconf]
@@ -60,6 +62,7 @@ class TestsessionsController < ApplicationController
       @test.useransw=""
       @test.ok=0
       @test.save
+
     end
     if (:back!=1) 
     redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1"

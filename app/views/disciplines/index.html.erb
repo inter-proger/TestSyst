@@ -53,9 +53,12 @@
     <span style=" width: 28%; " class="micon">
        <% if logged_in?%> 
         <%  if  current_user.is_admin? %>
-          <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),disc,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
+              <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}),disc,:confirm =>'Вы уверены', :method=>:delete , :class=>"ui-state-default ui-corner-all",:title=>"Удалить"  %>
+              <%= link_to tag("span",{:class=>"ui-icon ui-icon-pencil"}), edit_discipline_path(disc),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
         <%end%>
+
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-search"}), disc,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+       
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-play"}),{:controller=>:tconfigurations, :action=>:fastconf,:id=>1,:th=>disc.themes.map{|i|i.id}},:class=>"ui-state-default ui-corner-all",:title=>"Начать тестирование" %>
       <% end %>
     </span>
