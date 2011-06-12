@@ -129,6 +129,12 @@ class TestsessionsController < ApplicationController
 
   def destroy
   end
+  def delete
+    @ts=Testsession.find(params[:id])
+   
+      @ts.destroy
+    redirect_back_or_default(:controller=>:report,:action=>:new_report)
+  end
 
   def check
     @num=params[:num].to_i

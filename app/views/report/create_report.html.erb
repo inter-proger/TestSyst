@@ -10,8 +10,22 @@
   $(function(){
     $('#active').addClass("ui-state-active");
   });
+  $(function(){
+    $('#selectall').bind('click',function()
+  {
+     if ($('#selectall').attr('checked'))
+      {
+        $("input:checkbox").attr("checked","checked");
+      }
+      else
+        {
+          $("input:checkbox").removeAttr("checked");
+        }
+  })
+  });
 </script>
 <%end%>
+
 <%= content_for :secondmenu do %>
   <%= link_to 'Простой поиск', {:controller=>:report,:action=>:new_report},:class=>"actionbutton"%>
   
@@ -34,9 +48,10 @@
 </div>
 </div>
 
-
+<%= form_tag :controller=>:report, :action=>:delete, :method=>"post",:ses=>@sessions do %>
 <div class="ui-widget" style="width:100%;">
    <div class="ui-widget-header ui-corner-top" >
+      <span style="width: 5%; " class="header mycell"><%= check_box_tag (:selectall) %></span>
       <span style="width: 35%; " class="header mycell">Пользователь</span>
       <span style="width: 19%; " class="header mycell">Тест</span>
       <span style="width: 27%; " class="header mycell">Оценка</span>
@@ -52,6 +67,9 @@
   <% @class="ui-widget-content" %>
 <%end%>
   <div class="<%=@class%>" >
+    <span class="mycell" style="padding: 0px 0; width: 5%; font-weight: normal; color: black; text-align: center;">
+      <%= check_box_tag "del[#{i}]" %>
+    </span>
     <span class="mycell" style="padding: 0px 0; width: 35%; font-weight: normal; color: black;">
       <% us=[t.F,t.I,t.O].join(' ')  %>
       <div><%= link_to(us,{:controller=>:users,:action=>:show,:id=>t.user_id},:style=>'float:none; background:none; border:none; font-wieght:normal; text-decoration:none;') %></div>
@@ -68,11 +86,12 @@
       <% end %>, <%= ((t.percent*100).to_i.to_f/100.00).to_s+"%" if t.percent%>
       <% #i+=1 %>
     </span>
-    <span class="mycell micon" style="width: 17%;">
+    <span class="mycell micon" style="">
 
         <%= link_to tag("span",{:class=>"ui-icon ui-icon-document"}),{:controller=>:report,:action=>:createdetailreport,:id=>t.id,:userid=>t.user_id},:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
     </span>
   </div>
+  <%i=i+1%>
 <% end %>
 <%if @class=="ui-widget-content"%>
   <% @class="ui-state-default" %>
@@ -94,3 +113,5 @@
     </div>
   </div>
 </div>
+ <%= submit_tag 'Удалить',:confirm=>'Вы уверены что хотите удалить выбранные сессии?' %>
+<%end%>
