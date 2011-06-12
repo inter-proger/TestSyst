@@ -67,9 +67,14 @@ class TestsessionsController < ApplicationController
   end
 
   def show
+
     @num=params[:num].to_i-1
     @ai='#item1'
     @ts=current_user.testsessions.find(params[:id])
+    if @ts.completed==1
+      redirect_to :action=>:complete,:id=>params[:id]
+    
+    end
     @count=@ts.tests.count
     @has_answer=@ts.tests.map{|i| i.useransw.length>0 }.unshift(false)
     @end=false
@@ -127,6 +132,9 @@ class TestsessionsController < ApplicationController
     if @num
       @num-=1
       @ts=current_user.testsessions.find(params[:id])
+      if @ts.completed==1
+        redirect_to :action=>:complete, :id=>params[:id] and return
+      end
       tests=@ts.tests
       @test=tests[@num]
       @count=@ts.tests.count
@@ -178,6 +186,9 @@ class TestsessionsController < ApplicationController
       else
         @test.update_attributes("ok"=> 0,"useransw"=>ua)
       end
+      if !ua
+        @test.update_attributes("useransw"=>"")
+      end
       #@test.update_attribute("useransw",ua)
     end
     redirect_to :action=>:show,:id=>params[:id],:num=>(params[:num].to_i+1).to_s
@@ -204,6 +215,7 @@ class TestsessionsController < ApplicationController
     if @percent >= @ts.tconfiguration.degree5
       @rank+=1
     end
+ 
     @ts.update_attributes(:completed=>1,:mark=>@rank,:percent=>@percent) if @ts.completed!=1
     @questions=Array.new
     @tests.each{|t| @questions.push(qs.detect{|q| q.id==t.question_id})}

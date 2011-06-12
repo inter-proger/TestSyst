@@ -286,11 +286,11 @@
 </div>
     </div>
 Список вопросов:<br/>
-<div style="width: 440px;height: 60px;overflow: auto;float: left;">
+<div style="width: 800px;height: 50px;overflow: auto;float: left;">
 <div class="answlist " style="width: 2000px;" >
 <%1.upto(@count) do |i|%>
   <% if @has_answer[i] then  @cls='actionbutton ui-state-default' else @cls='actionbutton ui-widget-shadow' end %>
-  <%   if i==params[:num].to_i then @cls+=" ui-state-active" end%>
+  <%   if i==params[:num].to_i then @cls="ui-state-active actionbutton ui-state-default actbutton" end%>
   <%= link_to (i).to_s,{ :controller => :testsessions, :action => :show, :id=>@ts.id.to_s, :num=>(i).to_s },:class=>@cls,:style=>"margin: 0px 0 0 0px;" %>
   
 <%end%>
