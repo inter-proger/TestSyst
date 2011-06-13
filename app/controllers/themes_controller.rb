@@ -7,7 +7,7 @@ class ThemesController < ApplicationController
   
   def show
 
-    @questions=@theme.questions
+    @questions=@theme.questions.sort{|x,y| x.content.mb_chars.downcase <=> y.content.mb_chars.downcase}
     #pagination
     @parametrs=params
     if params[:pagenum]
