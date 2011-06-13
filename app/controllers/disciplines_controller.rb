@@ -30,7 +30,7 @@ class DisciplinesController < ApplicationController
   def show
 
     
-    @themes=@discipline.themes
+    @themes=@discipline.themes.sort{|x,y| x.title.mb_chars<=>y.title.mb_chars}
     #pagination
     @parametrs=params
     if params[:pagenum]

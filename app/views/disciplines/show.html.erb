@@ -4,7 +4,7 @@
 	span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float:right;  list-style: none;display: inline;}
         .mycell{display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;}
          .header{padding: 6px 0; text-indent: 1em;}
-         .paginate{display: inline-block;width:65%; text-align: right;/* padding: 8px;*/}
+         .paginate{display: inline-block;width:65%; text-align: right; padding: .5em;}
          span a.toleft{float: left;text-decoration: none;font-weight: bold;}
 </style>
 <%end%>
@@ -60,11 +60,9 @@
 
 <%end%>
 
-<%if @class=="ui-widget-content"%>
-  <% @class="ui-state-default" %>
-<%else%>
+
   <% @class="ui-widget-content" %>
-<%end%>
+
   <div class="<%=@class%> ui-corner-bottom" >
     <%  if logged_in? && current_user.is_admin? %>
       <%= link_to 'Новая тема',new_discipline_theme_url(@discipline),:class=>'actionbutton' %>
@@ -72,15 +70,16 @@
     <%= link_to 'Назад', disciplines_path ,:class=>'actionbutton'%>
     <div class="paginate" style="float:right;">
       Страница <%= @pagenum %> из <%= @pagecount %>.
-      Номера: <%=  link_to '1',{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>'1'})),:class=>:actionbutton if @pagenum>2 %>
-      <%=  link_to '2',{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>'2'})),:class=>:actionbutton if @pagenum>3 %>
+      Номера: <%=  link_to '1',{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>'1'})) if @pagenum>2 %>
+      <%=  link_to '2',{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>'2'})) if @pagenum>3 %>
       <%= '...' if @pagenum>4 %>
-      <%=  link_to (@pagenum-1).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})),:class=>:actionbutton if @pagenum>=2 %>
-      <%=  link_to (@pagenum).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagenum)})),:class=>:actionbutton %>
-      <%=  link_to (@pagenum+1).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})),:class=>:actionbutton if @pagenum<@pagecount %>
+      <%=  link_to (@pagenum-1).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})) if @pagenum>=2 %>
+      <%=  link_to (@pagenum).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagenum)})) %>
+      <%=  link_to (@pagenum+1).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})) if @pagenum<@pagecount %>
       <%= '...' if @pagenum<@pagecount-3 %>
-      <%=  link_to (@pagecount-1).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})),:class=>:actionbutton if @pagenum<@pagecount-2 %>
-      <%=  link_to (@pagecount).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})),:class=>:actionbutton if @pagenum<@pagecount-1 %>
+      <%=  link_to (@pagecount-1).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})) if @pagenum<@pagecount-2 %>
+      <%=  link_to (@pagecount).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})) if @pagenum<@pagecount-1 %>
     </div>
   </div>
 </div>
+<%= render "help" %>
