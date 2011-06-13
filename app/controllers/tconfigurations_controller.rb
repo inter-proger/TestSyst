@@ -140,7 +140,7 @@ class TconfigurationsController < ApplicationController
       render :action => "edit" and return
     end
     
-    unless @tconfiguration.configuration_type_id==@ctypes[@simpleconf]
+    unless params[:tconfiguration][:configuration_type_id]==@ctypes[@simpleconf].to_s
       st=" and (theme_id in ("+params[:themes].join(", ")+"))"
       f1=Question.where("(qtype_id= 6)"+ st).count>=params[:tconfiguration][:qT1Count].to_i
       f2=Question.where("(qtype_id= 7)"+ st).count>=params[:tconfiguration][:qT2Count].to_i
@@ -168,8 +168,13 @@ class TconfigurationsController < ApplicationController
       @tconfiguration.qT5Count=0
     end
      #====================
+    tparams=params[:tconfiguration]
+    if params[:tconfiguration][:configuration_type_id]==@ctypes[@simpleconf].to_s
+      tparams[:qT1Count]=params[:qCount].to_i
+    end
     respond_to do |format|
-      if @tconfiguration.update_attributes(params[:tconfiguration].merge({:qT1Count=>params[:qCount].to_i,:qT2Count=>0,:qT3Count=>0,:qt4Count=>0,:qt5Count=>0}))
+
+      if @tconfiguration.update_attributes(tparams)
         format.html {
           
           @tconfiguration.themes.delete(@tconfiguration.themes)
