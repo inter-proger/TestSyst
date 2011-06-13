@@ -235,7 +235,7 @@
     </div>
   <%end%>
 
-<a type="button" class="actionbutton" onClick="add_ans();">Добавить вариант ответа</a>
+<a  class="actionbutton" onClick="add_ans();">Добавить вариант ответа</a>
 
     <%= submit_tag "Подтвердить"  %>
 
@@ -258,3 +258,4 @@
 </div>-->
 
       <%= link_to "К списку вопросов",discipline_theme_path(@discipline,@theme),:class=>'actionbutton'%>
+<%= render :partial=>"disciplines/help" %>

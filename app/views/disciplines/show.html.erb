@@ -25,7 +25,21 @@
 
 
 <p id="notice"><%= notice %></p>
+
 <h2>Раздел <%=  @discipline.title %></h2>
+
+    <div class="paginate" style="float:right; padding: 0px .5em;">
+      Страница <%= @pagenum %> из <%= @pagecount %>.
+      Номера: <%=  link_to '1',{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>'1'})) if @pagenum>2 %>
+      <%=  link_to '2',{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>'2'})) if @pagenum>3 %>
+      <%= '...' if @pagenum>4 %>
+      <%=  link_to (@pagenum-1).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})) if @pagenum>=2 %>
+      <%=  link_to (@pagenum).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagenum)})) %>
+      <%=  link_to (@pagenum+1).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})) if @pagenum<@pagecount %>
+      <%= '...' if @pagenum<@pagecount-3 %>
+      <%=  link_to (@pagecount-1).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})) if @pagenum<@pagecount-2 %>
+      <%=  link_to (@pagecount).to_s,{:controller=>:disciplines,:action=>:show}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})) if @pagenum<@pagecount-1 %>
+    </div>
 <h3>Список тем:</h3>
 <div class="ui-widget" style="width:100%;">
    <div class="ui-widget-header ui-corner-top" >

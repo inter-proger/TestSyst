@@ -6,7 +6,7 @@ class DisciplinesController < ApplicationController
   before_filter :find_discipline, :only=>[ :edit, :show,:update]
 
   def index
-    @disciplines=Discipline.all.sort{|x,y| x.title.mb_chars<=>y.title.mb_chars}
+    @disciplines=Discipline.all.sort{|x,y| x.title.mb_chars.downcase<=>y.title.mb_chars.downcase}
 
   #pagination
   @parametrs=params
@@ -30,7 +30,7 @@ class DisciplinesController < ApplicationController
   def show
 
     
-    @themes=@discipline.themes.sort{|x,y| x.title.mb_chars<=>y.title.mb_chars}
+    @themes=@discipline.themes.sort{|x,y| x.title.mb_chars.downcase<=>y.title.mb_chars.downcase}
     #pagination
     @parametrs=params
     if params[:pagenum]
