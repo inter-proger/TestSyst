@@ -169,7 +169,7 @@ class TconfigurationsController < ApplicationController
     end
      #====================
     respond_to do |format|
-      if @tconfiguration.update_attributes(params[:tconfiguration].merge({:qt1Count=>params[:qCount].to_i,:qt2Count=>0,:qt3Count=>0,:qt4Count=>0,:qt5Count=>0}))
+      if @tconfiguration.update_attributes(params[:tconfiguration].merge({:qT1Count=>params[:qCount].to_i,:qT2Count=>0,:qT3Count=>0,:qt4Count=>0,:qt5Count=>0}))
         format.html {
           
           @tconfiguration.themes.delete(@tconfiguration.themes)
