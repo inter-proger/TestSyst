@@ -43,7 +43,7 @@
                       {
                        $('#tconfiguration_degree5').val(ui.value);
                       });
-      $('.type2').hide();
+      $('.type1').hide();
       $('#tconfiguration_configuration_type_id').change(function(){
         if($(this).val()==5){
             $('.type2').hide();
@@ -54,22 +54,19 @@
             $('.type2').show();
           };
       });
+      if($('#tconfiguration_configuration_type_id').val()==5){
+            $('.type2').hide();
+            $('.type1').show();
+          }
+          else{
+            $('.type1').hide();
+            $('.type2').show();
+          };
     });
 </script>
 <%end%>
 <%= form_for(@tconfiguration) do |f| %>
-  <% if @tconfiguration.errors.any? %>
-<div id="error_explanation" class="ui-state-error">
-      <h2><%= pluralize(@tconfiguration.errors.count, "error") %>
-          prohibited this tconfiguration from being saved:</h2>
-
-      <ul>
-      <% @tconfiguration.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= jerror_message @tconfiguration %>
 
 
   <div class="field">

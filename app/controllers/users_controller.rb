@@ -13,7 +13,13 @@ class UsersController < ApplicationController
   end
 
   def index
-  @us = User.all
+    @us = User.all.sort do |a,b|
+      if a.F&&a.I&&b.F&&b.I
+        (a.F.mb_chars+a.I.mb_chars) <=> (b.F.mb_chars+b.I.mb_chars)
+      else
+        a.login <=>b.login
+      end
+    end
   @ai='#item4'
     respond_to do |format|
       format.html # index.html.erb

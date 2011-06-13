@@ -1,9 +1,9 @@
 # coding: utf-8
 class TestsessionsController < ApplicationController
   before_filter :login_required,:only=>[:fastconf,:create,:check,:complete]
-  before_filter :prev,:only=>[:new,:show,:complete]
+  before_filter :prev,:only=>[:show,:complete]
   def new
-    
+    @ai='#item1'
     @ts=Testsession.new
   end
 
@@ -23,7 +23,7 @@ class TestsessionsController < ApplicationController
     end
     unless f
       @ts=current_user.testsessions.build
-      @ts.errors.add("Вопросов","в базе данных недостаточно.")
+      @ts.errors.add("db","Вопросовв базе данных недостаточно.")
       render :action=>:new and return
     end
     unless @tconf.configuration_type_id==@ctypes[@simpleconf]

@@ -11,9 +11,9 @@ class User < ActiveRecord::Base
   validates :login, :presence   => true,
                     :uniqueness => true,
                     :length     => { :within => 3..40 },
-                    :format     => { :with => Authentication.login_regex, :message => Authentication.bad_login_message }
+                    :format     => { :with => Authentication.login_regex, :message => "Логин должен быть от 3 до 40 символов" }
 
-  validates :name,  :format     => { :with => Authentication.name_regex, :message => Authentication.bad_name_message },
+  validates :name,  :format     => { :with => Authentication.name_regex, :message => "Неудовлетворительный пароль" },
                     :length     => { :maximum => 100 },
                     :allow_nil  => true
   
