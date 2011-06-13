@@ -19,32 +19,50 @@
 
 
 <div class="chform">
-<% form_tag do  %>
-  <%= label_tag 'Тип службы' %>
-  <%= text_field_tag :type=>'text' %>
-  <%=  submit_tag "Добавить" ,:class=>'actionbutton' %>
+  Тип службы
+<%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>1}) do  %>
+ 
+   <%= select_tag(:sid, options_for_select(@sert),:size=>"8",:style=>"width:90%; margin: 5px;") %>
+  <%= text_field_tag :val %>
+  Режим: <br/>
+  <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
+  <%= radio_button_tag :mode,'delete'  %>Удалить
+  <%=  submit_tag "Выполнить" ,:class=>'actionbutton' %>
   <%end%>
   </div>
 <div class="chform">
-<% form_tag do  %>
-  <%= label_tag 'Уровень службы' %>
-  <%= text_field_tag :type=>'text' %>
-  <%=  submit_tag "Добавить" ,:class=>'actionbutton' %>
+  Уровень службы
+<%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>2}) do  %>
+ 
+   <%= select_tag(:sid, options_for_select(@serl),:size=>"8",:style=>"width:90%; margin: 5px;") %>
+  <%= text_field_tag :val %>
+   Режим: <br/>
+  <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
+  <%= radio_button_tag :mode,'delete'  %>Удалить
+  <%=  submit_tag "Выполнить" ,:class=>'actionbutton' %>
   <%end%>
   </div>
 <div class="chform">
-  'Образование'
-<% form_tag do  %>
-  <%= select_tag("id[]", options_for_select(@edu),:multiple=>"true",:size=>"8",:style=>"width:100%") %>
-  <%= text_field_tag :type=>'text' %>
-  <%=  submit_tag "Добавить" ,:class=>'actionbutton' %>
+  Образование
+<%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>3}) do  %>
+  <%= select_tag(:sid, options_for_select(@edu),:size=>"8",:style=>"width:90%; margin: 5px;") %>
+  <%= text_field_tag :val %>
+   Режим: <br/>
+  <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
+  <%= radio_button_tag :mode,'delete'  %>Удалить
+  <%=  submit_tag "Выполнить" ,:class=>'actionbutton' %>
   <%end%>
   </div>
 <div class="chform">
-<% form_tag do  %>
-  <%= label_tag 'Сфера деятельности' %>
-  <%= text_field_tag :type=>'text' %>
-  <%=  submit_tag "Добавить" ,:class=>'actionbutton' %>
+  Сфера деятельности
+<%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>4}) do  %>
+ 
+   <%= select_tag(:sid, options_for_select(@sph),:multiple=>"true",:size=>"8",:style=>"width:90%; margin: 5px;") %>
+  <%= text_field_tag :val %>
+   Режим: <br/>
+  <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
+  <%= radio_button_tag :mode,'delete'  %>Удалить
+  <%=  submit_tag "Выполнить" ,:class=>'actionbutton' %>
   <%end%>
   </div>
 

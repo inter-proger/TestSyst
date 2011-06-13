@@ -186,7 +186,61 @@ class UsersController < ApplicationController
     end
    def admin
      @edu=Education.all.map {|i| [i.name,i.id]}
+     @sert=Sertype.all.map {|i| [i.name,i.id]}
+     @serl=Serlevel.all.map {|i| [i.name,i.id]}
+     @sph=Sphere.all.map {|i| [i.name,i.id]}
      
+   end
+   def service
+     f=params[:form].to_i
+     id=params[:sid]
+     case f
+     when 1
+       elem=Sertype.find(id)
+       if !id and params[:mode]=='add'
+       Sertype.create(:name=>params[:val])
+       else
+         if params[:mode]=='add'
+        elem.update_attribute(:name,params[:val]) if elem
+         else
+           elem.destroy if elem
+         end
+       end
+     when 2
+          elem=Serlevel.find(id)
+       if !id and params[:mode]=='add'
+       Serlevel.create(:name=>params[:val])
+        else
+         if params[:mode]=='add'
+        elem.update_attribute(:name,params[:val]) if elem
+         else
+           elem.destroy if elem
+         end
+       end
+     when 3
+       elem=Education.find(id)
+       if !id and params[:mode]=='add'
+       Education.create(:name=>params[:val])
+        else
+         if params[:mode]=='add'
+        elem.update_attribute(:name,params[:val]) if elem
+         else
+           elem.destroy if elem
+         end
+       end
+     when 4
+       elem= Sphere.find(id)
+       if !id and params[:mode]=='add'
+       Sphere.create(:name=>params[:val])
+        else
+         if params[:mode]=='add'
+        elem.update_attribute(:name,params[:val]) if elem
+         else
+           elem.destroy if elem
+         end
+       end
+     end
+     redirect_back_or_default(:admin)
    end
 private
  def secondmenu
