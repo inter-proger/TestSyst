@@ -1,0 +1,51 @@
+# coding: utf-8
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%  end %>
+<%= content_for :secondmenu do %>
+  <%= link_to 'Пользователи', users_path,:class=>"actionbutton"%>
+  <%= link_to 'Управление', :admin, :class=>"actionbutton",:id=>:active %>
+<% end %>
+
+
+
+
+<h2>Консоль управления сайтом</h2>
+<p>Здесь вы можете управлять материалами сайта - редактировать/добавлять/удалять элементы базы данных</p>
+
+
+<div class="chform">
+<% form_tag do  %>
+  <%= label_tag 'Тип службы' %>
+  <%= text_field_tag :type=>'text' %>
+  <%=  submit_tag "Добавить" ,:class=>'actionbutton' %>
+  <%end%>
+  </div>
+<div class="chform">
+<% form_tag do  %>
+  <%= label_tag 'Уровень службы' %>
+  <%= text_field_tag :type=>'text' %>
+  <%=  submit_tag "Добавить" ,:class=>'actionbutton' %>
+  <%end%>
+  </div>
+<div class="chform">
+  'Образование'
+<% form_tag do  %>
+  <%= select_tag("id[]", options_for_select(@edu),:multiple=>"true",:size=>"8",:style=>"width:100%") %>
+  <%= text_field_tag :type=>'text' %>
+  <%=  submit_tag "Добавить" ,:class=>'actionbutton' %>
+  <%end%>
+  </div>
+<div class="chform">
+<% form_tag do  %>
+  <%= label_tag 'Сфера деятельности' %>
+  <%= text_field_tag :type=>'text' %>
+  <%=  submit_tag "Добавить" ,:class=>'actionbutton' %>
+  <%end%>
+  </div>
+
+

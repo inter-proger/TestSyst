@@ -21,6 +21,7 @@ A3::Application.routes.draw do
 
   get "testsessions/destroy"
   match ':tconfigurations/fastconf'=>'tconfigurations#fastconf'
+  match 'admin' => 'users#admin', :as=>:admin
  
   resources :tconfigurations do
     collection do

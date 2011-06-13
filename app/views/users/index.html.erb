@@ -6,7 +6,16 @@
         .mycell{text-align: center;display:inline-block; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word; font-size: 12pt;}
       
 </style>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
 <%end%>
+<%= content_for :secondmenu do %>
+  <%= link_to 'Пользователи', users_path,:class=>"actionbutton",:id=>:active%>
+  <%= link_to 'Управление', :admin, :class=>"actionbutton" %>
+<% end %>
 
 
 <h2>Список пользователей</h2>

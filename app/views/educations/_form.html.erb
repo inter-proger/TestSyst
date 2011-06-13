@@ -1,0 +1,10 @@
+<%form_for @education do |f|%>
+  <%= jerror_message(@education) %>
+  <div class="field">
+    <%= f.label "Образование: " %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Cохранить'%>
+  </div>
+<% end %>

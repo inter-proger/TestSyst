@@ -1,0 +1,25 @@
+/* 
+    Document   : stsheet
+    Created on : 13.06.2011, 17:34:05
+    Author     : xamele0n
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.chform
+{
+    float: left;
+    width: 20%;
+    border: 1px dotted black;
+    margin: 10px;
+}
+.chform input
+{
+    width: 90%;
+}
+

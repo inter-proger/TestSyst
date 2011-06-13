@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   include AuthenticatedSystem
   before_filter :login_required, :only => [:index, :show]
   before_filter :admin_required, :only=>:index
+  before_filter :secondmenu
   
 
   # render new.rhtml
@@ -177,6 +178,14 @@ class UsersController < ApplicationController
         flash[:alert] = "Old password incorrect"
       end
     end
-
+   def admin
+     @edu=Education.all.map {|i| [i.name,i.id]}
+     
+   end
+private
+ def secondmenu
+   @secondmenu=true
+   @ai='#item4'
+ end
      
 end

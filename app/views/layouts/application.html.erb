@@ -102,7 +102,8 @@
             <li ><%= link_to 'Конфигурации',tconfigurations_path,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item3" %></li>
           <% end %>
           <% if current_user&&current_user.is_admin? %>
-          <li ><%= link_to 'Пользователи',users_url,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item4" %></li>
+          <li ><%= link_to 'Управление',users_url,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item4" %></li>
+          
           <% end %>
 
           <%= yield :tabs %>
