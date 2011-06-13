@@ -168,8 +168,10 @@ class TconfigurationsController < ApplicationController
       @tconfiguration.qT5Count=0
     end
      #====================
+    tparams=params[:tconfiguration]
+    tparams=tparams.merge({:qT1Count=>params[:qCount].to_i,:qT2Count=>0,:qT3Count=>0,:qT4Count=>0,:qT5Count=>0}) if @tconfiguration.configuration_type_id==@ctypes[@simpleconf]
     respond_to do |format|
-      if @tconfiguration.update_attributes(params[:tconfiguration].merge({:qT1Count=>params[:qCount].to_i,:qT2Count=>0,:qT3Count=>0,:qT4Count=>0,:qT5Count=>0}))
+      if @tconfiguration.update_attributes(tparams)
         format.html {
           
           @tconfiguration.themes.delete(@tconfiguration.themes)
