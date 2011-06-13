@@ -21,6 +21,19 @@ class UsersController < ApplicationController
         a.login <=>b.login
       end
     end
+      #pagination
+  @parametrs=params
+  if params[:pagenum]
+    @pagenum=params[:pagenum].to_i
+  else
+    @pagenum=1
+  end
+  @perpage=30
+  @pagecount=@us.length/@perpage
+  @pagecount+=1 if @us.length%@perpage!=0
+  @firstline=(@pagenum-1)*@perpage
+  @us=@us.drop(@firstline).take(@perpage)
+
   @ai='#item4'
     respond_to do |format|
       format.html # index.html.erb

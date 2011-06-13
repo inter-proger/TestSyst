@@ -8,7 +8,20 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations
   # GET /tconfigurations.xml
   def index
-    @tconfigurations = Tconfiguration.all
+    @tconfigurations = Tconfiguration.all.sort{|x,y| x.Name<=>y.Name}
+      #pagination
+  @parametrs=params
+  if params[:pagenum]
+    @pagenum=params[:pagenum].to_i
+  else
+    @pagenum=1
+  end
+  @perpage=30
+  @pagecount=@tconfigurations.length/@perpage
+  @pagecount+=1 if @tconfigurations.length%@perpage!=0
+  @firstline=(@pagenum-1)*@perpage
+  @tconfigurations=@tconfigurations.drop(@firstline).take(@perpage)
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tconfigurations }

@@ -1,7 +1,8 @@
 <%= content_for :head do %>
   
 <style type="text/css">
-	 span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline; }
+        .paginate{display: inline-block;width:65%; text-align: right; padding: .5em;}
+          span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline; }
 	.mycell{display:inline-block; width: 12%; text-align: center; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;font-size: 12pt;}
 </style>
 <script type="text/javascript">
@@ -16,9 +17,20 @@
 <%end%>
 
 
+    <div class="paginate" style="float:right;">
+      Страница <%= @pagenum %> из <%= @pagecount %>.
+      Номера: <%=  link_to '1',{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>'1'})) if @pagenum>2 %>
+      <%=  link_to '2',{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>'2'})) if @pagenum>3 %>
+      <%= '...' if @pagenum>4 %>
+      <%=  link_to (@pagenum-1).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})) if @pagenum>=2 %>
+      <%=  link_to (@pagenum).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagenum)})) %>
+      <%=  link_to (@pagenum+1).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})) if @pagenum<@pagecount %>
+      <%= '...' if @pagenum<@pagecount-3 %>
+      <%=  link_to (@pagecount-1).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})) if @pagenum<@pagecount-2 %>
+      <%=  link_to (@pagecount).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})) if @pagenum<@pagecount-1 %>
+    </div>
 
-
-<h1>Конфигурации тестов</h1>
+<h2>Конфигурации тестов</h2>
 
 <div class="ui-widget">
   <div class="ui-widget-header ui-corner-top">
@@ -56,13 +68,23 @@
   </div>
 
 <% end %>
-  <%if @class=="ui-widget-content"%>
-    <% @class="ui-state-default" %>
-  <%else%>
+
     <% @class="ui-widget-content" %>
-  <%end%>
+
   <div class="<%=@class%> ui-corner-bottom" >
     <%= link_to 'Создать', new_tconfiguration_path,:class=>"actionbutton" %>
+      <div class="paginate" style="float:right;">
+      Страница <%= @pagenum %> из <%= @pagecount %>.
+      Номера: <%=  link_to '1',{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>'1'})) if @pagenum>2 %>
+      <%=  link_to '2',{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>'2'})) if @pagenum>3 %>
+      <%= '...' if @pagenum>4 %>
+      <%=  link_to (@pagenum-1).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagenum-1).to_s})) if @pagenum>=2 %>
+      <%=  link_to (@pagenum).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagenum)})) %>
+      <%=  link_to (@pagenum+1).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagenum+1)})) if @pagenum<@pagecount %>
+      <%= '...' if @pagenum<@pagecount-3 %>
+      <%=  link_to (@pagecount-1).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagecount-1).to_s})) if @pagenum<@pagecount-2 %>
+      <%=  link_to (@pagecount).to_s,{:controller=>:tconfigurations,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})) if @pagenum<@pagecount-1 %>
+    </div>
   </div>
   </div>
 <%=render "help" %>
