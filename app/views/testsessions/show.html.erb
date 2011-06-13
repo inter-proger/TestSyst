@@ -92,8 +92,8 @@
 						$( this ).draggable("enable");
 						$( this ).parent().removeClass("ui-state-highlight");
 						$( this ).appendTo($('#drags'));
-                                                $( this ).css("width","450px");
-                                                $( this ).css("height","50px");
+                                                $( this ).css("width","420px");
+                                                $( this ).css("height","70px");
 						$(sel)[parseInt(this.id)].value="";
 						return true;
 					});
@@ -101,8 +101,8 @@
 					dr.removeClass("ui-state-disabled");
 					dr.css("left","0");
 					dr.css("top","0");
-                                        dr.css("width","445px");
-                                        dr.css("height","18px");
+                                        dr.css("width","410px");
+                                        dr.css("height","30px");
 					dr.appendTo($( this ));
 					var ind=parseInt(dr[0].id);
 					var val=this.id.substr(1);
@@ -119,12 +119,12 @@
 					del.click(function(){});
 					del.appendTo($('#drags'));
 					del.draggable("enable");
-                                        del.css("width","450px");
-                                        del.css("height","50px");
+                                        del.css("width","420px");
+                                        del.css("height","70px");
 					dr.click(function(){
 						$( this ).draggable("enable");
-                                                $( this ).css("width","450px");
-                                                $( this ).css("height","50px");
+                                                $( this ).css("width","420px");
+                                                $( this ).css("height","70px");
 						$( this ).parent().removeClass("ui-state-highlight");
 						$( this ).appendTo($('#drags'));
 						$( this ).click(function(){});
@@ -135,8 +135,8 @@
 					dr.removeClass("ui-state-disabled");
 					dr.css("left","0");
 					dr.css("top","0");
-                                        dr.css("width","445px");
-                                        dr.css("height","18px");
+                                        dr.css("width","410px");
+                                        dr.css("height","30px");
 
 					dr.appendTo($( this ));
 					}
@@ -149,10 +149,10 @@
 <style>
 	#sortable { list-style-type: none; margin: 0; padding: 0; }
 	#sortable li { margin: 0 2px 2px 2px; padding: 2px; font-size: 16; height: 1.2em; }
-        .drs { width: 450px; height: 50px; padding: 2px;  margin: 3px 3px 3px 0; word-wrap:break-word; overflow: auto;}
-	#drags {width: 450px; display: inline-block; vertical-align: top;}
+        .drs { width: 420px; height: 70px; padding: 2px;  margin: 3px 3px 3px 0; word-wrap:break-word; overflow: auto;}
+	#drags {width: 420px; display: inline-block; vertical-align: top;}
 	#drops{display: inline-block; vertical-align: top;}
-	.drop { width: 450px; height: 50px; padding: 2px;  margin: 1px; word-wrap:break-word; overflow: auto;}
+	.drop { width: 420px; height: 70px; padding: 2px;  margin: 1px; word-wrap:break-word; overflow: auto;}
 </style>
 <%end%>
 
@@ -173,14 +173,18 @@
   <div class="ui-widget-content" style="padding: 5px;margin:10px;">
   <%= @question.content %>
   </div>
-  <div>
+  
   <%if @question.pictures.any?%>
     <%@pic=@question.pictures[0]%>
+
     <%  if @pic.pict_url %>
-      <%= image_tag(@pic.pict_url) %>
+      <div class="ui-widget-content" style="padding: 5px;margin:10px;">
+        <%= image_tag(@pic.pict_url) %>
+      </div>
     <% end %>
   <%end%>
-  </div>
+  
+<div class="ui-widget-content" style="padding: 5px;margin:10px;">
   <%=  form_tag({:controller=>:testsessions,:action=>:check, :num=>(@num+1).to_s, :id=>@ts.id},:method=>:post) do%>
   <% if  @question.qtype_id == 6 %>
     <% 0.upto(@a_count-1) do |i| %>
@@ -269,6 +273,7 @@
 
   <%= submit_tag "Подтвердить" %>
   <%end%>
+    </div>
 <% else %>
       <div>
         Вы можете вернуться к предыдущим впоросам или завершить тестирование.
@@ -278,8 +283,9 @@
   <% end %>
 
 <%end%>
-<br/>
 
+<br/>
+<div style="min-height: 100px;"></div>
 <div class="floating  ui-corner-all  ui-widget-header" >
   <div style="float:right">Осталось времени:
   <div id="timer">
@@ -303,3 +309,4 @@
   </div>
   
 </div>
+<%= render "help" %>

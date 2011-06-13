@@ -1,8 +1,9 @@
 # coding: utf-8
 class TestsessionsController < ApplicationController
   before_filter :login_required,:only=>[:fastconf,:create,:check,:complete]
+  before_filter :prev,:only=>[:new,:show,:complete]
   def new
-    @ai='#item1'
+    
     @ts=Testsession.new
   end
 
@@ -72,7 +73,7 @@ class TestsessionsController < ApplicationController
   def show
 
     @num=params[:num].to_i-1
-    @ai='#item1'
+    
     @ts=current_user.testsessions.find(params[:id])
     if @ts.completed==1
       redirect_to :action=>:complete,:id=>params[:id]
@@ -205,7 +206,7 @@ class TestsessionsController < ApplicationController
 
   def complete
     @ts=current_user.testsessions.find(params[:id])
-    @ai='#item1'
+    
     #@ts.update_attribute("completed",1)
     @tests=@ts.tests
     qs=@ts.questions
@@ -233,5 +234,9 @@ class TestsessionsController < ApplicationController
     @tests.each_index{|i| @rights[i] = '+' if @tests[i].ok==1}
     
   end
-
+private
+  def prev
+    @ai='#item1'
+    @is_test=true
+  end
 end
