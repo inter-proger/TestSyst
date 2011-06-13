@@ -196,46 +196,58 @@ class UsersController < ApplicationController
      id=params[:sid]
      case f
      when 1
-       elem=Sertype.find(id)
+      
+       d=Sertype.find_by_name(params[:val])
        if !id and params[:mode]=='add'
-       Sertype.create(:name=>params[:val])
+         Sertype.create(:name=>params[:val]) if !d
        else
          if params[:mode]=='add'
+            elem=Sertype.find(id)
         elem.update_attribute(:name,params[:val]) if elem
          else
+            elem=Sertype.find(id)
            elem.destroy if elem
          end
        end
      when 2
-          elem=Serlevel.find(id)
+        d=Serlevel.find_by_name(params[:val])
+          
        if !id and params[:mode]=='add'
        Serlevel.create(:name=>params[:val])
         else
          if params[:mode]=='add'
+           elem=Serlevel.find(id)
         elem.update_attribute(:name,params[:val]) if elem
          else
+           elem=Serlevel.find(id)
            elem.destroy if elem
          end
        end
      when 3
-       elem=Education.find(id)
+        d= Education.find_by_name(params[:val])
+      
        if !id and params[:mode]=='add'
        Education.create(:name=>params[:val])
         else
          if params[:mode]=='add'
+            elem= Education.find(id)
         elem.update_attribute(:name,params[:val]) if elem
          else
+            elem= Education.find(id)
            elem.destroy if elem
          end
        end
      when 4
-       elem= Sphere.find(id)
+       d= Sphere.find_by_name(params[:val])
+       
        if !id and params[:mode]=='add'
        Sphere.create(:name=>params[:val])
         else
          if params[:mode]=='add'
+           elem= Sphere.find(id)
         elem.update_attribute(:name,params[:val]) if elem
          else
+           elem= Sphere.find(id)
            elem.destroy if elem
          end
        end
