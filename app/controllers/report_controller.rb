@@ -4,7 +4,7 @@
 class ReportController < ApplicationController
   before_filter :login_required
   before_filter :menu
-  before_filter :admin_required,:only=>[:adv_search_report]
+  before_filter :admin_required,:only=>[:adv_search_report,:delete]
 
   class AnswerReport
     attr_accessor :answorder,:answorder2,:useransw,:question,:rightansw,:type,:answers,:right,:questionchanged
