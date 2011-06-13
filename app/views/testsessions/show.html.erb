@@ -157,7 +157,7 @@
 <%end%>
 
 
-<h2>Тест <%= @ts.tconfiguration.Name %>. 
+<h2>Тест <%= @ts.tconfiguration.Name %>.
   
   <% if @num+1<=@count %>
   Вопрос № <%= @num+1 %>.
@@ -209,7 +209,7 @@
     <% 0.upto(@a2_count-1) do |i| %>
       <%= hidden_field_tag "answ[#{i}]","",:class=>"vals" %>
     <%  end %>
-    <div id="drops">
+    <div id="drops" >
       <% 0.upto(@a1_count-1) do |i| %>
       <div id="<%= 'd'+(i+1).to_s %>" class="ui-widget-header drop" style="margin: 1px 1px 1px 1px;">
             <div class="title"><%= @answers[@answorder1[i]].content %></div>
@@ -218,7 +218,7 @@
       <% end %>
     </div>
 
-    <div id="drags">
+    <div id="drags" >
 
     <% 0.upto(@a2_count-1) do |i| %>
       <div id="<%=i.to_s%>" class="ui-widget-content drs" style="margin: 1px 1px 1px 1px;">
@@ -229,6 +229,7 @@
         currDrag=$("#<%=i.to_s%>");
         $("#d<%=@ua[i]%>").append(currDrag);
         $("#d<%=@ua[i]%>").addClass( "ui-state-highlight" );
+       
         currDrag.click(function(){
                 $( this ).draggable("enable");
                 $( this ).parent().removeClass("ui-state-highlight");
@@ -240,6 +241,8 @@
         currDrag.removeClass("ui-state-disabled");
         currDrag.css("left","0");
         currDrag.css("top","0");
+         currDrag.css("width","410px");
+         currDrag.css("height","30px");
         var ind=parseInt(currDrag[0].id);
         var val=$("#d<%=@ua[i]%>")[0].id.substr(1);
         $("[type=hidden].vals")[ind].value=val;
