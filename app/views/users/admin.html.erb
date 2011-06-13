@@ -1,0 +1,70 @@
+# coding: utf-8
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%  end %>
+<%= content_for :secondmenu do %>
+  <%= link_to 'Пользователи', users_path,:class=>"actionbutton"%>
+  <%= link_to 'Управление', :admin, :class=>"actionbutton",:id=>:active %>
+<% end %>
+
+
+
+
+<h2>Консоль управления сайтом</h2>
+<p>Здесь вы можете управлять материалами сайта - редактировать/добавлять/удалять элементы базы данных</p>
+
+
+<div class="chform">
+  Тип службы
+<%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>1}) do  %>
+ 
+   <%= select_tag(:sid, options_for_select(@sert),:size=>"8",:style=>"width:90%; margin: 5px;") %>
+  <%= text_field_tag :val %>
+  Режим: <br/>
+  <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
+  <%= radio_button_tag :mode,'delete'  %>Удалить
+  <%=  submit_tag "Выполнить" ,:class=>'actionbutton' %>
+  <%end%>
+  </div>
+<div class="chform">
+  Уровень службы
+<%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>2}) do  %>
+ 
+   <%= select_tag(:sid, options_for_select(@serl),:size=>"8",:style=>"width:90%; margin: 5px;") %>
+  <%= text_field_tag :val %>
+   Режим: <br/>
+  <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
+  <%= radio_button_tag :mode,'delete'  %>Удалить
+  <%=  submit_tag "Выполнить" ,:class=>'actionbutton' %>
+  <%end%>
+  </div>
+<div class="chform">
+  Образование
+<%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>3}) do  %>
+  <%= select_tag(:sid, options_for_select(@edu),:size=>"8",:style=>"width:90%; margin: 5px;") %>
+  <%= text_field_tag :val %>
+   Режим: <br/>
+  <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
+  <%= radio_button_tag :mode,'delete'  %>Удалить
+  <%=  submit_tag "Выполнить" ,:class=>'actionbutton' %>
+  <%end%>
+  </div>
+<div class="chform">
+  Сфера деятельности
+<%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>4}) do  %>
+ 
+   <%= select_tag(:sid, options_for_select(@sph),:multiple=>"true",:size=>"8",:style=>"width:90%; margin: 5px;") %>
+  <%= text_field_tag :val %>
+   Режим: <br/>
+  <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
+  <%= radio_button_tag :mode,'delete'  %>Удалить
+  <%=  submit_tag "Выполнить" ,:class=>'actionbutton' %>
+  <%end%>
+  </div>
+<%= render "help"%>
+
+

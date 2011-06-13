@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   include AuthenticatedSystem
   before_filter :login_required, :only => [:index, :show]
   before_filter :admin_required, :only=>:index
+  before_filter :secondmenu
   
 
   # render new.rhtml
@@ -183,6 +184,80 @@ class UsersController < ApplicationController
         flash[:alert] = "Old password incorrect"
       end
     end
-
+   def admin
+     @edu=Education.all.map {|i| [i.name,i.id]}
+     @sert=Sertype.all.map {|i| [i.name,i.id]}
+     @serl=Serlevel.all.map {|i| [i.name,i.id]}
+     @sph=Sphere.all.map {|i| [i.name,i.id]}
+     
+   end
+   def service
+     f=params[:form].to_i
+     id=params[:sid]
+     case f
+     when 1
+      
+       d=Sertype.find_by_name(params[:val])
+       if !id and params[:mode]=='add'
+         Sertype.create(:name=>params[:val]) if !d
+       else
+         if params[:mode]=='add'
+            elem=Sertype.find(id)
+        elem.update_attribute(:name,params[:val]) if elem
+         else
+            elem=Sertype.find(id)
+           elem.destroy if elem
+         end
+       end
+     when 2
+        d=Serlevel.find_by_name(params[:val])
+          
+       if !id and params[:mode]=='add'
+       Serlevel.create(:name=>params[:val])
+        else
+         if params[:mode]=='add'
+           elem=Serlevel.find(id)
+        elem.update_attribute(:name,params[:val]) if elem
+         else
+           elem=Serlevel.find(id)
+           elem.destroy if elem
+         end
+       end
+     when 3
+        d= Education.find_by_name(params[:val])
+      
+       if !id and params[:mode]=='add'
+       Education.create(:name=>params[:val])
+        else
+         if params[:mode]=='add'
+            elem= Education.find(id)
+        elem.update_attribute(:name,params[:val]) if elem
+         else
+            elem= Education.find(id)
+           elem.destroy if elem
+         end
+       end
+     when 4
+       d= Sphere.find_by_name(params[:val])
+       
+       if !id and params[:mode]=='add'
+       Sphere.create(:name=>params[:val])
+        else
+         if params[:mode]=='add'
+           elem= Sphere.find(id)
+        elem.update_attribute(:name,params[:val]) if elem
+         else
+           elem= Sphere.find(id)
+           elem.destroy if elem
+         end
+       end
+     end
+     redirect_back_or_default(:admin)
+   end
+private
+ def secondmenu
+   @secondmenu=true
+   @ai='#item4'
+ end
      
 end
