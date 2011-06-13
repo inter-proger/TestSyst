@@ -3,8 +3,10 @@ class TestsessionsController < ApplicationController
   before_filter :login_required,:only=>[:fastconf,:create,:check,:complete]
   before_filter :prev,:only=>[:show,:complete]
   def new
-    @ts=current_user.testsessions.last
-    redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1" and return false if @ts.completed!=1
+    if logged_in?
+      @ts=current_user.testsessions.last
+      redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1" and return false if @ts.completed!=1
+    end
     @ai='#item1'
     @ts=Testsession.new
   end
