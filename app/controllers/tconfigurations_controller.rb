@@ -77,7 +77,7 @@ class TconfigurationsController < ApplicationController
     @tconfiguration = Tconfiguration.new(params[:tconfiguration])
 
     unless params[:themes]
-      @tconfiguration.errors.add("Вопросов","не достаточно")
+      @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
       @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "new" and return
     end
@@ -90,7 +90,7 @@ class TconfigurationsController < ApplicationController
       f5=Question.where("(qtype_id= 10)"+ st).count>=params[:tconfiguration][:qT5Count].to_i
       f=f1&&f2&&f3&&f4&&f5
       unless f
-        @tconfiguration.errors.add("Вопросов","не достаточно")
+        @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
         @themes=Theme.all.map{|t| [t.title,t.id]}
         render :action => "new" and return
       end
@@ -98,7 +98,7 @@ class TconfigurationsController < ApplicationController
       hsh={}
       hsh[:theme_id]=params[:themes]
       unless Question.where(hsh).count>=params[:qCount].to_i
-        @tconfiguration.errors.add("Вопросов","не достаточно")
+        @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
         @themes=Theme.all.map{|t| [t.title,t.id]}
         render :action => "new" and return
       end
@@ -121,7 +121,7 @@ class TconfigurationsController < ApplicationController
           redirect_to(@tconfiguration, :notice => 'Конфигурация успешно создана') }
         format.xml  { render :xml => @tconfiguration, :status => :created, :location => @tconfiguration }
       else
-        format.html { redirect_to :action => "new" }
+        format.html { render :action => "new" }
         format.xml  { render :xml => @tconfiguration.errors, :status => :unprocessable_entity }
       end
     end
@@ -135,7 +135,7 @@ class TconfigurationsController < ApplicationController
      @themes= Theme.all.map{|th| [th.title, th.id]}
      #=========from create===========
       unless params[:themes]
-      @tconfiguration.errors.add("Вопросов","не достаточно")
+      @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
       @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "edit" and return
     end
@@ -149,7 +149,7 @@ class TconfigurationsController < ApplicationController
       f5=Question.where("(qtype_id= 10)"+ st).count>=params[:tconfiguration][:qT5Count].to_i
       f=f1&&f2&&f3&&f4&&f5
       if !f
-        @tconfiguration.errors.add("Вопросов","не достаточно")
+        @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
         @themes=Theme.all.map{|t| [t.title,t.id]}
         render :action => "edit" and return
       end
@@ -157,7 +157,7 @@ class TconfigurationsController < ApplicationController
       hsh={}
       hsh[:theme_id]=params[:themes]
       unless Question.where(hsh).count>=params[:qCount].to_i
-        @tconfiguration.errors.add("Вопросов","не достаточно")
+        @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
         @themes=Theme.all.map{|t| [t.title,t.id]}
         render :action => "new" and return
       end

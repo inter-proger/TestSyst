@@ -65,7 +65,12 @@ def createdetailreport
       end
       case rep.type
       when 6
-        rep.useransw=@tests[i].useransw.to_i
+        if @tests[i].useransw!=""
+          rep.useransw=@tests[i].useransw.to_i
+        else
+          rep.useransw=100000
+        end
+
         rep.rightansw=rep.answers.detect{|k,v| v.right==1}[0]
       when 7
         rep.useransw=@tests[i].useransw.split('|%')
