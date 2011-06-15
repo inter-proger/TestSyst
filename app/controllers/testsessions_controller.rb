@@ -12,9 +12,10 @@ class TestsessionsController < ApplicationController
   end
 
   def create
-    unless params[:testsession][:tconfiguration_id]
+    @ts=Testsession.new
+    unless params[:testsession]&&params[:testsession][:tconfiguration_id]
       @ts.errors.add("id","Не выбран тест")
-      render :action=> :new
+      render :action=> :new and return
     end
     @tconf=Tconfiguration.find(params[:testsession][:tconfiguration_id])
     @themes=@tconf.themes.map{|t| t.id}
