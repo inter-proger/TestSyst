@@ -91,8 +91,9 @@ class DisciplinesController < ApplicationController
   end
 
   def destroy
+
     begin
-	
+	@discipline=Discipline.find(params[:id])
 	@discipline.destroy
    rescue ActiveRecord::RecordNotFound
     end
