@@ -5,13 +5,17 @@ class TestsessionsController < ApplicationController
   def new
     if logged_in?
       @ts=current_user.testsessions.last
-      redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1" and return false if @ts.id and @ts.completed!=1
+      redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1" and return false if @ts and @ts.completed!=1
     end
     @ai='#item1'
     @ts=Testsession.new
   end
 
   def create
+    unless params[:testsession][:tconfiguration_id]
+      @ts.errors.add("id","Не выбран тест")
+      render :action=> :new
+    end
     @tconf=Tconfiguration.find(params[:testsession][:tconfiguration_id])
     @themes=@tconf.themes.map{|t| t.id}
     @ctypes=Hash[ConfigurationType.all.map{|u| [u.Name,u.id]}]
