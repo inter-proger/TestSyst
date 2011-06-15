@@ -148,12 +148,7 @@ display:inline;
     -webkit-border-radius:8px;
     border-radius:8px;*/
 }
-.menu ul li
-{
-    display: inline-block;
-    vertical-align:  middle;
-   
-}
+
 .menu a:link
 {
    /* color: cornflowerblue;*/
@@ -171,7 +166,7 @@ display:inline;
 #timer
 {
     float: right;
-    
+    display: inline;
     background-color: transparent;
    margin-left: 2em;
     text-align: center;
@@ -191,6 +186,7 @@ display:inline;
 {
     position: fixed;
     float: right;
+    display: inline;
     top:85%;
   /*  left: 50%;*/
     padding: 5px;
