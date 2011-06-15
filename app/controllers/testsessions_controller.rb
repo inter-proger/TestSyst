@@ -5,7 +5,7 @@ class TestsessionsController < ApplicationController
   def new
     if logged_in?
       @ts=current_user.testsessions.last
-      redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1" and return false if @ts and @ts.completed!=1
+      redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1" and return false if @ts.id and @ts.completed!=1
     end
     @ai='#item1'
     @ts=Testsession.new
