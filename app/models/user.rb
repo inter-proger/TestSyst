@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   #                 :length     => { :within => 6..100 }
 
   easy_roles :roles
-  has_many :testsessions
+  has_many :testsessions,:dependent => :destroy
   belongs_to :education
   belongs_to :sphere
   belongs_to :sertype
