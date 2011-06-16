@@ -5,13 +5,18 @@ class TestsessionsController < ApplicationController
   def new
     if logged_in?
       @ts=current_user.testsessions.last
-      redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1" and return false if @ts.completed!=1
+      redirect_to :action=>:show,:id=>@ts.id.to_s,:num=>"1" and return false if @ts and @ts.completed!=1
     end
     @ai='#item1'
     @ts=Testsession.new
   end
 
   def create
+    @ts=Testsession.new
+    unless params[:testsession]&&params[:testsession][:tconfiguration_id]
+      @ts.errors.add("id","Не выбран тест")
+      render :action=> :new and return
+    end
     @tconf=Tconfiguration.find(params[:testsession][:tconfiguration_id])
     @themes=@tconf.themes.map{|t| t.id}
     @ctypes=Hash[ConfigurationType.all.map{|u| [u.Name,u.id]}]
@@ -79,9 +84,10 @@ class TestsessionsController < ApplicationController
     @num=params[:num].to_i-1
     
     @ts=current_user.testsessions.find(params[:id])
-    if @ts.completed==1
-      redirect_to :action=>:complete,:id=>params[:id]
-    
+    redirect_to :action=>:complete,:id=>params[:id] if @ts.completed==1  and return
+    if !@ts.tconfiguration
+    @ts.update_attribute(:completed, 1)
+    redirect_to :action=>:new and return
     end
     @count=@ts.tests.count
     @has_answer=@ts.tests.map{|i| i.useransw.length>0 }.unshift(false)
@@ -124,7 +130,7 @@ class TestsessionsController < ApplicationController
     end
     t=Time.now
      @dt=t-@ts.created_at
-     @tt=@ts.tconfiguration.TestTime-Time.utc(2000,1,1,0,0,0)
+     @tt=  @ts.tconfiguration.TestTime-Time.utc(2000,1,1,0,0,0)
     @dt=@tt-@dt
     @dt=@dt.to_i
     @hour=@dt/3600

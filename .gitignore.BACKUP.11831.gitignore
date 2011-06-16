@@ -1,0 +1,12 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
+<<<<<<< HEAD
+nbproject/private/rake-d.txt
+nbproject/project.xml
+=======
+config/*.yml
+nbproject/*
+public/pictures/*
+>>>>>>> master

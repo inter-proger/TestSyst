@@ -8,20 +8,7 @@ class TconfigurationsController < ApplicationController
   # GET /tconfigurations
   # GET /tconfigurations.xml
   def index
-    @tconfigurations = Tconfiguration.all.sort{|x,y| x.Name<=>y.Name}
-      #pagination
-  @parametrs=params
-  if params[:pagenum]
-    @pagenum=params[:pagenum].to_i
-  else
-    @pagenum=1
-  end
-  @perpage=30
-  @pagecount=@tconfigurations.length/@perpage
-  @pagecount+=1 if @tconfigurations.length%@perpage!=0
-  @firstline=(@pagenum-1)*@perpage
-  @tconfigurations=@tconfigurations.drop(@firstline).take(@perpage)
-
+    @tconfigurations = Tconfiguration.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tconfigurations }
@@ -186,8 +173,11 @@ class TconfigurationsController < ApplicationController
       tparams[:qT1Count]=params[:qCount].to_i
     end
     respond_to do |format|
-
+<<<<<<< HEAD
+      if @tconfiguration.update_attributes(params[:tconfiguration].merge({:qT1Count=>params[:qCount].to_i,:qT2Count=>0,:qT3Count=>0,:qt4Count=>0,:qt5Count=>0}))
+=======
       if @tconfiguration.update_attributes(tparams)
+>>>>>>> e8d6bbacda54f9bc880a520e2fc9aefe834a17e7
         format.html {
           
           @tconfiguration.themes.delete(@tconfiguration.themes)

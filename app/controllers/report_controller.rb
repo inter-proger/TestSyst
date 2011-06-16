@@ -31,8 +31,8 @@ def createdetailreport
   @ra_count=0
   @tests.each{|t| @ra_count+=t.ok}
   @percent=@ra_count.to_f/@tests.length.to_f*100.0
-  @mark=2
-  @degrees.each { |item2| @mark+=1 if @percent>item2  }
+
+ @mark=@ts.mark
   if @mark>2
     @color='#00FF00'
     @zachet='Зачтено'

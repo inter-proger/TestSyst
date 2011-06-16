@@ -14,6 +14,7 @@
 .chform
 {
     float: left;
+    display: inline;
     width: 20%;
     border: 1px dotted black;
     margin: 10px;
