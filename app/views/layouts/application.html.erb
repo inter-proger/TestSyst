@@ -1,7 +1,7 @@
 <!DOCTYPE html ">
 <html>
 <head>
-  <title>Комплекс тестирования федеральных и государственных служащих</title>
+  <title>Комплекс тестирования государственных и муниципальных служащих</title>
   <%= stylesheet_link_tag :all %>
   <link href="/stylesheets/redmond/jquery-ui-1.8.13.custom.css" type="text/css" rel="stylesheet"/>
   <%= javascript_include_tag :defaults %>
@@ -96,7 +96,7 @@
        </div>
        <% end %>
  
-       <ul style="vertical-align: bottom; border-bottom-width: 0px;padding: 1em 2em 0px;" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ">
+       <ul style="vertical-align: bottom; border-bottom-width: 0px;padding: 1em 2em 0px; display: inline-block;" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ">
           <li ><%= link_to "Тестирование", root_url,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item1" %></li>
           <% if logged_in? %>
             <li ><%= link_to 'Отчеты',{:controller=>:report,:action=>:new_report},:class=>"menu1 ui-state-default ui-corner-top",:id=>"item5" %></li>

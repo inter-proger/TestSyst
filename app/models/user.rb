@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
                     :length     => { :within => 3..40 },
                     :format     => { :with => Authentication.login_regex, :message => "Логин должен быть от 3 до 40 символов" }
 
-  validates :name,  :format     => { :with => Authentication.name_regex, :message => "Неудовлетворительный пароль" },
+  validates :name,  :format     => { :with => Authentication.name_regex, :message => "" },
                     :length     => { :maximum => 100 },
                     :allow_nil  => true
   
@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :name, :password, :password_confirmation,:F,:I,:O,:Birth,:Sex,:workplace,:proff,:sertype_id,:sphere_id,:education_id,:serlevel_id
+  validates_presence_of :I, :message=>"Не введено имя"
+  validates_presence_of :F, :message=>"Не введена фамилия"
+  validates_presence_of :O, :message=>"Не введено отчество"
+
 
 
 

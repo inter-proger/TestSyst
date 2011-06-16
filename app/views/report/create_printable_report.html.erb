@@ -1,0 +1,63 @@
+<%= content_for :head do %>
+<style type="text/css">
+  td,th{
+    background: white;
+    border-bottom: 1px #000000 solid;
+    border-right: 1px #000000 solid;
+}
+th{
+  border-top: 1px #000000 solid;
+}
+table{
+  border-left: 1px #000000 solid;
+  
+}
+</style>
+<% end %>
+<h3>Отчет о тестировании пользователей</h3>
+<table cellpadding="5" cellspacing="0">
+  <thead>
+    <tr >
+      <th>№</th>
+      <th>Пользователь</th>
+      <th>Тест</th>
+      <th>Дата прохождения</th>
+      <th>Оценка</th>
+      <th>Зачет</th>
+      <th>Процент выполнения</th>
+    </tr>
+  </thead>
+  <tbody>
+<% i=0 %><% av_mark=0 %><% av_percent=0.0 %>
+    <% @sessions.each do |sess|%>
+    <% i+=1 %>
+    <tr>
+      <td><%=i%></td>
+      <td><%=  sess.F+" "+sess.I+" "+sess.O %></td>
+      <td><%= sess.Name %></td>
+      <td><%= sess.created_at.day.to_s+"."+sess.created_at.month.to_s+"."+sess.created_at.year.to_s %> </td>
+      <td><%=  sess.mark if sess.mark%>&nbsp;<%av_mark+=sess.mark if sess.mark%></td>
+      <td>
+        <%  if sess.mark&&sess.mark>2 %>
+          <%= 'Зачтено' %>
+        <% else %>
+          <%= 'Не зачтено' %>
+        <% end %>
+      </td>
+      <td><%=((sess.percent*100).to_i.to_f/100.00).round(3).to_s if sess.percent%> %</td>
+      <% av_percent+=((sess.percent*100).to_i.to_f/100.00) if sess.percent%>
+    </tr>
+    <% end %>
+
+        <tr>
+          <td>&nbsp;</td>
+      <td>Средний балл</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><%=  (av_mark.to_f/i.to_f).round(3) %></td>
+      <td>&nbsp;
+      </td>
+      <td><%= (av_percent.to_f/i.to_f).round(3) %> %</td>
+    </tr>
+  </tbody>
+</table>

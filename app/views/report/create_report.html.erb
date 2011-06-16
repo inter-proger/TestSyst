@@ -31,6 +31,7 @@
   
   <%= link_to 'Расширенный поиск', {:controller=>:report,:action=>:adv_search_report},:class=>"actionbutton"%>
   <%= link_to 'Просмотр отчетов', {:controller=>:report,:action=>:create_report}.update(@parametrs.merge({:pagenum=>(@pagenum)})),:class=>"actionbutton",:id=>:active %>
+  <%= link_to 'Печатная версия',{:controller=>:report,:action=>:create_printable_report}.update(@parametrs.merge({:action=>:create_printable_report})),:class=>"actionbutton",:target=>"__blank" %>
 <%end%>
 
 <div style="width:100%;">
@@ -53,7 +54,7 @@
 <%= form_tag :controller=>:report, :action=>:delete, :method=>"post",:ses=>@sessions do %>
 <div class="ui-widget" style="width:100%;">
    <div class="ui-widget-header ui-corner-top" >
-      <span style="width: 5%; " class="header mycell"><%= check_box_tag (:selectall) %></span>
+      <span style="width: 5%; " class="header mycell"><%= check_box_tag (:selectall) if current_user.is_admin?%></span>
       <span style="width: 35%; " class="header mycell">Пользователь</span>
       <span style="width: 19%; " class="header mycell">Тест</span>
       <span style="width: 27%; " class="header mycell">Оценка</span>
@@ -70,7 +71,7 @@
 <%end%>
   <div class="<%=@class%>" >
     <span class="mycell" style="padding: 0px 0; width: 5%; font-weight: normal; color: black; text-align: center;">
-      <%= check_box_tag "del[#{i}]" %>
+      <%= check_box_tag "del[#{i}]" if current_user.is_admin? %>
     </span>
     <span class="mycell" style="padding: 0px 0; width: 35%; font-weight: normal; color: black;">
       <% us=[t.F,t.I,t.O].join(' ')  %>
@@ -116,7 +117,7 @@
 
 
 
- <%= submit_tag 'Удалить',:confirm=>'Вы уверены что хотите удалить выбранные сессии?' %>
+ <%= submit_tag 'Удалить',:confirm=>'Вы уверены что хотите удалить выбранные сессии?' if current_user.is_admin? %>
 <%end%>
 <%= render "help" %>
 
