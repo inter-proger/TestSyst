@@ -1,6 +1,21 @@
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+<%= content_for :secondmenu do %>
+  <% if logged_in? && current_user.is_admin? %>
+  <%= link_to 'Пользователи', users_path,:class=>"actionbutton"%>
+  <%= link_to 'Управление', :admin, :class=>"actionbutton" %>
+<%else%>
+  <%= link_to 'Просмотр пользователя', {:controller=>:users,:action=>:listsessions,:id=>@us.id},:class=>"actionbutton",:id=>:active%>
+  <%= link_to 'Редактирование пользователя', edit_user_path(@us),:class=>"actionbutton"%>
+<% end %>
 <h2>Просмотр данных о пользователе.</h2>
 
-<div class="ui-widget ui-state-highlight ui-corner-all">
+<div class="ui-widget ui-widget-content ui-corner-all">
 <table cellpadding="10" cellspacing="0" width="100%">
   <tr ><td width="20%"><b>Логин:</b></td><td><%= @us.login%></td></tr>
   <tr><td><b>Имя:</b></td><td><%=@us.I %></td></tr>
@@ -9,6 +24,10 @@
    <tr><td><b>Место работы:</b></td><td><%=@us.workplace %></td></tr>
   <tr> <td><b>Должность:</b></td><td><%=@us.proff %></td></tr>
    <tr><td><b>Роли:</b></td><td><%=@us.roles %></td></tr>
+   <tr><td><b>Образование:</b></td><td><%=Education.find(@us.education_id).name %></td></tr>
+   <tr><td><b>Вид службы:</b></td><td><%=Sertype.find(@us.sertype_id).name %></td></tr>
+   <tr><td><b>&nbsp;</b></td><td><%=Serlevel.find(@us.serlevel_id).name %></td></tr>
+   <tr><td><b>Сфера деятельности</b></td><td><%=Sphere.find(@us.sphere_id).name %></td></tr>
   </table>
 <br/>
 <%= link_to 'Отобразить сессии',{:controller=>:users,:action=>:listsessions,:id=>@us},:class=>'actionbutton' %>&nbsp;

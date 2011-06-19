@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
 
   def show
     @ai='#item2'
-    @pict=Picture.new
+    #@pict=Picture.new
 
     
     respond_to do |format|
@@ -40,9 +40,14 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @quest=@theme.questions.create(params[:question])
-    
-    redirect_to discipline_theme_question_path(@discipline,@theme,@quest)
+    @quest=@theme.questions.build(params[:question])
+    if @quest.save
+      redirect_to discipline_theme_question_path(@discipline,@theme,@quest)
+    else
+      @ai='#item2'
+      render :action=>:new
+    end
+
   end
 
   def destroy

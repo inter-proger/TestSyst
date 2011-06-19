@@ -1,5 +1,6 @@
+# coding: utf-8
 class Question < ActiveRecord::Base
-  validates :content, :presence   => true
+  validates_presence_of :content, :message=>"Формулировка вопроса не может быть пустой."
                     
   belongs_to :qtype
   belongs_to :theme

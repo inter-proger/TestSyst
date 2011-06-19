@@ -6,8 +6,10 @@
 </script>
 <%end%>
 <%= content_for :secondmenu do %>
+<% if logged_in? && current_user.is_admin? %>
   <%= link_to 'Пользователи', users_path,:class=>"actionbutton"%>
   <%= link_to 'Управление', :admin, :class=>"actionbutton" %>
+<% end %>
   <%= link_to 'Регистрация', :signup, :class=>"actionbutton", :id=>:active %>
 <% end %>
 
