@@ -80,7 +80,7 @@
 
      <div  class="ui-tabs ui-widget-header ui-corner-top" style="border-bottom-width: 0px; padding: 0px;" id="menu1" >
        <% unless @is_test %>
-       <div style="text-align: left; text-indent: 1em; padding-top: 1em;width: 100%; ">
+       <div style="text-align: left; text-indent: 1em; padding-top: 1em;width: 100%;">
          <div style="float: left;width: 15% ;"><%=image_tag "gerb.png"%></div>
          <div style="float: left;width: 55%; text-indent: 0;">
           
@@ -94,8 +94,9 @@
          </div>
          <div  style="display: inline-block;width: 26%; text-indent: 0;vertical-align: top; height: 130px;"><%= render :partial =>"testsessions/userenter" %></div>
        </div>
-       <% end %>
- 
+<br/>
+<% end %>
+
        <ul style="vertical-align: bottom; border-bottom-width: 0px;padding: 1em 2em 0px; display: inline-block;" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ">
           <li ><%= link_to "Тестирование", root_url,:class=>"menu1 ui-state-default ui-corner-top",:id=>"item1" %></li>
           <% if logged_in? %>

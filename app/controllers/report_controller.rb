@@ -71,8 +71,13 @@ def createdetailreport
         else
           rep.useransw=100000
         end
-
-        rep.rightansw=rep.answers.detect{|k,v| v.right==1}[0]
+        rrrr=rep.answers.detect{|k,v| v.right==1}
+        unless rrrr
+          rep.rightansw=nil
+        else
+          rep.rightansw=rep.answers.detect{|k,v| v.right==1}[0]
+        end
+        
       when 7
         rep.useransw=@tests[i].useransw.split('|%')
         rep.rightansw=rep.answers.select{|k,v| v.right==1}.keys

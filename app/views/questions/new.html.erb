@@ -12,10 +12,12 @@
   <%= link_to 'Текущая тема', discipline_theme_path(@discipline,@theme), :class=>"actionbutton" %>
   <%= link_to 'Новый вопрос', new_discipline_theme_question_path(@discipline,@theme),:class=>'actionbutton',:id=>'active' %>
 <% end %>
+
 <h2>Раздел: <%=@discipline.title%> Тема: <%=@theme.title%></h2>
 <h2>Создать вопрос</h2><br/>
 
 <% form_for([@discipline,@theme,@quest]) do |f| %>
+<%= jerror_message(@quest) %>
   <%= f.label "Тип вопроса:" %><br/>
   <%= f.collection_select(:qtype_id,Qtype.all,:id,:title) %><br/>
   <%= f.label "Вопрос:" %><br/>

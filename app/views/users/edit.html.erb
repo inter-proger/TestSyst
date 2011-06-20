@@ -1,3 +1,15 @@
+<%= content_for :head do %>
+<script type="text/javascript">
+  $(function(){
+    $('#active').addClass("ui-state-active");
+  });
+</script>
+<%end%>
+<%= content_for :secondmenu do %>
+  <%= link_to 'Пользователи', users_path,:class=>"actionbutton"%>
+  <%= link_to 'Управление', :admin, :class=>"actionbutton" %>
+  <%= link_to 'Редактирование пользователя', edit_user_path(@us),:class=>"actionbutton",:id=>:active%>
+<% end %>
 <h1>Редактирование пользователя</h1>
 <%= error_messages_for @us %>
 <%= form_for @us do |f| -%>

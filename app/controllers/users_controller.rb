@@ -2,8 +2,8 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
-  before_filter :login_required, :only => [:index, :show]
-  before_filter :admin_required, :only=>:index
+  before_filter :login_required, :ecxcept=>[:new,:create]
+  before_filter :admin_required, :ecxcept=>[:new,:create,:show,:edit,:update]
   before_filter :secondmenu
   
 
@@ -159,7 +159,9 @@ class UsersController < ApplicationController
     end
 
     def edit
+      render root_url and return unless current_user.is_admin? || current_user.id.to_s == params[:id].to_s
       @us = User.find(params[:id])
+
     end
     def update
         @us = User.find(params[:id])
