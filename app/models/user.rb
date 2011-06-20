@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
 
   set_table_name 'users'
 
-  validates :login, :presence   => true,
-                    :uniqueness => true,
-                    :length     => { :within => 3..40 },
-                    :format     => { :with => Authentication.login_regex, :message => "Логин должен быть от 3 до 40 символов" }
+  validates :login, :presence   => true
+   validates :login,                  :uniqueness => true
+    validates :login,                 :length     => { :within => 3..40 , :message => "Логин должен быть от 3 до 40 символов"}
+     validates :login,                :format     => { :with => /\A[a-zA-Zа-яА-Я0-9]+\z/, :message => "Логин должен содержать только буквы или цифры" }
 
   validates :name,  :format     => { :with => Authentication.name_regex, :message => "" },
                     :length     => { :maximum => 100 },

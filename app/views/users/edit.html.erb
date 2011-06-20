@@ -10,7 +10,6 @@
   <%= link_to 'Управление', :admin, :class=>"actionbutton" %>
   <%= link_to 'Редактирование пользователя', edit_user_path(@us),:class=>"actionbutton",:id=>:active%>
 <% end %>
-
 <h1>Редактирование пользователя</h1>
 <%= error_messages_for @us %>
 <%= form_for @us do |f| -%>
@@ -20,11 +19,11 @@
 <!--<p><%= label_tag 'e-mail' %><br/>
 <%= f.text_field :email %></p>*-->
 
-<p><%= label_tag 'Фамилия' %><br/>
+<p><%= label_tag 'Фамилия *' %><br/>
 <%= f.text_field :F %></p>
-<p><%= label_tag 'Имя' %><br/>
+<p><%= label_tag 'Имя *' %><br/>
 <%= f.text_field :I %></p>
-<p><%= label_tag 'Отчество' %><br/>
+<p><%= label_tag 'Отчество *' %><br/>
 <%= f.text_field :O %></p>
 <p><%= label_tag 'Пол' %><br/>
   Муж. <%= f.radio_button :Sex,true %>&nbsp;
@@ -54,7 +53,7 @@
 <td>
     <%= link_to 'Создать',{:controller=>:educations,:action=>:new},:class=>'actionbutton' %></td></tr>
 <tr>
-<td><%= label_tag 'Уровень службы(?)' %></td><td>
+<td><%= label_tag 'Группа государствнных должностей' %></td><td>
 <%= f.collection_select(:serlevel_id, Serlevel.all,:id,:name ) %>&nbsp;</td>
 <td>
     <%= link_to 'Создать',{:controller=>:serlevels,:action=>:new},:class=>'actionbutton' %></td></tr>
