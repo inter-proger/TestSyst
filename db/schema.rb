@@ -102,22 +102,6 @@ ActiveRecord::Schema.define(:version => 20110529100203) do
     t.integer  "configuration_type_id"
   end
 
-  create_table "test_configs", :force => true do |t|
-    t.string   "Name"
-    t.datetime "TestTime"
-    t.integer  "confType"
-    t.integer  "qType1Count"
-    t.integer  "qType2Count"
-    t.integer  "qType3Count"
-    t.integer  "qType4Count"
-    t.integer  "qType5Count"
-    t.integer  "degree3"
-    t.integer  "degree4"
-    t.integer  "degree5"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "tests", :force => true do |t|
     t.integer  "testsession_id"
     t.integer  "question_id"
