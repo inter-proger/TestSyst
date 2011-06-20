@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   before_filter :login_required, :except=>[:new,:create]
-  before_filter :admin_required, :except=>[:new,:create,:show,:edit,:update]
+  before_filter :admin_required, :except=>[:new,:create,:show,:edit,:update,:listsessions]
   before_filter :secondmenu
   
 
