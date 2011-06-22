@@ -1,3 +1,4 @@
+# coding: utf-8
 module Authentication
   module ByPassword
     # Stuff directives into including module
@@ -8,10 +9,10 @@ module Authentication
         
         # Virtual attribute for the unencrypted password
         attr_accessor :password
-        validates_presence_of     :password,                   :if => :password_required?
-        validates_presence_of     :password_confirmation,      :if => :password_required?
-        validates_confirmation_of :password,                   :if => :password_required?
-        validates_length_of       :password, :within => 6..40, :if => :password_required?
+        validates_presence_of     :password,:message=>"Пароль не может быть пустым",                   :if => :password_required?
+        validates_presence_of     :password_confirmation,:message=>"Не введено подтверждение пароля",      :if => :password_required?
+        validates_confirmation_of :password,:message=>"Введенные пароли не совпадают",                   :if => :password_required?
+        validates      :password, :length=>{:within => 6..40,:message=>"Длина пароля должна быть от 6 до 40 символов"}, :if => :password_required?
         before_save :encrypt_password
       end
     end # #included directives
