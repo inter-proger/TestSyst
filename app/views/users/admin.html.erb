@@ -3,8 +3,27 @@
 <script type="text/javascript">
   $(function(){
     $('#active').addClass("ui-state-active");
+    $('#cb1').change(function(){
+      var tt=$('#cb1')[0].options[$('#cb1')[0].options.selectedIndex].text
+      $('#tf1').val(tt);
+    });
+        $('#cb2').change(function(){
+      var tt=$('#cb2')[0].options[$('#cb2')[0].options.selectedIndex].text
+      $('#tf2').val(tt);
+    });
+        $('#cb3').change(function(){
+      var tt=$('#cb3')[0].options[$('#cb3')[0].options.selectedIndex].text
+      $('#tf3').val(tt);
+    });
+        $('#cb4').change(function(){
+      var tt=$('#cb4')[0].options[$('#cb4')[0].options.selectedIndex].text
+      $('#tf4').val(tt);
+    });
   });
 </script>
+<style type="text/css">
+  .mhead{height: 65px; vertical-align: middle;text-align: center;}
+</style>
 <%  end %>
 <%= content_for :secondmenu do %>
   <%= link_to 'Пользователи', users_path,:class=>"actionbutton"%>
@@ -19,11 +38,11 @@
 
 
 <div class="chform">
-  Тип службы
+  <div class="ui-widget-header mhead">Тип службы</div>
 <%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>1}) do  %>
  
-   <%= select_tag(:sid, options_for_select(@sert),:size=>"8",:style=>"width:90%; margin: 5px;") %>
-  <%= text_field_tag :val %>
+   <%= select_tag(:sid, options_for_select(@sert),:size=>"8",:style=>"width:90%; margin: 5px;",:id=>"cb1") %>
+  <%= text_field_tag :val,nil,:id=>"tf1" %>
   Режим: <br/>
   <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
   <%= radio_button_tag :mode,'delete'  %>Удалить
@@ -31,11 +50,11 @@
   <%end%>
   </div>
 <div class="chform">
-  Уровень службы
+  <div class="ui-widget-header mhead">Группа государственных должностей</div>
 <%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>2}) do  %>
  
-   <%= select_tag(:sid, options_for_select(@serl),:size=>"8",:style=>"width:90%; margin: 5px;") %>
-  <%= text_field_tag :val %>
+   <%= select_tag(:sid, options_for_select(@serl),:size=>"8",:style=>"width:90%; margin: 5px;",:id=>"cb2") %>
+  <%= text_field_tag :val,nil,:id=>"tf2" %>
    Режим: <br/>
   <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
   <%= radio_button_tag :mode,'delete'  %>Удалить
@@ -43,10 +62,10 @@
   <%end%>
   </div>
 <div class="chform">
-  Образование
+  <div class="ui-widget-header mhead">Образование</div>
 <%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>3}) do  %>
-  <%= select_tag(:sid, options_for_select(@edu),:size=>"8",:style=>"width:90%; margin: 5px;") %>
-  <%= text_field_tag :val %>
+  <%= select_tag(:sid, options_for_select(@edu),:size=>"8",:style=>"width:90%; margin: 5px;",:id=>"cb3") %>
+  <%= text_field_tag :val,nil,:id=>"tf3" %>
    Режим: <br/>
   <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
   <%= radio_button_tag :mode,'delete'  %>Удалить
@@ -54,17 +73,17 @@
   <%end%>
   </div>
 <div class="chform">
-  Сфера деятельности
+  <div class="ui-widget-header mhead">Сфера деятельности</div>
 <%= form_tag ({:controller=>:users,:action=>:service,:method=>'post',:form=>4}) do  %>
  
-   <%= select_tag(:sid, options_for_select(@sph),:multiple=>"true",:size=>"8",:style=>"width:90%; margin: 5px;") %>
-  <%= text_field_tag :val %>
+   <%= select_tag(:sid, options_for_select(@sph),:multiple=>"true",:size=>"8",:style=>"width:90%; margin: 5px;",:id=>"cb4") %>
+  <%= text_field_tag :val,nil,:id=>"tf4" %>
    Режим: <br/>
   <%= radio_button_tag :mode,'add', true  %>Добавить/Обновить
   <%= radio_button_tag :mode,'delete'  %>Удалить
   <%=  submit_tag "Выполнить" ,:class=>'actionbutton' %>
   <%end%>
   </div>
-<% # = render "help"%>
+<%= render "help"%>
 
 

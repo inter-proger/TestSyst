@@ -8,14 +8,14 @@ class User < ActiveRecord::Base
 
   set_table_name 'users'
 
-  validates :login, :presence   => true
-   validates :login,                  :uniqueness => true
-    validates :login,                 :length     => { :within => 3..40 , :message => "Логин должен быть от 3 до 40 символов"}
-     validates :login,                :format     => { :with => /\A[a-zA-Zа-яА-Я0-9]+\z/, :message => "Логин должен содержать только буквы или цифры" }
+  validates_presence_of  :login, :message=>"Логин не может быть пустым"
+  validates_uniqueness_of  :login,:message=>"Пользователь с таким логином уже существует"
+  validates :login,                 :length     => { :within => 3..40 , :message => "Логин должен быть от 3 до 40 символов"}
+  validates :login,                :format     => { :with => /\A[a-zA-Zа-яА-Я0-9]+\z/, :message => "Логин должен содержать только буквы или цифры" }
 
-  validates :name,  :format     => { :with => Authentication.name_regex, :message => "" },
-                    :length     => { :maximum => 100 },
-                    :allow_nil  => true
+  #validates :name,  :format     => { :with => Authentication.name_regex, :message => "" },
+   #                 :length     => { :maximum => 100 },
+   #                 :allow_nil  => true
   
 
   #validates :email, :presence   => true,
