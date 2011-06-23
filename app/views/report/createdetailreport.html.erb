@@ -35,7 +35,7 @@
     Отчет
   </div>
   <div class="ui-widget-content ui-corner-all" style="padding: 8px 30px; ">
-    Тестируемый: <br/>
+    Тестируемый: <%= @user.F+" "+@user.I+" "+@user.O %><br/>
     Дата тестирования: <%= @ts.created_at.day %>.<%= @ts.created_at.month %>.<%= @ts.created_at.year %><br/>
     Процент решенных заданий: <%= @percent %> %<br/>
     <h2 style="color:<%=@color%>; display:inline;">Оценка: <%= @mark %></h2><br/>
