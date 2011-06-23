@@ -152,7 +152,12 @@ class TestsessionsController < ApplicationController
     if @num
       @num-=1
       @ts=current_user.testsessions.find(params[:id])
-      if @ts.completed==1
+    t=Time.now
+     @dt=t-@ts.created_at
+     @tt=  @ts.tconfiguration.TestTime-Time.utc(2000,1,1,0,0,0)
+    @dt=@tt-@dt
+    @dt=@dt.to_i
+      if @ts.completed==1 || @dt<0
         redirect_to :action=>:complete, :id=>params[:id] and return
       end
       tests=@ts.tests
