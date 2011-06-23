@@ -6,7 +6,7 @@
 
 <% form_for(@ts) do |f| %>
 <%= jerror_message(@ts) %>
-  <%= f.collection_select :tconfiguration_id,Tconfiguration.all.sort{|a,b|a.Name<=>b.Name},:id,:Name,{} ,:size=>20,:style=>"width:100%;" %><br/>
+  <%= f.collection_select :tconfiguration_id,Tconfiguration.all.delete_if{|x| x.Name=="fastconf"}.sort{|a,b|a.Name<=>b.Name},:id,:Name,{} ,:size=>20,:style=>"width:100%;" %><br/>
   <br/>
   <%= f.submit "Начать тестирование" ,:class=>'actionbutton',:style=>"width:300px;" %>
 
