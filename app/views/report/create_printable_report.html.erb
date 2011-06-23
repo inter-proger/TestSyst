@@ -54,10 +54,10 @@ table{
       <td>Средний балл</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
-      <td><%=  (av_mark.to_f/i.to_f).round(3) %></td>
+      <td>&nbsp;<%=  (av_mark.to_f/i.to_f).round(3) if i.to_f!=0.0 %></td>
       <td>&nbsp;
       </td>
-      <td><%= (av_percent.to_f/i.to_f).round(3) %> %</td>
+      <td>&nbsp;<%= (av_percent.to_f/i.to_f).round(3)  if i.to_f!=0.0 %> %</td>
     </tr>
   </tbody>
 </table>

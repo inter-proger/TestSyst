@@ -3,7 +3,7 @@
 <style type="text/css">
         .paginate{display: inline-block;width:65%; text-align: right; padding: .5em;}
           span a {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;display: inline; }
-	.mycell{display:inline-block; width: 12%; text-align: center; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;font-size: 12pt;}
+	.mycell{display:inline-block; width: 10%; text-align: center; vertical-align: top; color: black; font-weight: normal;  word-wrap: break-word;font-size: 12pt;}
 </style>
 <script type="text/javascript">
   $(function(){
@@ -34,8 +34,8 @@
 
 <div class="ui-widget">
   <div class="ui-widget-header ui-corner-top">
-    <span class="mycell">Название теста</span>
-    <span class="mycell" style="width: 10%;">Тип конфигурации</span>
+    <span class="mycell" style="width: 21%;">Название теста</span>
+    <span class="mycell" style="width: 12%;">Тип конфигурации</span>
 
     <span class="mycell" >Общее количество вопросов</span>
     <span class="mycell">Оценка 3 (%)</span>
@@ -54,15 +54,15 @@
     <% @class="ui-widget-content" %>
   <%end%>
   <div class="<%=@class%>" >
-    <span class="mycell"  id="<%=tconfiguration.id%>"><%=link_to tconfiguration.Name,tconfiguration_path(tconfiguration),:style=>"padding:0px  0px 0px 1em; text-decoration:none;" %></span>
-    <span class="mycell" style="width: 10%;"><%= tconfiguration.configuration_type.Name %></span>
+    <span class="mycell" style="width: 21%;" id="<%=tconfiguration.id%>"><%=link_to tconfiguration.Name,tconfiguration_path(tconfiguration),:style=>"padding:0px  0px 0px 1em; text-decoration:none;" %></span>
+    <span class="mycell" style="width: 12%;"><%= tconfiguration.configuration_type.Name %></span>
     <span class="mycell" ><%= tconfiguration.qT5Count+tconfiguration.qT1Count+tconfiguration.qT2Count+tconfiguration.qT3Count+tconfiguration.qT4Count %>
     </span>
     <span class="mycell"><%= tconfiguration.degree3 %></span>
     <span class="mycell"><%= tconfiguration.degree4 %></span>
     <span class="mycell"><%= tconfiguration.degree5 %></span>
     <span class="mycell"><%= tconfiguration.TestTime.strftime('%H:%M:%S')  %></span>
-    <span class="mycell micon" style="width: 95px;"><%= link_to tag("span",{:class=>"ui-icon ui-icon-search"}), tconfiguration,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
+    <span class="mycell micon" style="width: 80px%;"><%= link_to tag("span",{:class=>"ui-icon ui-icon-search"}), tconfiguration,:class=>"ui-state-default ui-corner-all",:title=>"Показать" %>
    <%= link_to tag("span",{:class=>"ui-icon ui-icon-pencil"}), edit_tconfiguration_path(tconfiguration),:class=>"ui-state-default ui-corner-all",:title=>"Редактировать" %>
     <%= link_to tag("span",{:class=>"ui-icon ui-icon-trash"}), tconfiguration, :confirm => 'Вы уверены?', :method => :delete, :class=>"ui-state-default ui-corner-all",:title=>"Удалить"%></span>
   </div>

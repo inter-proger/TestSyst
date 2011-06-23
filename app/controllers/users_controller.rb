@@ -110,7 +110,10 @@ class UsersController < ApplicationController
     def deladmin
       @ai='#item4'
     @us=User.find(params[:id])
-    @us.remove_role 'admin'
+	if @us.id==self.current_user.id
+ 		redirect_to(users_url,:notice=>"Нельзя понизить права у себя.") and return
+	end
+    @us.remove_role 'admin' 
        success = @us && @us.save
     if success && @us.errors.empty?
             # Protects against session fixation attacks, causes request forgery

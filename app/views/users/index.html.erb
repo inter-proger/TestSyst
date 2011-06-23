@@ -30,6 +30,7 @@
       <%=  link_to (@pagecount).to_s,{:controller=>:users,:action=>:index}.update(@parametrs.merge({:pagenum=>(@pagecount).to_s})) if @pagenum<@pagecount-1 %>
      
     </div>
+<p id="notice"><%= notice%></p>
 <h2>Список пользователей</h2>
 
 <p>
