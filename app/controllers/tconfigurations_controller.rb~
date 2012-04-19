@@ -89,14 +89,9 @@ class TconfigurationsController < ApplicationController
   def create
     @tconfiguration = Tconfiguration.new(params[:tconfiguration])
 
-    @themes= Theme.all.map{|th| [th.title, th.id]}
-    @the=@tconfiguration.themes.map { |e| e.id } 
-    @arr=Array.new
-    @themes.each_index { |i| @arr.push(i+1) if @the.include?(@themes[i][1])  }
-
     unless params[:themes]
       @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
-      #@themes=Theme.all.map{|t| [t.title,t.id]}
+      @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "new" and return
     end
     unless @tconfiguration.configuration_type_id==@ctypes[@simpleconf]
@@ -109,7 +104,7 @@ class TconfigurationsController < ApplicationController
       f=f1&&f2&&f3&&f4&&f5
       unless f
         @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
-        #@themes=Theme.all.map{|t| [t.title,t.id]}
+        @themes=Theme.all.map{|t| [t.title,t.id]}
         render :action => "new" and return
       end
     else
@@ -117,13 +112,13 @@ class TconfigurationsController < ApplicationController
       hsh[:theme_id]=params[:themes]
 	if params[:qCount].to_i==0
 		@tconfiguration.errors.add("db","Необходимо указать количество вопросов")
-        	#@themes=Theme.all.map{|t| [t.title,t.id]}
+        	@themes=Theme.all.map{|t| [t.title,t.id]}
         	render :action => "new" and return
 	end
 
       unless Question.where(hsh).count>=params[:qCount].to_i
         @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
-        #@themes=Theme.all.map{|t| [t.title,t.id]}
+        @themes=Theme.all.map{|t| [t.title,t.id]}
         render :action => "new" and return
       end
       #@tconfiguration =Tconfiguration.new
@@ -156,16 +151,11 @@ class TconfigurationsController < ApplicationController
   def update
     
     @tconfiguration = Tconfiguration.find(params[:id])
-@themes= Theme.all.map{|th| [th.title, th.id]}
-    @the=@tconfiguration.themes.map { |e| e.id } 
-    @arr=Array.new
-    @themes.each_index { |i| @arr.push(i+1) if @the.include?(@themes[i][1])  }
-
-     #@themes= Theme.all.map{|th| [th.title, th.id]}
+     @themes= Theme.all.map{|th| [th.title, th.id]}
      #=========from create===========
       unless params[:themes]
       @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
-      #@themes=Theme.all.map{|t| [t.title,t.id]}
+      @themes=Theme.all.map{|t| [t.title,t.id]}
       render :action => "edit" and return
     end
     
@@ -179,7 +169,7 @@ class TconfigurationsController < ApplicationController
       f=f1&&f2&&f3&&f4&&f5
       if !f
         @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
-       # @themes=Theme.all.map{|t| [t.title,t.id]}
+        @themes=Theme.all.map{|t| [t.title,t.id]}
         render :action => "edit" and return
       end
     else
@@ -188,13 +178,13 @@ class TconfigurationsController < ApplicationController
 
 	if params[:qCount].to_i==0
 		@tconfiguration.errors.add("db","Необходимо указать количество вопросов")
-        	#@themes=Theme.all.map{|t| [t.title,t.id]}
+        	@themes=Theme.all.map{|t| [t.title,t.id]}
         	render :action => "new" and return
 	end
 
       unless Question.where(hsh).count>=params[:qCount].to_i
         @tconfiguration.errors.add("db","Вопросов в базе данных не достаточно")
-        #@themes=Theme.all.map{|t| [t.title,t.id]}
+        @themes=Theme.all.map{|t| [t.title,t.id]}
         render :action => "new" and return
       end
       @tconfiguration.qT1Count=params[:qCount].to_i

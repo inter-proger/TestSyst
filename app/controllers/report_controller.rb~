@@ -118,7 +118,7 @@ def createdetailreport
 	#rep.rightansw[it].a2=rep.answers.detect{|k,v| v.right==rep.answers[rep.answorder[it]].right&&v.col==2}[1].content if curtemp.size==2
 	#rep.rightansw[it].a2=curtemp.select{|k,v| v.col==2}.values[0].content if curtemp.size>=1
         end
-        arr=rep.answers.select{|k,v| usednums.count(k)==0}
+        arr=rep.answers.select{|k,v| v.right==0}
         arr.each do |it|
           p=Type9Format.new
           p.a1=""

@@ -200,7 +200,7 @@ class TestsessionsController < ApplicationController
           f=(ra.value?(useransw.mb_chars.downcase.to_s)) #||(ra.value.downcase?(useransw.downcase))
           ua=useransw
         when 9
-          useransw.each { |key,value| f&&=((value.to_i==0)&&(@answers.select{|k,v| v.right==@answers[@answorder2[key.to_i]].right}.length==1))||((value.to_i!=0)&&@answers[@answorder2[key.to_i]].right==@answers[@answorder1[value.to_i-1]].right)}
+          useransw.each { |key,value| f&&=((value.to_i==0)&&(answs.count{|v| v.right==@answers[@answorder2[key.to_i]].right}==1))||((value.to_i!=0)&&@answers[@answorder2[key.to_i]].right==@answers[@answorder1[value.to_i-1]].right)}
 #useransw.each { |key,value| f&&=((value.to_i==0)&&(@answers[@answorder2[key.to_i]].right==0))||((value.to_i!=0)&&@answers[@answorder2[key.to_i]].right==@answers[@answorder1[value.to_i-1]].right)}
           ua=useransw.values.join('|%')
         when 10

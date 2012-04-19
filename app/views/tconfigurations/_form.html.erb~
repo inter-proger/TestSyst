@@ -112,7 +112,7 @@
 </div>
 <div class="type2">
   <%= label_tag 'Количество вопросов' %><br />
-    <%= text_field_tag :qCount, @tconfiguration.qT1Count %>
+    <%= text_field_tag :qCount %>
 </div>
 
   <div class="field">

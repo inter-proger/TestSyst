@@ -42,7 +42,8 @@
     <h2 style="color:<%=@color%>; display:inline;"><%= @zachet %></h2><br/>
   </div>
 </div>
-
+<%=@ctemp%>
+<br/>
 
 <% @i=1 %>
 <div id="accordion">

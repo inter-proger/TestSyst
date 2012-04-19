@@ -123,14 +123,22 @@ class QuestionsController < ApplicationController
         if (params[:content1][i.to_s]!="")
           @answ=@quest.answers.build
           @answ.content=params[:content1][i.to_s]
-          @answ.right=i
+	  if (params[:content2][i.to_s]=="")          
+		@answ.right=0
+	  else
+		@answ.right=i
+	  end
           @answ.col=1
           @answ.save
         end
         if (params[:content2][i.to_s]!="")
           @answ=@quest.answers.build
           @answ.content=params[:content2][i.to_s]
-          @answ.right=i
+	  if (params[:content1][i.to_s]=="")          
+		@answ.right=0
+	  else
+		@answ.right=i
+	  end
           @answ.col=2
           @answ.save
         end

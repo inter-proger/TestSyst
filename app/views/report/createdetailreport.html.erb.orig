@@ -2,7 +2,11 @@
 <style type="text/css">
   .icons { padding: 4px 4px;  display: inline-block; width:5px;vertical-align: middle; margin: 2px;}
   .icons span.ui-icon {}
+<<<<<<< HEAD
   .ua{display: inline-block; width:17px; vertical-align: middle;text-align: center; margin: 2px;}
+=======
+  .ua{display: inline-block; width:17px; height: 100%; vertical-align: middle;text-align: center; margin: 2px;}
+>>>>>>> 7fd472af31bdc0c7df523c46293676810f8a45c5
   .answ{display: inline-block;vertical-align: middle; text-indent: 1em;}
 </style>
  <script language="javascript" type="text/javascript">
@@ -35,14 +39,13 @@
     Отчет
   </div>
   <div class="ui-widget-content ui-corner-all" style="padding: 8px 30px; ">
-    Тестируемый: <%= @user.F+" "+@user.I+" "+@user.O %><br/>
+    Тестируемый: <br/>
     Дата тестирования: <%= @ts.created_at.day %>.<%= @ts.created_at.month %>.<%= @ts.created_at.year %><br/>
-    Процент решенных заданий: <%= @percent.to_i %> %<br/>
+    Процент решенных заданий: <%= @percent.round(3).to_s %> %<br/>
     <h2 style="color:<%=@color%>; display:inline;">Оценка: <%= @mark %></h2><br/>
     <h2 style="color:<%=@color%>; display:inline;"><%= @zachet %></h2><br/>
   </div>
 </div>
-
 
 <% @i=1 %>
 <div id="accordion">
@@ -84,7 +87,7 @@
              <% @iconclass="ui-icon ui-icon-check" %>
           <%  else %>
              <% #  @class="ui-state-error ui-corner-all" %>
-             <% @iconclass="ui-icon ui-icon-check" %>
+             <% @iconclass="ui-icon ui-icon-circle-close" %>
           <% end %>
         <%end%>
         
@@ -219,7 +222,6 @@
 
 
   <%end%>
-
   </div>
 </div>
 <% else %>
@@ -228,5 +230,4 @@
 
 <% end %>
 </div>
-
 <%= render "help" %>
